@@ -20,7 +20,7 @@ const translations = {
     boot: { init: 'SYSTEM.init()', loading: 'Loading...', loadingOk: '[OK]', mounting: 'Mounting components...', mountingOk: '[OK]', rendering: 'Rendering portfolio...', welcome: 'Welcome, visitor.' },
     prompt: {
       placeholder: ' what do you want to know about me?',
-      welcomeMessage: 'Welcome! Ask me anything or type \\help for commands.',
+      welcomeMessage: 'Welcome! I\'m Abdulrahman — a software developer building with .NET and Angular.\n\nExplore my portfolio: type a section name (about, experience, projects, contact) or \\help for commands.',
       hint: '> Type \\help for commands',
       menuHint: 'Type \\help for commands — or click a section below',
       helpTitle: '> \\help — available commands',
@@ -74,7 +74,7 @@ const translations = {
     boot: { init: 'SYSTEM.init()', loading: 'جاري التحميل...', loadingOk: '[تم]', mounting: 'تركيب المكونات...', mountingOk: '[تم]', rendering: 'عرض المحفظة...', welcome: 'مرحباً بك.' },
     prompt: {
       placeholder: ' ماذا تريد أن تعرف عني؟',
-      welcomeMessage: 'مرحباً بك! اسألني أي شيء أو اكتب \\help للأوامر.',
+      welcomeMessage: 'مرحباً بك! أنا عبدالرحمن — مطور برمجيات أعمل بـ .NET و Angular.\n\nتصفح معرض أعمالي: اكتب اسم قسم (عني، الخبرة، المشاريع، تواصل) أو \\help للأوامر.',
       hint: '> اكتب \\help للأوامر',
       menuHint: 'اكتب \\help للأوامر — أو انقر على قسم أدناه',
       helpTitle: '> \\help — الأوامر المتاحة',

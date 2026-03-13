@@ -3,7 +3,6 @@ import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
 import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
-import { useIsMobile } from '../hooks/useIsMobile';
 import { useSwipeBack } from '../hooks/useSwipeBack';
 import { useTheme } from '../hooks/useTheme';
 import { useLanguage } from '../hooks/useLanguage';
@@ -80,11 +79,8 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   const sectionLinesRef = useRef<ConsoleSectionLinesRef>(null);
   const isExpandableSection = (id: SectionId) => ['experience', 'skills', 'projects'].includes(id);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isMobile = useIsMobile();
 
   useSwipeBack(onBack, !!selectedSection);
-
-  const showMenuBelowPrompt = menuVisible || (isMobile && bootComplete && !selectedSection);
 
   useEffect(() => {
     if (selectedSection !== 'contact') {
@@ -249,12 +245,15 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
     inputRef.current?.focus();
   };
 
+  const isMobileView = () =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches;
+
   useEffect(() => {
-    inputRef.current?.focus();
+    if (!isMobileView()) inputRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    if (!selectedSection) inputRef.current?.focus();
+    if (!selectedSection && !isMobileView()) inputRef.current?.focus();
   }, [selectedSection]);
 
   const SECTIONS_FIRST_COUNT = SECTIONS.length; // sections first (indices 0-6)
@@ -295,7 +294,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   }, [showHelp, helpFocusIndex, helpItemCount, SECTIONS_FIRST_COUNT, onOpenSection]);
 
   useEffect(() => {
-    if (!showMenuBelowPrompt || menuItemCount === 0) return;
+    if (!menuVisible || menuItemCount === 0) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.target === inputRef.current) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -314,7 +313,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [showMenuBelowPrompt, menuFocusIndex, menuItemCount, menuItems, onOpenSection]);
+  }, [menuVisible, menuFocusIndex, menuItemCount, menuItems, onOpenSection]);
 
   useEffect(() => {
     if (!showStory) return;
@@ -480,7 +479,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
           )}
 
           {bootComplete && !menuVisible && !selectedSection && (
-            <p className="text-[0.7rem] sm:text-[0.8rem] mb-1" style={{ color: 'var(--color-terminal)', fontFamily: 'var(--font-mono)' }}>
+            <p className="text-[0.7rem] sm:text-[0.8rem] mb-1" style={{ color: 'var(--color-terminal)', fontFamily: 'var(--font-mono)', whiteSpace: 'pre-line' }}>
               {tr.prompt.welcomeMessage}
             </p>
           )}
@@ -518,7 +517,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
               </button>
             </div>
           )}
-          {showMenuBelowPrompt && (
+          {menuVisible && (
             <>
               <p className="text-[0.6rem] sm:text-[0.7rem]" style={{ color: 'var(--color-text-muted)' }}>
                 {tr.prompt.menuHint}
