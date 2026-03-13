@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
 import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
@@ -69,7 +69,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   const [menuFocusIndex, setMenuFocusIndex] = useState(0);
   const [storyFocusIndex, setStoryFocusIndex] = useState(0);
   const [prefsFocusIndex, setPrefsFocusIndex] = useState(0);
-  const [contactFlowStep, setContactFlowStep] = useState<0 | 1 | 2 | 'done'>(0);
+  const [contactFlowStep, setContactFlowStep] = useState<0 | 1 | 2 | 'ready' | 'done'>(0);
   const [contactFormData, setContactFormData] = useState({ name: '', email: '', message: '' });
   const [contactSubmitStatus, setContactSubmitStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -84,6 +84,29 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
     }
   }, [selectedSection]);
 
+  const handleContactSend = async () => {
+    if (contactFlowStep !== 'ready' || !contactFormData.name || !contactFormData.email || !contactFormData.message) return;
+    setContactSubmitStatus('sending');
+    try {
+      const res = await fetch('/.netlify/functions/send-contact-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: contactFormData.name,
+          email: contactFormData.email,
+          message: contactFormData.message,
+        }),
+      });
+      setContactSubmitStatus(res.ok ? 'success' : 'error');
+      if (res.ok) {
+        setContactFormData({ name: '', email: '', message: '' });
+        setContactFlowStep('done');
+      }
+    } catch {
+      setContactSubmitStatus('error');
+    }
+  };
+
   const menuItems = (site.navItems as SectionId[]);
   const menuItemCount = menuItems.length;
   const storyItemCount = SECTIONS.length + 1; // sections + back
@@ -96,7 +119,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
         : contactFlowStep === 1
           ? tr.contact.flowPlaceholderEmail
           : tr.contact.flowPlaceholderMessage
-      : selectedSection === 'contact' && contactFlowStep === 'done'
+      : (selectedSection === 'contact' && (contactFlowStep === 'ready' || contactFlowStep === 'done'))
         ? tr.prompt.placeholder
         : null;
   const effectivePlaceholder = contactPlaceholder ?? tr.prompt.placeholder;
@@ -151,22 +174,8 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
         setContactFormData((prev) => ({ ...prev, email: toSubmit }));
         setContactFlowStep(2);
       } else if (contactFlowStep === 2) {
-        const name = contactFormData.name;
-        const email = contactFormData.email;
         setContactFormData((prev) => ({ ...prev, message: toSubmit }));
-        setContactFlowStep('done');
-        setContactSubmitStatus('sending');
-        try {
-          const res = await fetch('/.netlify/functions/send-contact-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, message: toSubmit }),
-          });
-          setContactSubmitStatus(res.ok ? 'success' : 'error');
-          if (res.ok) setContactFormData({ name: '', email: '', message: '' });
-        } catch {
-          setContactSubmitStatus('error');
-        }
+        setContactFlowStep('ready');
       }
       inputRef.current?.focus();
       return;
@@ -662,6 +671,30 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
               {contactFormData.message && (
                 <div style={{ color: 'var(--color-text-secondary)' }}>{`  ${contactFormData.message}`}</div>
               )}
+              {contactFlowStep === 'ready' && (
+                <div style={{ marginTop: '0.75rem' }}>
+                  <button
+                    type="button"
+                    onClick={handleContactSend}
+                    disabled={contactSubmitStatus === 'sending'}
+                    className="flex items-center gap-2 px-3 py-2 rounded border transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.75rem',
+                      color: 'var(--color-bg)',
+                      background: 'var(--color-terminal)',
+                      borderColor: 'var(--color-terminal)',
+                    }}
+                    aria-label={tr.contact.send}
+                  >
+                    <Send className="h-4 w-4 shrink-0" aria-hidden />
+                    <span>{contactSubmitStatus === 'sending' ? tr.contact.sending : tr.contact.send}</span>
+                  </button>
+                  {contactSubmitStatus === 'error' && (
+                    <div style={{ color: 'var(--color-hp)', marginTop: '0.5rem', fontSize: '0.7rem' }}>{tr.contact.errorMsg}</div>
+                  )}
+                </div>
+              )}
               {contactFlowStep === 'done' && (
                 <div
                   style={{
@@ -674,6 +707,32 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
                   {contactSubmitStatus === 'error' && `  ${tr.contact.errorMsg}`}
                 </div>
               )}
+              <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
+                <div style={{ color: 'var(--color-terminal)', marginBottom: '0.5rem' }}>{`> ${tr.contact.infoHeading}`}</div>
+                <div style={{ color: 'var(--color-text-secondary)' }}>
+                  <span style={{ color: 'var(--color-terminal)' }}>{tr.contact.emailLabel}:</span>{' '}
+                  <a href={`mailto:${site.email}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>{site.email}</a>
+                </div>
+                <div style={{ color: 'var(--color-text-secondary)' }}>
+                  <span style={{ color: 'var(--color-terminal)' }}>{tr.contact.phoneLabel}:</span>{' '}
+                  <a href={`tel:${site.phone}`} style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>{site.phone}</a>
+                </div>
+                <div style={{ color: 'var(--color-text-secondary)' }}>
+                  <span style={{ color: 'var(--color-terminal)' }}>{tr.contact.locationLabel}:</span> {site.location}
+                </div>
+                <div className="flex gap-3 mt-2" style={{ marginTop: '0.5rem' }}>
+                  {[
+                    { Icon: Github, href: site.socialLinks.find((l) => l.platform === 'github')?.url ?? '#', label: 'GitHub' },
+                    { Icon: Linkedin, href: site.socialLinks.find((l) => l.platform === 'linkedin')?.url ?? '#', label: 'LinkedIn' },
+                    { Icon: Mail, href: `mailto:${site.email}`, label: 'Email' },
+                  ].map(({ Icon, href, label }) => (
+                    <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1" style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem' }} aria-label={label}>
+                      <Icon className="h-3.5 w-3.5" />
+                      <span>{label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
