@@ -22,9 +22,17 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
   const secure = port === 465;
 
   if (!user || !password) {
+    const missing = [
+      !user && 'SMTP_USER or EMAIL_FROM',
+      !password && 'SMTP_PASSWORD',
+    ].filter(Boolean);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Email not configured. Set SMTP_USER, SMTP_PASSWORD, and EMAIL_FROM.' }),
+      body: JSON.stringify({
+        error: 'Email not configured.',
+        missing: missing as string[],
+        hint: 'Set env vars in Netlify (Site → Environment variables) then trigger a new deploy.',
+      }),
     };
   }
 
