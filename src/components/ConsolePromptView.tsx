@@ -3,9 +3,13 @@ import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
 import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
+import { useIsMobile } from '../hooks/useIsMobile';
+import { useSwipeBack } from '../hooks/useSwipeBack';
 import { useTheme } from '../hooks/useTheme';
 import { useLanguage } from '../hooks/useLanguage';
 import { ConsoleSectionLines, type ConsoleSectionLinesRef } from './ConsoleSectionLines';
+import { MobileBottomNav } from './MobileBottomNav';
+import { MobileMenuOverlay } from './MobileMenuOverlay';
 
 type SectionId = 'home' | 'about' | 'experience' | 'skills' | 'projects' | 'education' | 'contact';
 
@@ -75,6 +79,12 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   const inputRef = useRef<HTMLInputElement>(null);
   const sectionLinesRef = useRef<ConsoleSectionLinesRef>(null);
   const isExpandableSection = (id: SectionId) => ['experience', 'skills', 'projects'].includes(id);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  useSwipeBack(onBack, !!selectedSection);
+
+  const showMenuBelowPrompt = menuVisible || (isMobile && bootComplete && !selectedSection);
 
   useEffect(() => {
     if (selectedSection !== 'contact') {
@@ -285,7 +295,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   }, [showHelp, helpFocusIndex, helpItemCount, SECTIONS_FIRST_COUNT, onOpenSection]);
 
   useEffect(() => {
-    if (!menuVisible || menuItemCount === 0) return;
+    if (!showMenuBelowPrompt || menuItemCount === 0) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.target === inputRef.current) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -304,7 +314,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [menuVisible, menuFocusIndex, menuItemCount, menuItems, onOpenSection]);
+  }, [showMenuBelowPrompt, menuFocusIndex, menuItemCount, menuItems, onOpenSection]);
 
   useEffect(() => {
     if (!showStory) return;
@@ -380,7 +390,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
 
   return (
     <div className="min-h-full-viewport min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
-      <div className="section-container flex-1 flex flex-col justify-center py-6 sm:py-8 md:py-12 min-h-0 overflow-y-auto">
+      <div className="section-container flex-1 flex flex-col justify-center py-6 sm:py-8 md:py-12 min-h-0 overflow-y-auto pb-[68px] sm:pb-0">
         <div
           className="content-width space-y-4 sm:space-y-6 py-4 px-4 sm:py-4 sm:px-5"
           style={{
@@ -508,7 +518,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
               </button>
             </div>
           )}
-          {menuVisible && (
+          {showMenuBelowPrompt && (
             <>
               <p className="text-[0.6rem] sm:text-[0.7rem]" style={{ color: 'var(--color-text-muted)' }}>
                 {tr.prompt.menuHint}
@@ -783,6 +793,23 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
           </div>
         </div>
       </footer>
+
+      <div className="sm:hidden">
+        <MobileBottomNav
+          selectedSection={selectedSection}
+          onBack={onBack}
+          isMenuOpen={mobileMenuOpen}
+          onToggleMenu={() => setMobileMenuOpen((o) => !o)}
+        />
+        <MobileMenuOverlay
+          open={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+          onOpenSection={(id) => {
+            onOpenSection(id);
+            setMobileMenuOpen(false);
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
 
 const DURATION_MS = 2500;
-const LINE_INTERVAL_MS = 380;
+const LINE_INTERVAL_MS = 270;
 const FADE_MS = 400;
 
 interface BootScreenProps {
@@ -13,17 +13,17 @@ interface BootScreenProps {
 export const BootScreen: React.FC<BootScreenProps> = ({ onDone }) => {
   const { lang } = useLang();
   const tr = t(lang).boot;
+  const nav = t(lang).nav as Record<string, string>;
   const [done, setDone] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lineIndex, setLineIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
+  const sectionIds = ['home', 'about', 'experience', 'skills', 'projects', 'education', 'contact'];
   const lines = [
-    { text: `> ${tr.init}`, delay: 0 },
-    { text: `> ${tr.loading} ${tr.loadingOk}`, delay: LINE_INTERVAL_MS },
-    { text: `> ${tr.mounting} ${tr.mountingOk}`, delay: LINE_INTERVAL_MS * 2 },
-    { text: `> ${tr.rendering}`, delay: LINE_INTERVAL_MS * 3 },
-    { text: `> ${tr.welcome}`, delay: LINE_INTERVAL_MS * 4 },
+    { text: `> ${tr.loading}`, delay: 0 },
+    ...sectionIds.map((id, i) => ({ text: `> ${nav[id] ?? id} ${tr.loadingOk}`, delay: LINE_INTERVAL_MS * (i + 1) })),
+    { text: `> ${tr.welcome}`, delay: LINE_INTERVAL_MS * (sectionIds.length + 1) },
   ];
 
   useEffect(() => {
