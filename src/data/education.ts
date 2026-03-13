@@ -2,50 +2,24 @@ import type { EducationEntry } from '../types';
 
 export const educationEntries: Record<'en' | 'ar', EducationEntry[]> = {
   en: [
-    {
-      school: 'Radboud University',
-      location: 'Nijmegen',
-      degree: 'Dutch Language Course',
-      period: 'Sep, 2023 - Jan, 2024',
-    },
-    {
-      school: 'University of Obuda',
-      location: 'Hungary, Budapest',
-      degree: 'BSc of Computer Science and Engineering',
-      period: 'Sep, 2017 - Feb, 2022',
-    },
+    { school: 'Utrecht University', degree: 'B.Sc. Computer Science', location: 'Utrecht, Netherlands', period: '2016 – 2020' },
+    { school: 'HBO ICT (Higher Professional Education)', degree: 'Associate degree, Software Development', location: 'Netherlands', period: '2014 – 2016' },
   ],
   ar: [
-    {
-      school: 'جامعة رادبود',
-      location: 'نايميخن',
-      degree: 'دورة اللغة الهولندية',
-      period: 'سبتمبر ٢٠٢٣ - يناير ٢٠٢٤',
-    },
-    {
-      school: 'جامعة أوبودا',
-      location: 'المجر، بودابست',
-      degree: 'بكالوريوس علوم الحاسوب والهندسة',
-      period: 'سبتمبر ٢٠١٧ - فبراير ٢٠٢٢',
-    },
+    { school: 'جامعة أوترخت', degree: 'بكالوريوس علوم الحاسوب', location: 'أوترخت، هولندا', period: '2016 – 2020' },
+    { school: 'HBO ICT (تعليم عالي مهني)', degree: 'دبلوم، تطوير البرمجيات', location: 'هولندا', period: '2014 – 2016' },
   ],
 };
 
 export const certifications: Record<'en' | 'ar', string[]> = {
   en: [
-    'Neural Networks and CNN Essential Training',
-    'Artificial Intelligence Foundations',
-    'C# Advanced Course',
-    'Database and SQL Courses',
-    'Microsoft Windows Server 2016',
-    'CCNA Training',
+    'Microsoft Certified: Azure Fundamentals (AZ-900)',
+    'Microsoft Certified: .NET Fundamentals',
+    'SQL Server Database Development (MTA)',
   ],
   ar: [
-    'تدريب أساسيات الشبكات العصبية و CNN',
-    'أسس الذكاء الاصطناعي',
-    'دورة C# المتقدمة',
-    'دورات قواعد البيانات و SQL',
-    'Microsoft Windows Server 2016',
-    'تدريب CCNA',
+    'شهادة مايكروسوفت: أساسيات Azure (AZ-900)',
+    'شهادة مايكروسوفت: أساسيات .NET',
+    'تطوير قواعد بيانات SQL Server (MTA)',
   ],
 };

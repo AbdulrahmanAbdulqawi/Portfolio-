@@ -9,7 +9,7 @@ export const About: React.FC = () => {
   const tr = t(lang).about;
 
   return (
-    <section className="py-16 bg-[var(--color-surface)]" aria-label="About">
+    <section className="py-16 bg-[var(--color-surface)]" aria-label={t(lang).aria.about}>
       <div className="section-container">
         <div className="text-center mb-10">
           <h2 className="section-label">{tr.label}</h2>

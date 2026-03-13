@@ -31,10 +31,11 @@ export const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const aria = t(lang).aria;
   return (
     <section
       className="min-h-screen flex items-center justify-center bg-[var(--color-bg)]"
-      aria-label="Home"
+      aria-label={aria.home}
     >
       <div className="section-container py-12 sm:py-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-10 md:gap-16">

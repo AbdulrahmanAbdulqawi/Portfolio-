@@ -35,17 +35,8 @@ export const BootScreen: React.FC = () => {
       timers.push(setTimeout(() => setProgress((i / progressSteps) * 100), i * progressInterval));
     }
 
-    timers.push(
-      setTimeout(() => {
-        setVisible(false);
-      }, DURATION_MS - 100)
-    );
-
-    timers.push(
-      setTimeout(() => {
-        setDone(true);
-      }, DURATION_MS + FADE_MS)
-    );
+    timers.push(setTimeout(() => setVisible(false), DURATION_MS - 100));
+    timers.push(setTimeout(() => setDone(true), DURATION_MS + FADE_MS));
 
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -55,10 +46,7 @@ export const BootScreen: React.FC = () => {
   return (
     <div
       className="boot-screen"
-      style={{
-        opacity: visible ? 1 : 0,
-        transition: `opacity ${FADE_MS}ms ease-out`,
-      }}
+      style={{ opacity: visible ? 1 : 0, transition: `opacity ${FADE_MS}ms ease-out` }}
       aria-hidden="true"
     >
       <div className="boot-screen-content">
@@ -77,10 +65,7 @@ export const BootScreen: React.FC = () => {
         <div className="boot-screen-progress-bg">
           <div
             className="boot-screen-progress-fill"
-            style={{
-              width: `${progress}%`,
-              backgroundColor: 'var(--color-primary)',
-            }}
+            style={{ width: `${progress}%`, backgroundColor: 'var(--color-primary)' }}
           />
         </div>
       </div>

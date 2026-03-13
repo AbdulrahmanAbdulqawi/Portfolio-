@@ -1,9 +1,3 @@
-export interface SocialLink {
-  platform: string;
-  url: string;
-  icon: string;
-}
-
 export interface SiteConfig {
   name: string;
   initials: string;
@@ -13,7 +7,7 @@ export interface SiteConfig {
   email: string;
   phone: string;
   location: string;
-  socialLinks: SocialLink[];
+  socialLinks: { platform: string; url: string; icon: string }[];
   navItems: string[];
 }
 
@@ -35,35 +29,35 @@ export interface AboutContent {
 export interface Experience {
   title: string;
   company: string;
-  logo?: string;
-  location: string;
   period: string;
+  location: string;
   responsibilities: string[];
-}
-
-export interface EducationEntry {
-  school: string;
-  location: string;
-  degree: string;
-  period: string;
-}
-
-export interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  category: 'web' | 'desktop' | 'fullstack' | 'other';
-  github?: string;
-  link?: string;
+  logo?: string;
 }
 
 export interface Skill {
   name: string;
-  level: 'Expert' | 'Solid' | 'Familiar';
+  level: string;
 }
 
 export interface SkillCategory {
   title: string;
   icon: string;
   skills: Skill[];
+}
+
+export interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  category: string;
+  github?: string;
+  link?: string;
+}
+
+export interface EducationEntry {
+  school: string;
+  degree: string;
+  location: string;
+  period: string;
 }

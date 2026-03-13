@@ -26,7 +26,7 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-[var(--color-bg)]" aria-label="Projects">
+    <section className="py-16 bg-[var(--color-bg)]" aria-label={t(lang).aria.projects}>
       <div className="section-container">
         <div className="text-center mb-10">
           <h2 className="section-label">{tr.label}</h2>

@@ -33,28 +33,28 @@
 
 [data-theme='light'] {
   --color-primary: #b8860b;
-  --color-primary-hover: #d4a030;
-  --color-accent: #d4a030;
-  --color-neon: #00875a;
-  --color-cyan: #0077aa;
-  --color-terminal: #00875a;
-  --color-hp: #c92a2a;
+  --color-primary-hover: #c4950a;
+  --color-accent: #0d9668;
+  --color-neon: #0d9668;
+  --color-cyan: #0569a6;
+  --color-terminal: #0d9668;
+  --color-hp: #b91c1c;
 
-  --color-bg: #f8f9fa;
+  --color-bg: #f2f4f6;
   --color-surface: #ffffff;
-  --color-surface-hover: #f0f2f5;
+  --color-surface-hover: #e8ebef;
 
-  --color-text: #1e1e1e;
-  --color-text-secondary: #4a4a4a;
-  --color-text-muted: #8b8b8b;
-  --color-nav-item: #4a4a4a;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #374151;
+  --color-text-muted: #5c5c5c;
+  --color-nav-item: #374151;
 
-  --color-border: #e0e0e0;
+  --color-border: #d1d5db;
 
-  --color-console-titlebar: #e8e8e8;
-  --color-dot-red: #c92a2a;
-  --color-dot-yellow: #c69026;
-  --color-dot-green: #2b8a3e;
+  --color-console-titlebar: #e5e7eb;
+  --color-dot-red: #b91c1c;
+  --color-dot-yellow: #b45309;
+  --color-dot-green: #15803d;
 }
 
 :root:not([data-theme='light']) {
@@ -320,6 +320,34 @@ button:focus-visible {
   );
 }
 
+/* Light mode: stronger contrast and polish */
+[data-theme='light'] .card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='light'] .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='light'] .console-window {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+[data-theme='light'] a:focus-visible,
+[data-theme='light'] button:focus-visible {
+  outline-color: var(--color-terminal);
+  outline-offset: 2px;
+}
+
+[data-theme='light'] .btn-primary:focus-visible {
+  outline-color: var(--color-neon);
+}
+
+[data-theme='light'] ::selection {
+  background-color: rgba(13, 150, 104, 0.25);
+  color: var(--color-text);
+}
+
 /* ── Pixel decorative corner ── */
 .pixel-corners {
   clip-path: polygon(
@@ -407,6 +435,27 @@ button:focus-visible {
 
 .console-window-dot-green {
   background-color: var(--color-dot-green);
+}
+
+.console-window-back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.65rem;
+  padding: 0 4px;
+  margin-right: 8px;
+}
+
+.console-window-back:hover {
+  color: var(--color-terminal);
+}
+
+.console-window-back-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .console-window-title {

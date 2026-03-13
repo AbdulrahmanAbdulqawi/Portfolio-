@@ -30,7 +30,7 @@ export const Skills: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-[var(--color-surface)]" aria-label="Skills">
+    <section className="py-16 bg-[var(--color-surface)]" aria-label={t(lang).aria.skills}>
       <div className="section-container">
         <div className="text-center mb-10">
           <h2 className="section-label">{tr.label}</h2>

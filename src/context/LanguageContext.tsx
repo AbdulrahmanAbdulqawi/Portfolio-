@@ -1,15 +1,31 @@
 import React, { createContext, useContext } from 'react';
-import type { Language } from '../hooks/useLanguage';
+
+export type Language = 'en' | 'ar';
 
 interface LanguageContextValue {
   lang: Language;
   toggle: () => void;
+  setLang: (lang: Language) => void;
 }
 
-const LanguageContext = createContext<LanguageContextValue>({ lang: 'en', toggle: () => {} });
+const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export const LanguageProvider: React.FC<{ value: LanguageContextValue; children: React.ReactNode }> = ({ value, children }) => {
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
-};
+export function LanguageProvider({
+  value,
+  children,
+}: {
+  value: LanguageContextValue;
+  children: React.ReactNode;
+}) {
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
 
-export const useLang = () => useContext(LanguageContext);
+export function useLang(): LanguageContextValue {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error('useLang must be used within LanguageProvider');
+  return ctx;
+}

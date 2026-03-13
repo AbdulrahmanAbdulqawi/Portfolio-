@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 export type Language = 'en' | 'ar';
 
@@ -13,15 +13,12 @@ export function useLanguage() {
   const [lang, setLang] = useState<Language>(getInitialLang);
 
   useEffect(() => {
-    const dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.setAttribute('dir', dir);
     document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
     localStorage.setItem('lang', lang);
   }, [lang]);
 
-  const toggle = useCallback(() => {
-    setLang((prev) => (prev === 'en' ? 'ar' : 'en'));
-  }, []);
+  const toggle = () => setLang((prev) => (prev === 'en' ? 'ar' : 'en'));
 
-  return { lang, toggle } as const;
+  return { lang, toggle, setLang } as const;
 }
