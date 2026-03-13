@@ -381,8 +381,15 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   return (
     <div className="min-h-full-viewport min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
       <div className="section-container flex-1 flex flex-col justify-center py-6 sm:py-8 md:py-12 min-h-0 overflow-y-auto">
-        <div className="content-width space-y-4 sm:space-y-6" style={{ fontFamily: 'var(--font-mono)' }}>
-          <form onSubmit={handleSubmit} className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.7rem] sm:text-[0.75rem] md:text-[0.9rem]">
+        <div
+          className="content-width space-y-4 sm:space-y-6 py-4 px-4 sm:py-4 sm:px-5"
+          style={{
+            fontFamily: 'var(--font-mono)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '0.25rem',
+          }}
+        >
+          <form onSubmit={handleSubmit} className="flex flex-wrap items-center gap-x-2 gap-y-1 min-h-[44px] text-[0.8rem] sm:text-[0.75rem] md:text-[0.9rem]">
             <span style={{ color: 'var(--color-nav-item)' }}>{lang === 'ar' ? '$' : '~'}</span>
             <span style={{ color: 'var(--color-primary)' }}>{site.initials}</span>
             <span style={{ color: 'var(--color-nav-item)' }}>{lang === 'ar' ? ' ~' : ' $'}</span>
@@ -411,6 +418,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleInputKeyDown}
+                  onFocus={() => inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
                   className="absolute inset-0 w-full bg-transparent border-none outline-none text-transparent caret-transparent"
                   style={{
                     fontFamily: 'var(--font-mono)',
@@ -453,8 +461,8 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
             <button
               type="button"
               onClick={onBack}
-              className="transition-colors hover:opacity-80 touch-manipulation"
-              style={{ color: 'var(--color-terminal)', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', padding: '0.25rem 0' }}
+              className="min-h-[44px] px-3 sm:min-h-0 sm:px-0 transition-colors hover:opacity-80 touch-manipulation flex items-center"
+              style={{ color: 'var(--color-terminal)', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', paddingTop: '0.25rem', paddingBottom: '0.25rem' }}
               aria-label={tr.aria.back}
             >
               {tr.prompt.back}
@@ -677,7 +685,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
                     type="button"
                     onClick={handleContactSend}
                     disabled={contactSubmitStatus === 'sending'}
-                    className="flex items-center gap-2 px-3 py-2 rounded border transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 min-h-[44px] sm:min-h-0 px-3 py-2 rounded border transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                     style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.75rem',
@@ -766,7 +774,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors touch-manipulation"
                 aria-label={href}
               >
                 <Icon className="h-4 w-4" />

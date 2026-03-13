@@ -139,7 +139,7 @@ export const ConsoleSectionLines = forwardRef<ConsoleSectionLinesRef, ConsoleSec
         type="button"
         onClick={() => { setFocusedIndex(index); onToggle(); }}
         onFocus={() => setFocusedIndex(index)}
-        className="text-left w-full transition-colors hover:opacity-90"
+        className="text-left w-full min-h-[44px] py-2 px-1 sm:min-h-0 sm:py-0 sm:px-1 transition-colors hover:opacity-90 touch-manipulation"
         style={{
           background: isFocused ? 'var(--color-surface)' : 'none',
           border: 'none',
@@ -147,7 +147,6 @@ export const ConsoleSectionLines = forwardRef<ConsoleSectionLinesRef, ConsoleSec
           color: 'var(--color-terminal)',
           fontFamily: 'var(--font-mono)',
           fontSize: 'inherit',
-          padding: '2px 4px',
           borderRadius: 2,
         }}
       >
@@ -295,7 +294,7 @@ export const ConsoleSectionLines = forwardRef<ConsoleSectionLinesRef, ConsoleSec
             type="button"
             onClick={onBack}
             onMouseEnter={() => expandableItemCount > 0 && setFocusedIndex(expandableItemCount)}
-            className="transition-colors hover:opacity-80"
+            className="min-h-[44px] py-2 px-3 sm:min-h-0 sm:py-0 sm:px-1 transition-colors hover:opacity-80 touch-manipulation"
             style={{
               color: 'var(--color-terminal)',
               background: expandableItemCount > 0 && isBackFocused ? 'var(--color-surface)' : 'none',
@@ -303,7 +302,6 @@ export const ConsoleSectionLines = forwardRef<ConsoleSectionLinesRef, ConsoleSec
               cursor: 'pointer',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.7rem',
-              padding: '2px 4px',
               borderRadius: 2,
             }}
           >
