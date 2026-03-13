@@ -4,6 +4,8 @@ export interface SiteConfig {
   title: string;
   tagline: string;
   description: string;
+  /** Short intro shown on Home section (console view) */
+  homeIntro?: string;
   email: string;
   phone: string;
   location: string;

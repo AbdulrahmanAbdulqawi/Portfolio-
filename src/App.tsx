@@ -9,15 +9,17 @@ type ViewId = 'prompt' | 'home' | 'about' | 'experience' | 'skills' | 'projects'
 
 function App() {
   const [view, setView] = useState<ViewId>('prompt');
+  const [bootComplete, setBootComplete] = useState(false);
   const { lang, toggle: toggleLang, setLang } = useLanguage();
   useTheme();
 
   return (
     <LanguageProvider value={{ lang, toggle: toggleLang, setLang }}>
-      <div className="min-h-screen scanlines" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
-        <BootScreen />
+      <div className="min-h-full-viewport min-h-screen scanlines flex flex-col" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
+        <BootScreen onDone={() => setBootComplete(true)} />
 
         <ConsolePromptView
+          bootComplete={bootComplete}
           onOpenSection={(sectionId) => setView(sectionId)}
           selectedSection={view === 'prompt' ? null : view}
           onBack={() => setView('prompt')}

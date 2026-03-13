@@ -48,7 +48,7 @@ export const Contact: React.FC = () => {
           <p className="section-title">{tr.title}</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 content-width mx-auto">
           <div className="card p-5">
             <h3
               className="text-[0.5rem] sm:text-[0.6rem] mb-5"

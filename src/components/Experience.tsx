@@ -17,7 +17,7 @@ export const Experience: React.FC = () => {
           <p className="section-title">{tr.title}</p>
         </div>
 
-        <div className="space-y-5 max-w-4xl mx-auto">
+        <div className="space-y-5 content-width mx-auto">
           {data.map((exp, index) => (
             <div key={index} className="card p-5">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">

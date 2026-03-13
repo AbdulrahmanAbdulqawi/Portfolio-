@@ -1,5 +1,4 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
 
@@ -29,7 +28,7 @@ export const ConsoleWindow: React.FC<ConsoleWindowProps> = ({ title, children, i
             style={{ color: 'var(--color-nav-item)', fontFamily: 'var(--font-mono)' }}
             aria-label={tr.aria.back}
           >
-            <ChevronLeft className="console-window-back-icon" />
+            <span className="console-window-back-icon" aria-hidden>{lang === 'ar' ? '>' : '<'}</span>
             {tr.aria.back}
           </button>
         )}

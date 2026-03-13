@@ -18,7 +18,7 @@ export const Education: React.FC = () => {
           <p className="section-title">{tr.title}</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 content-width mx-auto">
           <div>
             <div className="flex items-center mb-5 gap-2">
               <BookOpen className="h-4 w-4" style={{ color: 'var(--color-primary)' }} />

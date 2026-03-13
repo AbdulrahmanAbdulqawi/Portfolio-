@@ -15,7 +15,7 @@ export const About: React.FC = () => {
           <h2 className="section-label">{tr.label}</h2>
           <p className="section-title">{content.headline}</p>
         </div>
-        <div className="max-w-3xl mx-auto space-y-5">
+        <div className="content-width mx-auto space-y-5">
           {content.paragraphs.map((paragraph, i) => (
             <p
               key={i}

@@ -6,7 +6,11 @@ const DURATION_MS = 2500;
 const LINE_INTERVAL_MS = 380;
 const FADE_MS = 400;
 
-export const BootScreen: React.FC = () => {
+interface BootScreenProps {
+  onDone?: () => void;
+}
+
+export const BootScreen: React.FC<BootScreenProps> = ({ onDone }) => {
   const { lang } = useLang();
   const tr = t(lang).boot;
   const [done, setDone] = useState(false);
@@ -36,10 +40,15 @@ export const BootScreen: React.FC = () => {
     }
 
     timers.push(setTimeout(() => setVisible(false), DURATION_MS - 100));
-    timers.push(setTimeout(() => setDone(true), DURATION_MS + FADE_MS));
+    timers.push(
+      setTimeout(() => {
+        setDone(true);
+        onDone?.();
+      }, DURATION_MS + FADE_MS)
+    );
 
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [onDone]);
 
   if (done) return null;
 
