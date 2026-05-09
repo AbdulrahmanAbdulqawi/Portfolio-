@@ -512,6 +512,29 @@ button:focus-visible {
   color: var(--color-text);
 }
 
+.professional-header {
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  border-color: var(--color-border);
+}
+
+.professional-nav-link {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.professional-nav-link:hover {
+  color: var(--color-primary);
+}
+
+.professional-social-link {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.professional-social-link:hover {
+  color: var(--color-primary);
+}
+
 .console-window-content {
   padding: 1.5rem;
 }
@@ -598,4 +621,89 @@ button:focus-visible {
 
 [dir='rtl'] .text-left {
   text-align: right;
+}
+
+[data-layout='professional'] html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+}
+
+[data-layout='professional'] body {
+  image-rendering: auto;
+}
+
+[data-layout='professional'] .section-label {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+[data-layout='professional'] .section-title {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-top: 0.5rem;
+}
+
+[data-layout='professional'] .card {
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+[data-layout='professional'] .card::before {
+  border: none;
+}
+
+[data-layout='professional'] .card:hover {
+  border-color: var(--color-border);
+}
+
+[data-layout='professional'] .card:hover::before {
+  box-shadow: none;
+}
+
+[data-layout='professional'] .btn-primary {
+  border: 1px solid var(--color-primary);
+  border-radius: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+[data-layout='professional'] .btn-primary:hover {
+  transform: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+[data-layout='professional'] .btn-primary:active {
+  transform: none;
+  box-shadow: none;
+}
+
+[data-layout='professional'] .input-field {
+  border-width: 1px;
+  border-radius: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+
+[data-layout='professional'] .pixel-tag {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  border-radius: 999px;
+  letter-spacing: 0;
+}
+
+[data-layout='professional'] .xp-bar-bg {
+  border-width: 1px;
+  border-radius: 999px;
+  height: 10px;
+}
+
+[data-layout='professional'] .xp-bar-fill::after {
+  background: none;
 }

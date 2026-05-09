@@ -1,23 +1,7 @@
-import { useState, useEffect } from 'react';
-
-type Theme = 'dark' | 'light';
-
-function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
-  const stored = localStorage.getItem('theme') as Theme | null;
-  if (stored === 'dark' || stored === 'light') return stored;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-}
+import { useAppPreferences } from '../context/AppPreferencesContext';
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const { theme, setTheme, toggleTheme } = useAppPreferences();
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggle = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-
-  return { theme, toggle, setTheme } as const;
+  return { theme, toggle: toggleTheme, setTheme } as const;
 }

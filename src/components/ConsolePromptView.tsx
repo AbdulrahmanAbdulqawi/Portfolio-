@@ -5,7 +5,7 @@ import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
 import { useSwipeBack } from '../hooks/useSwipeBack';
 import { useTheme } from '../hooks/useTheme';
-import { useLanguage } from '../hooks/useLanguage';
+import { useViewMode } from '../hooks/useViewMode';
 import { ConsoleSectionLines, type ConsoleSectionLinesRef } from './ConsoleSectionLines';
 import { MobileBottomNav } from './MobileBottomNav';
 import { MobileMenuOverlay } from './MobileMenuOverlay';
@@ -18,6 +18,7 @@ const PROMPT_COMPLETIONS: string[] = [
   '\\help', 'help', '\\story', 'story', '\\guide', 'guide',
   '\\menu', 'menu', '\\prefs', 'prefs',
   'light', 'dark', 'theme light', 'theme dark',
+  'retro', 'professional', 'layout retro', 'layout professional',
   'english', 'arabic', 'en', 'ar', 'lang en', 'lang ar',
   ...SECTIONS,
 ];
@@ -57,9 +58,9 @@ const lineStyle = {
 };
 
 export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComplete = false, onOpenSection, selectedSection, onBack }) => {
-  const { lang, setLang } = useLang();
+  const { lang, setLang, toggle: toggleLang } = useLang();
   const { theme, toggle: toggleTheme, setTheme } = useTheme();
-  const { toggle: toggleLang } = useLanguage();
+  const { viewMode, toggle: toggleViewMode, setViewMode } = useViewMode();
   const site = siteConfig[lang];
   const tr = t(lang);
   const [inputValue, setInputValue] = useState('');
@@ -116,7 +117,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
   const menuItems = (site.navItems as SectionId[]);
   const menuItemCount = menuItems.length;
   const storyItemCount = SECTIONS.length + 1; // sections + back
-  const prefsItemCount = 2; // theme, lang
+  const prefsItemCount = 3; // theme, lang, view mode
 
   const contactPlaceholder =
     selectedSection === 'contact' && typeof contactFlowStep === 'number'
@@ -147,13 +148,28 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
 
   const navLabel = (key: string) => (tr.nav as Record<string, string>)[key] || key;
 
-  type ParsedCommand = 'help' | 'story' | 'menu' | 'prefs' | 'theme-light' | 'theme-dark' | 'lang-en' | 'lang-ar' | SectionId | 'unknown';
+  type ParsedCommand =
+    | 'help'
+    | 'story'
+    | 'menu'
+    | 'prefs'
+    | 'theme-light'
+    | 'theme-dark'
+    | 'layout-retro'
+    | 'layout-professional'
+    | 'lang-en'
+    | 'lang-ar'
+    | SectionId
+    | 'unknown';
   const parseCommand = (raw: string): ParsedCommand => {
     const s = raw.trim().toLowerCase().replace(/^\s*open\s+/i, '').trim();
     if (s === '\\help' || s === 'help' || s === '/help') return 'help';
     if (s === '\\story' || s === 'story' || s === '/story' || s === '\\guide' || s === 'guide' || s === '/guide') return 'story';
     if (s === '\\menu' || s === 'menu' || s === '/menu') return 'menu';
     if (s === 'light' || s === 'dark' || s === 'theme light' || s === 'theme dark') return s === 'light' || s === 'theme light' ? 'theme-light' : 'theme-dark';
+    if (s === 'retro' || s === 'professional' || s === 'layout retro' || s === 'layout professional') {
+      return s === 'retro' || s === 'layout retro' ? 'layout-retro' : 'layout-professional';
+    }
     if (s === 'en' || s === 'english' || s === 'ar' || s === 'arabic' || s === 'lang en' || s === 'lang english' || s === 'lang ar' || s === 'lang arabic') {
       if (s === 'en' || s === 'english' || s === 'lang en' || s === 'lang english') return 'lang-en';
       return 'lang-ar';
@@ -222,6 +238,16 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
       setShowStory(false);
       setUnknownCommand(false);
       setTheme('dark');
+    } else if (cmd === 'layout-retro') {
+      setShowHelp(false);
+      setShowStory(false);
+      setUnknownCommand(false);
+      setViewMode('retro');
+    } else if (cmd === 'layout-professional') {
+      setShowHelp(false);
+      setShowStory(false);
+      setUnknownCommand(false);
+      setViewMode('professional');
     } else if (cmd === 'lang-en') {
       setShowHelp(false);
       setShowStory(false);
@@ -352,12 +378,13 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
       } else if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         if (prefsFocusIndex === 0) toggleTheme();
-        else toggleLang();
+        else if (prefsFocusIndex === 1) toggleLang();
+        else toggleViewMode();
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [prefsVisible, prefsFocusIndex, prefsItemCount, toggleTheme, toggleLang]);
+  }, [prefsVisible, prefsFocusIndex, prefsItemCount, toggleTheme, toggleLang, toggleViewMode]);
 
   useEffect(() => {
     if (!selectedSection) return;
@@ -515,6 +542,20 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
               >
                 $ lang [{lang === 'en' ? 'EN' : 'عربي'}]
               </button>
+              <button
+                type="button"
+                onClick={toggleViewMode}
+                onMouseEnter={() => setPrefsFocusIndex(2)}
+                className="px-3 py-2.5 sm:px-2.5 sm:py-1 min-h-[44px] sm:min-h-0 transition-colors hover:border-[var(--color-terminal)] hover:text-[var(--color-primary)] touch-manipulation"
+                style={{
+                  ...promptStyle,
+                  borderColor: prefsFocusIndex === 2 ? 'var(--color-primary)' : undefined,
+                  backgroundColor: prefsFocusIndex === 2 ? 'var(--color-surface)' : undefined,
+                }}
+                aria-label={viewMode === 'retro' ? tr.aria.viewToProfessional : tr.aria.viewToRetro}
+              >
+                $ view [{viewMode}]
+              </button>
             </div>
           )}
           {menuVisible && (
@@ -602,6 +643,7 @@ export const ConsolePromptView: React.FC<ConsolePromptViewProps> = ({ bootComple
                 );
               })}
               <div style={{ color: 'var(--color-text-muted)' }}>{tr.prompt.helpTheme}</div>
+              <div style={{ color: 'var(--color-text-muted)' }}>{tr.prompt.helpView}</div>
               <div style={{ color: 'var(--color-text-muted)' }}>{tr.prompt.helpLang}</div>
               <button
                 type="button"
