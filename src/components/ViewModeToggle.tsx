@@ -18,7 +18,7 @@ export const ViewModeToggle: React.FC<ViewModeToggleProps> = ({ viewMode, toggle
       type="button"
       onClick={toggle}
       className="p-1.5 transition-colors duration-200"
-      style={{ color: 'var(--color-text-muted)' }}
+      style={{ color: 'var(--color-primary)' }}
       aria-label={viewMode === 'retro' ? tr.aria.viewToProfessional : tr.aria.viewToRetro}
       title={viewMode === 'retro' ? tr.ui.viewProfessional : tr.ui.viewRetro}
     >

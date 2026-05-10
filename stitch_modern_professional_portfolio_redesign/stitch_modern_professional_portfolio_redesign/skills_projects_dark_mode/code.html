@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#494551",
+                    "surface-container-high": "#2b292f",
+                    "surface-container-lowest": "#0f0d13",
+                    "surface-variant": "#36343a",
+                    "surface-container-highest": "#36343a",
+                    "surface": "#141218",
+                    "primary-fixed": "#e9ddff",
+                    "outline": "#948e9c",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "on-primary-fixed-variant": "#4f378a",
+                    "on-secondary-container": "#bfb2da",
+                    "background": "#141218",
+                    "on-tertiary-fixed": "#241a00",
+                    "tertiary-container": "#c9a74d",
+                    "on-tertiary-container": "#503d00",
+                    "on-secondary-fixed-variant": "#4b4263",
+                    "secondary-fixed-dim": "#cdc0e9",
+                    "tertiary": "#e7c365",
+                    "error": "#ffb4ab",
+                    "on-background": "#e6e0e9",
+                    "error-container": "#93000a",
+                    "on-primary": "#381e72",
+                    "surface-container-low": "#1d1b20",
+                    "secondary-container": "#4d4465",
+                    "on-secondary": "#342b4b",
+                    "secondary": "#cdc0e9",
+                    "tertiary-fixed": "#ffdf93",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#211f24",
+                    "on-primary-fixed": "#22005d",
+                    "surface-dim": "#141218",
+                    "on-surface": "#e6e0e9",
+                    "primary": "#cfbcff",
+                    "inverse-on-surface": "#322f35",
+                    "primary-container": "#6750a4",
+                    "surface-tint": "#cfbcff",
+                    "inverse-surface": "#e6e0e9",
+                    "on-error": "#690005",
+                    "primary-fixed-dim": "#cfbcff",
+                    "on-secondary-fixed": "#1f1635",
+                    "surface-bright": "#3b383e",
+                    "on-surface-variant": "#cbc4d2",
+                    "on-tertiary": "#3e2e00",
+                    "secondary-fixed": "#e9ddff",
+                    "on-primary-container": "#e0d2ff",
+                    "inverse-primary": "#6750a4",
+                    "tertiary-fixed-dim": "#e7c365"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "display": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #141218;
+            color: #e6e0e9;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Shell -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex flex-col w-full max-w-[768px] mx-auto px-4 md:px-6">
+<!-- Row 1: Brand and Action -->
+<div class="flex items-center justify-between h-14">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="code">code</span>
+<h1 class="text-xl font-display font-black tracking-tight text-on-surface dark:text-on-surface">DevPortfolio</h1>
+</div>
+<button class="text-body font-body text-primary font-medium hover:opacity-80 transition-opacity">Contact</button>
+</div>
+<!-- Row 2: Secondary Navigation Pills -->
+<nav class="flex items-center gap-6 overflow-x-auto no-scrollbar h-12">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap text-sm font-label font-medium" href="#">Home</a>
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 font-bold whitespace-nowrap text-sm font-label" href="#">Work</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap text-sm font-label font-medium" href="#">Skills</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap text-sm font-label font-medium" href="#">Education</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap text-sm font-label font-medium" href="#">Contact</a>
+</nav>
+</div>
+</header>
+<main class="max-w-[768px] mx-auto px-4 py-8 space-y-16">
+<!-- Skills Section -->
+<section class="space-y-8" id="skills">
+<div class="space-y-2">
+<h2 class="text-headline-sm font-headline font-bold text-on-surface">Technical Arsenal</h2>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+</div>
+<!-- Bento-style Skills Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Skill Group: Core Tech -->
+<div class="p-6 rounded-xl bg-surface-container border border-outline-variant/30 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="terminal">terminal</span>
+<h3 class="font-headline font-bold text-on-surface-variant">Core Development</h3>
+</div>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-label">
+<span>TypeScript &amp; React</span>
+<span>95%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-label">
+<span>Node.js Backend</span>
+<span>88%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill Group: Architecture -->
+<div class="p-6 rounded-xl bg-surface-container border border-outline-variant/30 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="architecture">architecture</span>
+<h3 class="font-headline font-bold text-on-surface-variant">Infrastructure</h3>
+</div>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-label">
+<span>AWS &amp; Cloud Architecture</span>
+<span>82%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-label">
+<span>CI/CD Pipelines</span>
+<span>90%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill Chips Row -->
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-3 py-1.5 bg-surface-variant/50 text-on-surface-variant border border-outline-variant/20 rounded-lg text-sm font-medium">PostgreSQL</span>
+<span class="px-3 py-1.5 bg-surface-variant/50 text-on-surface-variant border border-outline-variant/20 rounded-lg text-sm font-medium">Docker</span>
+<span class="px-3 py-1.5 bg-surface-variant/50 text-on-surface-variant border border-outline-variant/20 rounded-lg text-sm font-medium">Kubernetes</span>
+<span class="px-3 py-1.5 bg-surface-variant/50 text-on-surface-variant border border-outline-variant/20 rounded-lg text-sm font-medium">GraphQL</span>
+<span class="px-3 py-1.5 bg-surface-variant/50 text-on-surface-variant border border-outline-variant/20 rounded-lg text-sm font-medium">Python</span>
+<span class="px-3 py-1.5 bg-surface-variant/50 text-on-surface-variant border border-outline-variant/20 rounded-lg text-sm font-medium">Tailwind CSS</span>
+</div>
+</section>
+<!-- Projects Section -->
+<section class="space-y-8" id="work">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-2">
+<h2 class="text-headline-sm font-headline font-bold text-on-surface">Selected Projects</h2>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex gap-1 p-1 bg-surface-container rounded-xl border border-outline-variant/20 overflow-x-auto no-scrollbar">
+<button class="px-4 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold transition-all">All</button>
+<button class="px-4 py-1.5 rounded-lg text-on-surface-variant text-xs font-medium hover:bg-surface-variant/50 transition-all">Web</button>
+<button class="px-4 py-1.5 rounded-lg text-on-surface-variant text-xs font-medium hover:bg-surface-variant/50 transition-all">Mobile</button>
+<button class="px-4 py-1.5 rounded-lg text-on-surface-variant text-xs font-medium hover:bg-surface-variant/50 transition-all">AI</button>
+</div>
+</div>
+<!-- Project Cards Grid -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Project Card 1 -->
+<div class="group rounded-xl border border-outline-variant/20 bg-surface-container overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
+<div class="aspect-video relative overflow-hidden bg-surface-container-highest">
+<img alt="Nexus AI Dashboard" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high-fidelity software interface dashboard for an AI application, featuring complex data visualizations, glowing purple neon accents, and dark glassmorphic panels. The UI is clean and professional, with a focus on code editors and neural network diagrams, lit by soft ambient violet lighting in a professional workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrBAL91AO6TYOy6h9V-3TM-Kf48yD7VbW5QXI-TtfVfMtRxeM7HYow_MmMYKDBncqwXTN7-ak4OVVdgzGaVoAxRGeDv5KkAij6mjfuFszrqHcb9ovyAoF-1b7R8Vq8cqpxSm7kMpq7ru1L77Id9CHw3t5OhxDj0tUoEJGnr0L9k3XPzlizFmQ3jKNmTTIckevkwj5M7y44jqCHzEC1yI6lnttTgZAtv52g8iX5s660Ctoxo60SUADAZ7vEdMhI8_-Ic1rQ0rh9WbI"/>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-headline font-bold text-on-surface">Nexus AI Pipeline</h3>
+<div class="flex gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">
+                            A distributed machine learning pipeline manager built with Next.js, FastAPI, and Redis for real-time model monitoring.
+                        </p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-primary-container/30 text-primary">React</span>
+<span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-primary-container/30 text-primary">FastAPI</span>
+<span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-primary-container/30 text-primary">Kubernetes</span>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group rounded-xl border border-outline-variant/20 bg-surface-container overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
+<div class="aspect-video relative overflow-hidden bg-surface-container-highest">
+<img alt="Crypto Vault Mobile" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek mobile application mockup showing a cryptocurrency wallet interface on a high-end smartphone. The screen displays golden asset graphs and dark charcoal backgrounds with sharp white typography. The lighting is dramatic and moody, emphasizing a secure, premium financial technology aesthetic with soft shadows and gold accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJHSEl8B_kK3-zVfRK-56Av1IFtsKNqHigv4I0VkFMfhQwWf2RJp3GxyS_l2eLw6WXwTTmDbPda3AYWP4i2h0nEFeU1UF3DYh_ZtTVzkM8rEpgU8cxgme9PXGjsERjPVeamI91scVFIqgkk566l7sdRo8-J-aTGccg4a6xWyoZE2Mo3eXPgYZTMm2yR6gWknh9q3UKymN6d5kHTFTDwaOx_iCSd2vVNL-9tts8Ce2L5l8xVueGdh2KwpfU-LdWKhXR_3FXKVB9B_A"/>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-headline font-bold text-on-surface">Vault Mobile Wallet</h3>
+<div class="flex gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">
+                            Cross-platform secure cryptocurrency wallet application with biometric authentication and multi-chain support.
+                        </p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary">Flutter</span>
+<span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary">Dart</span>
+<span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary">Web3.js</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-12 px-6 md:px-12 max-w-[768px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 border-t border-outline-variant/20">
+<div class="space-y-2 text-center md:text-left">
+<h4 class="text-lg font-display font-bold text-on-surface">DevPortfolio</h4>
+<p class="text-body font-body text-sm text-on-surface-variant">© 2024 Developer Portfolio. Built with precision.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-label font-label text-on-surface-variant hover:text-primary transition-colors hover:translate-y-[-2px]" href="#">GitHub</a>
+<a class="text-label font-label text-on-surface-variant hover:text-primary transition-colors hover:translate-y-[-2px]" href="#">LinkedIn</a>
+<a class="text-label font-label text-on-surface-variant hover:text-primary transition-colors hover:translate-y-[-2px]" href="#">Twitter</a>
+<a class="text-label font-label text-on-surface-variant hover:text-primary transition-colors hover:translate-y-[-2px]" href="#">Resume</a>
+</div>
+</footer>
+<!-- Bottom Navigation Shell (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 pb-safe bg-surface/90 dark:bg-surface/90 backdrop-blur-md md:hidden border-t border-outline-variant/10 shadow-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-xs font-label font-medium">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary active:bg-primary/10 transition-colors scale-110">
+<span class="material-symbols-outlined" data-icon="terminal" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="text-xs font-label font-medium">Work</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="text-xs font-label font-medium">Skills</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-xs font-label font-medium">Education</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="text-xs font-label font-medium">Contact</span>
+</div>
+</nav>
+<!-- FAB for Main Action -->
+<button class="fixed bottom-20 right-6 z-40 bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 md:bottom-10">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+</body></html>

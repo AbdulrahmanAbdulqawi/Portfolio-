@@ -5,66 +5,118 @@ export const projectCategories = ['all', 'web', 'desktop', 'fullstack'] as const
 export const projects: Record<'en' | 'ar', Project[]> = {
   en: [
     {
-      title: 'ASP.NET Core Identity Authentication',
-      description: 'A comprehensive authentication system built with ASP.NET Core Identity, featuring user management, role-based authorization, and secure password handling.',
-      technologies: ['C#', 'ASP.NET Core', 'Entity Framework', 'JWT', 'Identity'],
-      category: 'fullstack',
-    },
-    {
-      title: 'Explainable Neural Networks Development',
-      description: 'Thesis project utilizing Python to conduct experiments. The goal was to create neural network models that are simpler and easier to interpret.',
+      title: 'Neural Network Models (thesis)',
+      description:
+        'Thesis work in Python to run experiments and build machine learning models that are simpler and easier to interpret than conventional black-box approaches.',
       technologies: ['Python', 'Deep Learning', 'Neural Networks'],
       category: 'fullstack',
-    },
-    {
-      title: 'Student Helper Website',
-      description: 'Educational platform built with modern web technologies to help students find opportunities abroad and provide online courses.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Wix'],
-      category: 'web',
-    },
-    {
-      title: 'Pacman Game',
-      description: 'A classic Pacman game developed from scratch using WPF, demonstrating strong object-oriented programming principles.',
-      technologies: ['C#', 'WPF', 'XAML'],
-      category: 'desktop',
+      illustration: 'neural',
     },
     {
       title: 'Employee Registration App',
-      description: 'Full-stack application with CI/CD pipeline implementation, showcasing modern cloud deployment practices.',
+      description:
+        'Employee registration solution using ASP.NET Core and Azure with a CI/CD pipeline, demonstrating end-to-end delivery and cloud deployment practices.',
       technologies: ['ASP.NET Core', 'Azure', 'CI/CD', 'SQL'],
       category: 'fullstack',
+      illustration: 'cloudPipeline',
+    },
+    {
+      title: 'Student Helper Website',
+      description:
+        'Built on the Wix platform with HTML, CSS, and JavaScript as a first business attempt—combining student support abroad with learning in project management, leadership, and entrepreneurship.',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Wix'],
+      category: 'web',
+      illustration: 'educationWeb',
+    },
+    {
+      title: 'Pacman Game',
+      description:
+        'Classic Pacman-style game developed entirely from scratch without a dedicated game engine or third-party game libraries, using WPF and strong object-oriented design.',
+      technologies: ['C#', 'WPF', 'XAML'],
+      category: 'desktop',
+      illustration: 'arcadeGame',
+    },
+    {
+      title: 'Tobacco Shop Application',
+      description:
+        'Multi-surface application spanning console, WPF desktop, ASP web, and ASP.NET Core API layers to practice layered architecture and software engineering principles across C# and Java.',
+      technologies: ['C#', 'Java', 'WPF', 'ASP.NET', 'API'],
+      category: 'fullstack',
+      illustration: 'multiLayerApp',
+    },
+    {
+      title: 'Yemeni Driver',
+      description:
+        'Web project built with ASP.NET Core, C#, HTML, CSS, and JavaScript to support a practical use case in the Yemeni Driver domain.',
+      technologies: ['ASP.NET Core', 'C#', 'HTML', 'CSS', 'JavaScript'],
+      category: 'web',
+      illustration: 'educationWeb',
+    },
+    {
+      title: 'Connect SAPiers',
+      description:
+        'Event-style project focused on brainstorming and prototyping new ideas within the Connect SAPiers initiative.',
+      technologies: ['Prototyping', 'Workshop', 'SAP community'],
+      category: 'fullstack',
+      illustration: 'prototypeIdeas',
     },
   ],
   ar: [
     {
-      title: 'مصادقة ASP.NET Core Identity',
-      description: 'نظام مصادقة شامل مبني على ASP.NET Core Identity، يتضمن إدارة المستخدمين والتفويض القائم على الأدوار ومعالجة كلمات المرور بشكل آمن.',
-      technologies: ['C#', 'ASP.NET Core', 'Entity Framework', 'JWT', 'Identity'],
-      category: 'fullstack',
-    },
-    {
-      title: 'تطوير شبكات عصبية قابلة للتفسير',
-      description: 'مشروع أطروحة باستخدام Python لإجراء تجارب. الهدف كان إنشاء نماذج شبكات عصبية أبسط وأسهل تفسيراً.',
+      title: 'نماذج شبكات عصبية (أطروحة)',
+      description:
+        'عمل أطروحة بـ Python لتجارب وبناء نماذج تعلم آلي أبسط وأسهل تفسيراً مقارنةً بالصناديق السوداء التقليدية.',
       technologies: ['Python', 'Deep Learning', 'Neural Networks'],
       category: 'fullstack',
-    },
-    {
-      title: 'موقع مساعد الطالب',
-      description: 'منصة تعليمية مبنية بتقنيات ويب حديثة لمساعدة الطلاب في إيجاد فرص في الخارج وتقديم دورات عبر الإنترنت.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Wix'],
-      category: 'web',
-    },
-    {
-      title: 'لعبة باكمان',
-      description: 'لعبة باكمان كلاسيكية مطورة من الصفر باستخدام WPF، تعرض مبادئ برمجة كائنية التوجه قوية.',
-      technologies: ['C#', 'WPF', 'XAML'],
-      category: 'desktop',
+      illustration: 'neural',
     },
     {
       title: 'تطبيق تسجيل الموظفين',
-      description: 'تطبيق full-stack مع تنفيذ خط أنابيب CI/CD، يعرض ممارسات النشر السحابي الحديثة.',
+      description:
+        'حل لتسجيل الموظفين باستخدام ASP.NET Core و Azure مع خط CI/CD، يوضح التسليم الشامل وممارسات النشر السحابي.',
       technologies: ['ASP.NET Core', 'Azure', 'CI/CD', 'SQL'],
       category: 'fullstack',
+      illustration: 'cloudPipeline',
+    },
+    {
+      title: 'موقع مساعد الطالب',
+      description:
+        'مبني على منصة Wix مع HTML و CSS و JavaScript كمحاولة أولى لإطلاق عمل—يدمج دعم الطلاب في الخارج مع تعلم إدارة المشاريع والقيادة وريادة الأعمال.',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Wix'],
+      category: 'web',
+      illustration: 'educationWeb',
+    },
+    {
+      title: 'لعبة باكمان',
+      description:
+        'لعبة على نمط باكمان طُورت بالكامل من الصفر دون محرك ألعاب جاهز أو مكتبات ألعاب خارجية، باستخدام WPF وتصميم كائني التوجه قوي.',
+      technologies: ['C#', 'WPF', 'XAML'],
+      category: 'desktop',
+      illustration: 'arcadeGame',
+    },
+    {
+      title: 'تطبيق متجر التبغ',
+      description:
+        'تطبيق متعدد الواجهات يشمل كونسول و WPF سطح مكتب وويب ASP وطبقة API بـ ASP.NET Core لممارسة الهندسة الطبقات ومبادئ هندسة البرمجيات عبر C# و Java.',
+      technologies: ['C#', 'Java', 'WPF', 'ASP.NET', 'API'],
+      category: 'fullstack',
+      illustration: 'multiLayerApp',
+    },
+    {
+      title: 'Yemeni Driver',
+      description:
+        'مشروع ويب باستخدام ASP.NET Core و C# و HTML و CSS و JavaScript لدعم حالة استخدام عملية في مجال السائق اليمني.',
+      technologies: ['ASP.NET Core', 'C#', 'HTML', 'CSS', 'JavaScript'],
+      category: 'web',
+      illustration: 'educationWeb',
+    },
+    {
+      title: 'Connect SAPiers',
+      description:
+        'مشروع بأسلوب فعاليات يركز على العصف الذهني والنماذج الأولية لأفكار جديدة ضمن مبادرة Connect SAPiers.',
+      technologies: ['Prototyping', 'Workshop', 'SAP community'],
+      category: 'fullstack',
+      illustration: 'prototypeIdeas',
     },
   ],
 };

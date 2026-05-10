@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --surface: #ffffff;
+            --background: #f2f4f6;
+            --primary: #b8860b;
+            --on-surface: #1a1a1a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--on-surface);
+            margin: 0;
+            padding: 0;
+        }
+        .font-headline, .font-display, .font-label {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#e1e3e8",
+                        "surface-container-high": "#f0f0f2",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#f4f4f6",
+                        "surface-container-highest": "#e8e8ea",
+                        "surface": "#ffffff",
+                        "primary-fixed": "#ffdf93",
+                        "outline": "#79747e",
+                        "background": "#f2f4f6",
+                        "tertiary-container": "#ffdf93",
+                        "on-tertiary-container": "#241a00",
+                        "secondary": "#625b71",
+                        "tertiary": "#b8860b",
+                        "on-background": "#1a1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f7f2fa",
+                        "secondary-container": "#e8def8",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1a1a",
+                        "primary": "#b8860b",
+                        "primary-container": "#ffdf93",
+                        "on-primary-container": "#241a00",
+                        "on-surface-variant": "#49454f"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar Component -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 docked full-width top-0 sticky z-50">
+<div class="flex flex-col w-full max-w-[768px] mx-auto px-4 md:px-8">
+<!-- Row 1: Brand & Action -->
+<div class="flex items-center justify-between h-14">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="code">code</span>
+<span class="text-xl font-display font-black tracking-tight text-on-surface">DevPortfolio</span>
+</div>
+<button class="text-label font-label font-bold text-primary hover:opacity-80 transition-opacity">
+                    Contact
+                </button>
+</div>
+<!-- Row 2: Navigation -->
+<nav class="flex items-center gap-6 h-10 overflow-x-auto no-scrollbar">
+<a class="text-primary border-b-2 border-primary pb-1 font-bold text-sm font-label whitespace-nowrap" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label whitespace-nowrap" href="#">Work</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label whitespace-nowrap" href="#">Skills</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label whitespace-nowrap" href="#">Education</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label whitespace-nowrap" href="#">Contact</a>
+</nav>
+</div>
+</header>
+<main class="max-w-[768px] mx-auto px-6 py-12 md:py-20">
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center">
+<!-- Headshot -->
+<div class="relative w-32 h-32 md:w-40 md:h-40 mb-8">
+<div class="absolute inset-0 rounded-full border-2 border-primary/20 scale-110"></div>
+<img alt="Professional Headshot" class="w-full h-full object-cover rounded-full shadow-md" data-alt="A professional studio headshot of a developer with a warm, confident expression. The subject is lit with soft, high-end three-point lighting against a clean, minimal light gray background. The overall aesthetic is refined and executive, matching a premium SaaS brand identity with soft shadows and high clarity. The lighting emphasizes a professional yet approachable persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMd-N1rKF8zvXdPfZ10pUAL7kC8pSpmiezq9HYf0KCmQR75MhxLpMidlwaxcZdEm6fFZfefJorYUhk0JebJGK6hzk18HMiBY24X7vgJFawCnM8TgPo_nhExRhzj-jjW3zzOZmOAcsysnkhC7LJbC-yKXIuMJxBVShdfS2ervK0uDFj3g22Bh4siN6tSU4Ywpq_wc4HPCm8rMWCuaN2rJiTtmiCSDMGYfwDONz7H_txDWfm5zhe3aYcNu7k8WGGPtqs8RpHpRwwH-s"/>
+</div>
+<!-- Headline -->
+<h1 class="text-headline-sm md:text-4xl font-headline font-extrabold tracking-tight text-on-surface mb-4 leading-tight">
+                Full-Stack Developer &amp; Architect
+            </h1>
+<!-- Sub-headline -->
+<p class="text-body font-body text-on-surface-variant max-w-xl mb-10 text-lg leading-relaxed">
+                Building scalable digital experiences through technical precision and architectural excellence. Specialized in high-performance SaaS solutions and refined user interfaces.
+            </p>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<button class="bg-primary text-surface font-label font-bold px-8 py-4 rounded-lg shadow-sm hover:translate-y-[-2px] active:scale-98 transition-all flex items-center justify-center gap-2">
+                    View Work
+                    <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="border border-outline-variant text-on-surface font-label font-bold px-8 py-4 rounded-lg hover:bg-surface-variant/50 transition-all flex items-center justify-center gap-2">
+                    Contact Me
+                </button>
+</div>
+</section>
+<!-- Bento Grid Feature Section -->
+<section class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface border border-outline-variant/30 p-6 rounded-xl hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="terminal">terminal</span>
+<h3 class="font-headline font-bold text-lg mb-2">Technical Mastery</h3>
+<p class="text-sm text-on-surface-variant font-body">Advanced expertise in React, Node.js, and Cloud Architecture with a focus on optimization.</p>
+</div>
+<div class="bg-surface border border-outline-variant/30 p-6 rounded-xl hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="architecture">architecture</span>
+<h3 class="font-headline font-bold text-lg mb-2">Systems Design</h3>
+<p class="text-sm text-on-surface-variant font-body">Crafting modular, maintainable codebases that scale alongside your growing business needs.</p>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface border-t border-outline-variant/20 w-full mt-20">
+<div class="max-w-[768px] mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-center md:text-left">
+<div class="text-lg font-display font-bold text-on-surface mb-2">DevPortfolio</div>
+<p class="text-body font-body text-sm text-on-surface-variant">© 2024 Developer Portfolio. Built with precision.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label" href="#">GitHub</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label" href="#">LinkedIn</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label" href="#">Twitter</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label" href="#">Resume</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant/10 md:hidden">
+<div class="flex flex-col items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-label font-medium">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="text-[10px] font-label font-medium">Work</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="text-[10px] font-label font-medium">Skills</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-[10px] font-label font-medium">Education</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="text-[10px] font-label font-medium">Contact</span>
+</div>
+</nav>
+</body></html>

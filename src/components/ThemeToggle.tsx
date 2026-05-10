@@ -16,7 +16,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, toggle }) => {
     type="button"
     onClick={toggle}
     className="p-1.5 transition-colors duration-200"
-    style={{ color: theme === 'dark' ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
+    style={{ color: 'var(--color-primary)' }}
     aria-label={theme === 'dark' ? tr.aria.themeToLight : tr.aria.themeToDark}
   >
     {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

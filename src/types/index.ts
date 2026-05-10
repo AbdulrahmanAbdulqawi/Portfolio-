@@ -48,11 +48,26 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
+export const PROJECT_ILLUSTRATION_KINDS = [
+  'neural',
+  'educationWeb',
+  'arcadeGame',
+  'cloudPipeline',
+  'multiLayerApp',
+  'prototypeIdeas',
+] as const;
+
+export type ProjectIllustrationKind = (typeof PROJECT_ILLUSTRATION_KINDS)[number];
+
 export interface Project {
   title: string;
   description: string;
   technologies: string[];
   category: string;
+  /** Optional screenshot or cover (public path or URL). */
+  image?: string;
+  /** Decorative SVG when `image` is omitted. */
+  illustration: ProjectIllustrationKind;
   github?: string;
   link?: string;
 }

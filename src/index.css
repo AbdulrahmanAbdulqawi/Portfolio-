@@ -2,55 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Theme Variables ── */
+/* ── Theme: black, white, gold + warm neutral accents (no navy) ── */
 :root {
-  --color-primary: #d4a030;
-  --color-primary-hover: #f0c75e;
-  --color-accent: #f0c75e;
-  --color-neon: #00ff88;
-  --color-cyan: #00d4ff;
-  --color-terminal: #00ff88;
-  --color-hp: #ff3c3c;
+  --color-primary: #c9a227;
+  --color-primary-hover: #dfc056;
+  --color-accent: #dfc056;
+  --color-secondary: #4a463d;
+  --color-neon: #e8cc6b;
+  --color-cyan: #6f6a5f;
+  --color-terminal: #e8cc6b;
+  --color-hp: #e85d5d;
 
-  --color-bg: #0c0c0c;
-  --color-surface: #161616;
-  --color-surface-hover: #1e1e1e;
+  --color-bg: #060606;
+  --color-surface: #0e0e0d;
+  --color-surface-hover: #161514;
 
-  --color-text: #f5f5f5;
-  --color-text-secondary: #b0b0b0;
-  --color-text-muted: #707070;
-  --color-nav-item: #ffffff;
+  --color-text: #fafafa;
+  --color-text-secondary: #c4c4c4;
+  --color-text-muted: #949089;
+  --color-nav-item: #f5f5f5;
 
-  --color-border: #333333;
+  --color-border: #2a2926;
+  --stitch-tertiary: #908880;
 
   --font-pixel: 'Press Start 2P', monospace;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-arabic: 'Cairo', 'Inter', sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
 
   --pixel-size: 4px;
   --content-width: 48rem; /* 768px – fixed content width for all pages */
 }
 
 [data-theme='light'] {
-  --color-primary: #b8860b;
-  --color-primary-hover: #c4950a;
-  --color-accent: #0d9668;
-  --color-neon: #0d9668;
-  --color-cyan: #0569a6;
-  --color-terminal: #0d9668;
+  --color-primary: #9a7209;
+  --color-primary-hover: #b8890f;
+  --color-accent: #c9a227;
+  --color-secondary: #4d4943;
+  --color-neon: #8a6a12;
+  --color-cyan: #5f5c55;
+  --color-terminal: #7a6310;
   --color-hp: #b91c1c;
 
-  --color-bg: #f2f4f6;
+  --color-bg: #fafaf9;
   --color-surface: #ffffff;
-  --color-surface-hover: #e8ebef;
+  --color-surface-hover: #f0efe8;
 
-  --color-text: #1a1a1a;
-  --color-text-secondary: #374151;
+  --color-text: #0a0a0a;
+  --color-text-secondary: #3d3d3d;
   --color-text-muted: #5c5c5c;
-  --color-nav-item: #374151;
+  --color-nav-item: #1a1a1a;
 
-  --color-border: #d1d5db;
+  --color-border: #dad8d0;
+  --stitch-tertiary: #6a6660;
 
   --color-console-titlebar: #e5e7eb;
   --color-dot-red: #b91c1c;
@@ -389,7 +394,7 @@ button:focus-visible {
 }
 
 [data-theme='light'] ::selection {
-  background-color: rgba(13, 150, 104, 0.25);
+  background-color: color-mix(in srgb, var(--color-primary) 32%, transparent);
   color: var(--color-text);
 }
 
@@ -513,17 +518,63 @@ button:focus-visible {
 }
 
 .professional-header {
-  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
-  border-color: var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+  border-color: color-mix(in srgb, var(--color-border) 55%, transparent);
 }
 
 .professional-nav-link {
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+  border-radius: 999px;
+  padding: 0.34rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+:root:not([data-theme='light']) .professional-nav-link {
+  color: var(--color-text);
 }
 
 .professional-nav-link:hover {
   color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+}
+
+.professional-nav-link-active {
+  color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+}
+
+.professional-nav-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.36rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.1rem;
+}
+
+.professional-nav-strip::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .professional-nav-strip {
+    justify-content: center;
+    gap: 0.48rem;
+  }
+
+  .professional-nav-link {
+    padding: 0.38rem 0.9rem;
+    font-size: 0.84rem;
+  }
 }
 
 .professional-social-link {
@@ -553,7 +604,7 @@ button:focus-visible {
   right: env(safe-area-inset-right);
   bottom: env(safe-area-inset-bottom);
   z-index: 10000;
-  background-color: #0c0c0c;
+  background-color: var(--color-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -592,7 +643,7 @@ button:focus-visible {
 }
 
 [data-theme='light'] .boot-screen {
-  background-color: #f8f9fa;
+  background-color: var(--color-bg);
 }
 
 [data-theme='light'] .boot-screen-line,
@@ -628,8 +679,60 @@ button:focus-visible {
   font-size: 16px;
 }
 
+[data-layout='professional'] {
+  --font-display: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+  --content-width: 75rem;
+  --stitch-on-primary: #0a0a0a;
+  --stitch-surface-low: #10100f;
+  --stitch-surface-raised: #181817;
+  --stitch-tertiary: #a39d91;
+  --font-pixel: var(--font-sans);
+  --color-primary: #c9a227;
+  --color-primary-hover: #dfc056;
+  --color-accent: #dfc056;
+  --color-secondary: #4a4740;
+  --color-neon: #e8cc6b;
+  --color-cyan: #6d675b;
+  --color-terminal: #e8cc6b;
+  --color-hp: #f08080;
+  --color-bg: #070706;
+  --color-surface: #10100f;
+  --color-surface-hover: #1a1918;
+  --color-text: #f7f7f4;
+  --color-text-secondary: #c9cec8;
+  --color-text-muted: #949089;
+  --color-nav-item: #f7f7f4;
+  --color-border: #2a2926;
+}
+
+[data-layout='professional'][data-theme='light'] {
+  --stitch-on-primary: #0a0a0a;
+  --stitch-tertiary: #5c5852;
+  --stitch-surface-low: #f2f1ee;
+  --stitch-surface-raised: #eae8e3;
+  --color-primary: #a67c00;
+  --color-primary-hover: #c9a227;
+  --color-accent: #c9a227;
+  --color-secondary: #45423c;
+  --color-neon: #8a6a12;
+  --color-cyan: #555149;
+  --color-terminal: #7a6310;
+  --color-hp: #ba1a1a;
+  --color-bg: #fafaf9;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f2f1ec;
+  --color-text: #0a0a0a;
+  --color-text-secondary: #3a3a3a;
+  --color-text-muted: #6b6b6b;
+  --color-nav-item: #0a0a0a;
+  --color-border: #ddd9cf;
+}
+
 [data-layout='professional'] body {
   image-rendering: auto;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
 }
 
 [data-layout='professional'] .section-label {
@@ -640,17 +743,17 @@ button:focus-visible {
 }
 
 [data-layout='professional'] .section-title {
-  font-family: var(--font-sans);
-  font-size: 1.5rem;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
   margin-top: 0.5rem;
 }
 
 [data-layout='professional'] .card {
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 [data-layout='professional'] .card::before {
@@ -658,7 +761,7 @@ button:focus-visible {
 }
 
 [data-layout='professional'] .card:hover {
-  border-color: var(--color-border);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
 }
 
 [data-layout='professional'] .card:hover::before {
@@ -672,11 +775,14 @@ button:focus-visible {
   font-size: 0.9rem;
   font-weight: 600;
   box-shadow: none;
+  color: var(--stitch-on-primary);
+  background-color: var(--color-primary);
 }
 
 [data-layout='professional'] .btn-primary:hover {
-  transform: none;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 10px 20px color-mix(in srgb, var(--color-bg) 82%, transparent);
+  background-color: var(--color-primary-hover);
 }
 
 [data-layout='professional'] .btn-primary:active {
@@ -706,4 +812,406 @@ button:focus-visible {
 
 [data-layout='professional'] .xp-bar-fill::after {
   background: none;
+}
+
+/* ── Stitch professional layout (matches stitch export screens) ── */
+[data-layout='professional'] .pro-stitch-main {
+  max-width: min(100%, var(--content-width));
+  width: 100%;
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-bottom: 4rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  [data-layout='professional'] .pro-stitch-main {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-layout='professional'] .pro-stitch-main {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+  }
+}
+
+[data-layout='professional'] .stitch-hero-secondary-cta:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background-color: color-mix(in srgb, var(--color-surface) 55%, transparent);
+}
+
+[data-layout='professional'] .stitch-nav-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  min-height: 2.75rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+[data-layout='professional'] .stitch-nav-strip::-webkit-scrollbar {
+  display: none;
+}
+
+[data-layout='professional'] .stitch-nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+[data-layout='professional'] .stitch-nav-link:hover {
+  color: var(--color-primary);
+}
+
+[data-layout='professional'] .stitch-nav-link-active {
+  color: var(--color-primary);
+  font-weight: 700;
+  border-bottom-color: var(--color-primary);
+}
+
+[data-layout='professional'] .stitch-header-row1 {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+}
+
+[data-layout='professional'] .stitch-section {
+  scroll-margin-top: 4.75rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  [data-layout='professional'] .stitch-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  [data-layout='professional'] .stitch-section {
+    scroll-margin-top: 7rem;
+  }
+}
+
+[data-layout='professional'] .stitch-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+[data-layout='professional'] .stitch-section-heading-bar {
+  width: 2rem;
+  height: 2px;
+  background-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+[data-layout='professional'] .stitch-h1 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+[data-layout='professional'] .stitch-skill-rule {
+  height: 0.25rem;
+  width: 3rem;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  margin-top: 0.25rem;
+}
+
+[data-layout='professional'] .stitch-exp-card {
+  background-color: var(--stitch-surface-low);
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+[data-layout='professional'] .stitch-exp-card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  background-color: var(--color-surface);
+}
+
+[data-layout='professional'] .stitch-bento-card {
+  background-color: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+[data-layout='professional'] .stitch-filter-shell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+
+[data-layout='professional'] .stitch-filter-shell::-webkit-scrollbar {
+  display: none;
+}
+
+[data-layout='professional'] .stitch-filter-btn {
+  padding: 0.375rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+[data-layout='professional'] .stitch-filter-btn:hover {
+  background-color: color-mix(in srgb, var(--color-surface-hover) 70%, transparent);
+}
+
+[data-layout='professional'] .stitch-filter-btn-active {
+  background-color: var(--color-primary);
+  color: var(--stitch-on-primary);
+}
+
+[data-layout='professional'] .stitch-project-card {
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  background-color: var(--color-surface);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-layout='professional'] .stitch-project-card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  box-shadow: 0 12px 40px color-mix(in srgb, var(--color-bg) 75%, transparent);
+}
+
+[data-layout='professional'] .stitch-tech-chip {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  color: var(--color-primary);
+}
+
+[data-layout='professional'] .stitch-contact-form {
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  background-color: var(--color-surface);
+  box-shadow: 0 25px 50px color-mix(in srgb, var(--color-bg) 65%, transparent);
+}
+
+[data-layout='professional'] .stitch-footer-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+[data-layout='professional'] .stitch-footer-icon:hover {
+  color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface));
+  transform: translateY(-3px);
+}
+
+[data-layout='professional'] .stitch-contact-pill {
+  flex: 1 1 200px;
+  min-width: 180px;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  background-color: var(--stitch-surface-raised);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+[data-layout='professional'] .stitch-edu-card {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 35%, transparent);
+  background-color: var(--color-surface);
+  transition: border-color 0.25s ease;
+}
+
+[data-layout='professional'] .stitch-edu-card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+}
+
+[data-layout='professional'] .stitch-cert-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 28%, transparent);
+  background-color: var(--stitch-surface-low);
+  transition: background-color 0.2s ease;
+}
+
+[data-layout='professional'] .stitch-cert-row:hover {
+  background-color: color-mix(in srgb, var(--color-surface-hover) 40%, transparent);
+}
+
+[data-layout='professional'] .stitch-pro-cta {
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.375rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: var(--stitch-on-primary);
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+[data-layout='professional'] .stitch-pro-cta:hover {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+[data-layout='professional'] .stitch-pro-cta:active {
+  transform: scale(0.97);
+}
+
+[data-layout='professional'] .stitch-icon-link {
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+[data-layout='professional'] .stitch-icon-link:hover {
+  color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+/* Selection + shadows track professional palette (not global retro green tint) */
+[data-layout='professional'] ::selection {
+  background-color: var(--color-primary);
+  color: var(--stitch-on-primary);
+}
+
+[data-layout='professional'] .professional-header {
+  border-bottom-color: color-mix(in srgb, var(--color-border) 50%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-layout='professional'] .stitch-card-lift {
+    transition: transform 0.28s ease, box-shadow 0.3s ease, border-color 0.25s ease;
+  }
+
+  [data-layout='professional'] .stitch-card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 16px 40px color-mix(in srgb, var(--color-bg) 68%, transparent),
+      0 2px 12px color-mix(in srgb, var(--color-border) 18%, transparent);
+  }
+}
+
+[data-layout='professional'] .stitch-shadow-floating {
+  box-shadow:
+    0 12px 32px color-mix(in srgb, var(--color-bg) 70%, var(--color-primary) 18%),
+    0 2px 8px color-mix(in srgb, var(--color-border) 25%, transparent);
+}
+
+[data-layout='professional'] .stitch-shadow-cta {
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--color-primary) 28%, transparent);
+}
+
+/* Mobile / tablet: slide-over navigation */
+[data-layout='professional'] .stitch-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: color-mix(in srgb, #000 52%, transparent);
+  backdrop-filter: blur(4px);
+}
+
+[data-layout='professional'] .stitch-sidebar-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  z-index: 70;
+  width: min(20.5rem, calc(100vw - 1.25rem));
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border-inline-end: 1px solid color-mix(in srgb, var(--color-border) 45%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-border) 20%, transparent),
+    0 12px 40px color-mix(in srgb, var(--color-bg) 70%, transparent);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s linear;
+}
+
+[dir='rtl'] [data-layout='professional'] .stitch-sidebar-panel {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-border) 20%, transparent),
+    0 12px 40px color-mix(in srgb, var(--color-bg) 70%, transparent);
+}
+
+[data-layout='professional'] .stitch-sidebar-link {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  border-inline-start: 3px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  text-align: start;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+[data-layout='professional'] .stitch-sidebar-link:hover {
+  color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+[data-layout='professional'] .stitch-sidebar-link-active {
+  color: var(--color-primary);
+  font-weight: 700;
+  background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border-inline-start-color: var(--color-primary);
 }

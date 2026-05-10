@@ -1,64 +1,100 @@
 import React from 'react';
-import { Calendar, MapPin } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { CheckCircle } from 'lucide-react';
 import { experiences } from '../data/experience';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
+import { Reveal } from './Reveal';
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export const Experience: React.FC = () => {
   const { lang } = useLang();
   const data = experiences[lang];
   const tr = t(lang).experience;
+  const reduce = useReducedMotion();
+
+  const cardVariants = reduce
+    ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
+    : {
+        hidden: { opacity: 0, y: 18 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease } },
+      };
 
   return (
-    <section className="py-16 bg-[var(--color-bg)]" aria-label={t(lang).aria.experience}>
-      <div className="section-container">
-        <div className="text-center mb-10">
-          <h2 className="section-label">{tr.label}</h2>
-          <p className="section-title">{tr.title}</p>
-        </div>
+    <section className="stitch-section bg-[var(--color-bg)]" aria-label={t(lang).aria.experience}>
+      <div className="space-y-10">
+        <Reveal y={14}>
+          <div>
+            <h2 className="stitch-section-heading">
+              <span className="stitch-section-heading-bar" aria-hidden />
+              {tr.label}
+            </h2>
+            <p
+              className="text-xl md:text-2xl font-bold mt-2"
+              style={{ color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}
+            >
+              {tr.title}
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="space-y-5 content-width mx-auto">
+        <div className="space-y-6">
           {data.map((exp, index) => (
-            <div key={index} className="card p-5">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                <div>
-                  <h3
-                    className="text-[0.55rem] sm:text-[0.7rem]"
-                    style={{ color: 'var(--color-text)', fontFamily: 'var(--font-pixel)' }}
+            <motion.article
+              key={index}
+              className="stitch-exp-card stitch-card-lift"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '0px 0px -12% 0px' }}
+              transition={reduce ? { duration: 0 } : { delay: index * 0.06, duration: 0.45, ease }}
+            >
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                <div className="flex gap-4 min-w-0">
+                  <div
+                    className="w-12 h-12 rounded-lg shrink-0 flex items-center justify-center border overflow-hidden transition-transform duration-300 hover:scale-105"
+                    style={{
+                      backgroundColor: 'var(--stitch-surface-raised)',
+                      borderColor: 'color-mix(in srgb, var(--color-border) 40%, transparent)',
+                    }}
                   >
-                    {exp.title}
-                  </h3>
-                  {!exp.logo && (
-                    <p className="text-[0.5rem] sm:text-[0.6rem] mt-1" style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-pixel)' }}>
+                    {exp.logo ? (
+                      <img src={exp.logo} alt="" className="w-8 h-8 object-contain" />
+                    ) : (
+                      <span className="text-xs font-bold" style={{ color: 'var(--color-primary)' }}>
+                        {exp.company.slice(0, 2).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-lg md:text-xl font-bold" style={{ color: 'var(--color-text)', fontFamily: 'var(--font-sans)' }}>
+                      {exp.title}
+                    </h3>
+                    <p className="text-sm md:text-base font-medium mt-0.5" style={{ color: 'var(--color-primary)' }}>
                       {exp.company}
                     </p>
-                  )}
-                </div>
-                <div className="mt-2 md:mt-0 md:text-right space-y-1">
-                  <div className="flex items-center gap-2" style={{ color: 'var(--color-text-muted)' }}>
-                    <Calendar className="h-3 w-3 shrink-0" />
-                    <span className="text-[0.5rem]" style={{ fontFamily: 'var(--font-pixel)' }}>{exp.period}</span>
-                  </div>
-                  <div className="flex items-center gap-2" style={{ color: 'var(--color-text-muted)' }}>
-                    <MapPin className="h-3 w-3 shrink-0" />
-                    <span className="text-[0.5rem]" style={{ fontFamily: 'var(--font-pixel)' }}>{exp.location}</span>
                   </div>
                 </div>
+                <span
+                  className="text-xs md:text-sm font-semibold px-3 py-1 rounded-full self-start shrink-0"
+                  style={{
+                    color: 'var(--color-text-secondary)',
+                    backgroundColor: 'color-mix(in srgb, var(--color-surface-hover) 65%, transparent)',
+                  }}
+                >
+                  {exp.period}
+                </span>
               </div>
-              <ul className="space-y-1.5" style={{ color: 'var(--color-text-secondary)' }}>
+              <ul className="mt-6 space-y-3">
                 {exp.responsibilities.map((resp, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
-                    <span style={{ color: 'var(--color-neon)' }} className="shrink-0">-</span>
-                    {resp}
+                  <li key={idx} className="flex items-start gap-3 text-sm md:text-base" style={{ color: 'var(--color-text-secondary)' }}>
+                    <CheckCircle className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-200 hover:scale-110" style={{ color: 'var(--stitch-tertiary)' }} aria-hidden />
+                    <span style={{ fontFamily: 'var(--font-sans)' }}>{resp}</span>
                   </li>
                 ))}
               </ul>
-              {exp.logo && (
-                <div className={`flex mt-4 ${lang === 'ar' ? 'justify-start' : 'justify-end'}`}>
-                  <img src={exp.logo} alt={exp.company} className="h-8 object-contain" />
-                </div>
-              )}
-            </div>
+            </motion.article>
           ))}
         </div>
       </div>
