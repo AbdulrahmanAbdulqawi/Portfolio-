@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { projects, projectCategories } from '../data/projects';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
@@ -22,8 +22,27 @@ export const Projects: React.FC = () => {
   const { lang } = useLang();
   const data = projects[lang];
   const tr = t(lang).projects;
+  const trPortfolio = t(lang).portfolio;
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [listMode, setListMode] = useState<ListSizeMode>('few');
+  const reduce = useReducedMotion();
+
+  const handleCardMouseMove = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      if (reduce) return;
+      const target = event.currentTarget;
+      const rect = target.getBoundingClientRect();
+      target.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+      target.style.setProperty('--my', `${event.clientY - rect.top}px`);
+    },
+    [reduce],
+  );
+
+  const handleCardMouseLeave = useCallback((event: React.MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget;
+    target.style.removeProperty('--mx');
+    target.style.removeProperty('--my');
+  }, []);
 
   useEffect(() => {
     setListMode('few');
@@ -96,26 +115,30 @@ export const Projects: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
+                onMouseMove={handleCardMouseMove}
+                onMouseLeave={handleCardMouseLeave}
               >
                 <div
-                  className="aspect-video relative overflow-hidden"
+                  className="stitch-project-media aspect-video relative overflow-hidden"
                   style={{
                     background: `linear-gradient(145deg, var(--stitch-surface-raised), color-mix(in srgb, var(--color-primary) 8%, var(--color-bg)))`,
                   }}
                 >
                   {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
+                    <div className="absolute inset-0 flex items-center justify-center px-8 py-6">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="max-h-full w-auto max-w-[min(100%,280px)] object-contain"
+                      />
+                    </div>
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center px-8 py-6 text-[var(--color-primary)]">
                       <ProjectCardIllustration kind={project.illustration} className="w-full max-w-[min(100%,280px)] [&_svg]:h-auto [&_svg]:w-full" />
                     </div>
                   )}
                 </div>
-                <div className="p-6 space-y-4">
+                <div className="relative z-[1] p-6 space-y-4">
                   <div className="flex justify-between items-start gap-3">
                     <h3 className="text-lg font-bold leading-snug" style={{ color: 'var(--color-text)', fontFamily: 'var(--font-sans)' }}>
                       {project.title}
@@ -148,6 +171,58 @@ export const Projects: React.FC = () => {
                   <p className="text-sm leading-relaxed line-clamp-3" style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-sans)' }}>
                     {project.description}
                   </p>
+                  {project.repoNote ? (
+                    <p
+                      className="text-xs leading-snug rounded-md px-2.5 py-2 border"
+                      style={{
+                        color: 'var(--color-text-muted)',
+                        fontFamily: 'var(--font-mono)',
+                        borderColor: 'color-mix(in srgb, var(--color-border) 55%, transparent)',
+                        backgroundColor: 'color-mix(in srgb, var(--color-surface-hover) 40%, transparent)',
+                      }}
+                    >
+                      {project.repoNote}
+                    </p>
+                  ) : null}
+                  {project.caseStudy ? (
+                    <details
+                      className="rounded-lg border text-start overflow-hidden"
+                      style={{ borderColor: 'color-mix(in srgb, var(--color-border) 45%, transparent)' }}
+                    >
+                      <summary
+                        className="cursor-pointer text-sm font-semibold px-3 py-2.5 list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+                        style={{ color: 'var(--color-primary)', backgroundColor: 'color-mix(in srgb, var(--color-surface-hover) 35%, transparent)' }}
+                      >
+                        <span className="select-none" aria-hidden>
+                          ▸
+                        </span>
+                        {trPortfolio.caseStudySummary}
+                      </summary>
+                      <div
+                        className="px-3 pb-3 pt-1 space-y-3 border-t text-sm leading-relaxed"
+                        style={{ borderColor: 'color-mix(in srgb, var(--color-border) 40%, transparent)', color: 'var(--color-text-secondary)' }}
+                      >
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                            {trPortfolio.context}
+                          </p>
+                          <p>{project.caseStudy.context}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                            {trPortfolio.contribution}
+                          </p>
+                          <p>{project.caseStudy.contribution}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                            {trPortfolio.outcome}
+                          </p>
+                          <p>{project.caseStudy.outcome}</p>
+                        </div>
+                      </div>
+                    </details>
+                  ) : null}
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span key={tech} className="stitch-tech-chip">

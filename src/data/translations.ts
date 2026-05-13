@@ -97,6 +97,17 @@ const translations = {
       viewProfessional: 'Professional view',
       navSidebarTitle: 'Sections',
     },
+    portfolio: {
+      downloadResume: 'Download résumé (PDF)',
+      writingHeading: 'Writing',
+      recommendationsHeading: 'Recommendations',
+      caseStudySummary: 'Case study',
+      context: 'Context',
+      contribution: 'My role',
+      outcome: 'Outcome',
+      testimonialReadMore: 'Read more',
+      testimonialShowLess: 'Show less',
+    },
     aria: {
       commandInput: 'Command input',
       themeToLight: 'Switch to light mode',
@@ -115,6 +126,7 @@ const translations = {
       skills: 'Skills',
       experience: 'Experience',
       about: 'About',
+      resumePdf: 'Download résumé as PDF',
     },
   },
   ar: {
@@ -207,6 +219,17 @@ const translations = {
       viewProfessional: 'عرض احترافي',
       navSidebarTitle: 'الأقسام',
     },
+    portfolio: {
+      downloadResume: 'تحميل السيرة الذاتية (PDF)',
+      writingHeading: 'الكتابة',
+      recommendationsHeading: 'توصيات',
+      caseStudySummary: 'دراسة حالة',
+      context: 'السياق',
+      contribution: 'دوري',
+      outcome: 'النتيجة',
+      testimonialReadMore: 'عرض المزيد',
+      testimonialShowLess: 'عرض أقل',
+    },
     aria: {
       commandInput: 'إدخال أمر',
       themeToLight: 'التبديل إلى الوضع الفاتح',
@@ -225,6 +248,7 @@ const translations = {
       skills: 'المهارات',
       experience: 'الخبرة',
       about: 'عني',
+      resumePdf: 'تحميل السيرة الذاتية بصيغة PDF',
     },
   },
 } as const;

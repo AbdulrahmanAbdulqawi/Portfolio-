@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Mail, MapPin, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { FileText, Mail, MapPin, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
@@ -12,6 +12,8 @@ export const Contact: React.FC = () => {
   const { lang } = useLang();
   const site = siteConfig[lang];
   const tr = t(lang).contact;
+  const trPortfolio = t(lang).portfolio;
+  const aria = t(lang).aria;
   const reduce = useReducedMotion();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<FormStatus>('idle');
@@ -57,6 +59,19 @@ export const Contact: React.FC = () => {
             <p className="text-base md:text-lg max-w-full sm:max-w-2xl leading-relaxed" style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-sans)' }}>
               {tr.intro}
             </p>
+            {site.resumeUrl ? (
+              <a
+                href={site.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 hover:opacity-90 transition-opacity w-fit"
+                style={{ color: 'var(--color-primary)' }}
+                aria-label={aria.resumePdf}
+              >
+                <FileText className="w-4 h-4 shrink-0" aria-hidden />
+                {trPortfolio.downloadResume}
+              </a>
+            ) : null}
           </div>
         </Reveal>
 

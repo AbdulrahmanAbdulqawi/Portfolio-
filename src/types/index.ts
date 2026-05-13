@@ -1,3 +1,14 @@
+export interface WritingLink {
+  label: string;
+  url: string;
+}
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  role?: string;
+}
+
 export interface SiteConfig {
   name: string;
   initials: string;
@@ -11,6 +22,12 @@ export interface SiteConfig {
   location: string;
   socialLinks: { platform: string; url: string; icon: string }[];
   navItems: string[];
+  /** Public path or URL to résumé PDF (e.g. `/resume.pdf` in `public/`). */
+  resumeUrl?: string;
+  /** One line: roles, stack, location / remote — shown in hero. */
+  availabilityLine?: string;
+  writingLinks?: WritingLink[];
+  testimonials?: Testimonial[];
 }
 
 export interface AboutLink {
@@ -55,9 +72,24 @@ export const PROJECT_ILLUSTRATION_KINDS = [
   'cloudPipeline',
   'multiLayerApp',
   'prototypeIdeas',
+  'agent',
+  'aiTraining',
+  'realEstate',
+  'codeGraph',
+  'erp',
+  'community',
+  'refugee',
+  'ticket',
+  'reel',
 ] as const;
 
 export type ProjectIllustrationKind = (typeof PROJECT_ILLUSTRATION_KINDS)[number];
+
+export interface ProjectCaseStudy {
+  context: string;
+  contribution: string;
+  outcome: string;
+}
 
 export interface Project {
   title: string;
@@ -70,6 +102,9 @@ export interface Project {
   illustration: ProjectIllustrationKind;
   github?: string;
   link?: string;
+  /** Optional short line: where to look in the repo (README, folder, etc.). */
+  repoNote?: string;
+  caseStudy?: ProjectCaseStudy;
 }
 
 export interface EducationEntry {
