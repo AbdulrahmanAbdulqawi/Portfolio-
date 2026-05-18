@@ -1,6 +1,19 @@
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
 import nodemailer from 'nodemailer';
 
+/**
+ * CORS headers for the function.
+ * Uses the Netlify URL environment variable to restrict to same origin in production,
+ * falls back to allowing any origin for local development.
+ */
+function getCorsHeaders(): Record<string, string> {
+  return {
+    'Access-Control-Allow-Origin': process.env.URL || '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+}
+
 /** Contact form body */
 interface ContactBody {
   name: string;
@@ -71,8 +84,23 @@ function getClientIp(event: HandlerEvent): string {
 }
 
 export const handler: Handler = async (event: HandlerEvent, _context: HandlerContext) => {
+  const corsHeaders = getCorsHeaders();
+
+  // Handle CORS preflight request
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 204,
+      headers: corsHeaders,
+      body: '',
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+    return {
+      statusCode: 405,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Method not allowed' }),
+    };
   }
 
   // Rate limiting check
@@ -83,6 +111,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     return {
       statusCode: 429,
       headers: {
+        ...corsHeaders,
         'Retry-After': String(Math.ceil(rateLimit.resetIn / 1000)),
         'X-RateLimit-Remaining': '0',
         'X-RateLimit-Reset': String(Math.ceil(rateLimit.resetIn / 1000)),
@@ -109,6 +138,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     ].filter(Boolean);
     return {
       statusCode: 500,
+      headers: corsHeaders,
       body: JSON.stringify({
         error: 'Email not configured.',
         missing: missing as string[],
@@ -121,19 +151,28 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
   try {
     body = JSON.parse(event.body ?? '{}') as ContactBody;
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON body' }) };
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Invalid JSON body' }),
+    };
   }
 
   // Honeypot check: if the hidden "website" field is filled, it's likely a bot
   if (body.website) {
     // Return success to avoid giving bots feedback, but don't actually send
-    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: JSON.stringify({ ok: true }),
+    };
   }
 
   const { name, email, message } = body;
   if (!name?.trim() || !email?.trim() || !message?.trim()) {
     return {
       statusCode: 400,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Missing name, email, or message' }),
     };
   }
@@ -157,6 +196,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     return {
       statusCode: 200,
       headers: {
+        ...corsHeaders,
         'X-RateLimit-Remaining': String(rateLimit.remaining),
         'X-RateLimit-Reset': String(Math.ceil(rateLimit.resetIn / 1000)),
       },
@@ -167,6 +207,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     return {
       statusCode: 500,
       headers: {
+        ...corsHeaders,
         'X-RateLimit-Remaining': String(rateLimit.remaining),
         'X-RateLimit-Reset': String(Math.ceil(rateLimit.resetIn / 1000)),
       },
