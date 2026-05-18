@@ -6,7 +6,7 @@ import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
 import { Reveal } from './Reveal';
 
-type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+type FormStatus = 'idle' | 'sending' | 'success' | 'error' | 'rate_limited';
 
 export const Contact: React.FC = () => {
   const { lang } = useLang();
@@ -32,6 +32,8 @@ export const Contact: React.FC = () => {
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+      } else if (res.status === 429) {
+        setStatus('rate_limited');
       } else {
         setStatus('error');
       }
@@ -147,6 +149,7 @@ export const Contact: React.FC = () => {
             name="contact"
             method="POST"
             data-netlify="true"
+            data-netlify-honeypot="website"
             onSubmit={handleSubmit}
             className="stitch-contact-form space-y-5"
             initial={reduce ? false : { opacity: 0, y: 12 }}
@@ -155,6 +158,17 @@ export const Contact: React.FC = () => {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <input type="hidden" name="form-name" value="contact" />
+            {/* Honeypot field - hidden from users, catches bots that auto-fill all fields */}
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="contact-website">Website</label>
+              <input
+                type="text"
+                id="contact-website"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="space-y-2">
@@ -233,6 +247,12 @@ export const Contact: React.FC = () => {
               <p className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-hp)' }}>
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 {tr.errorMsg}
+              </p>
+            )}
+            {status === 'rate_limited' && (
+              <p className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-hp)' }}>
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                {tr.rateLimitMsg}
               </p>
             )}
           </motion.form>
