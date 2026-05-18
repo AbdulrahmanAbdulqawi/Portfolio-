@@ -14,6 +14,19 @@ function getCorsHeaders(): Record<string, string> {
   };
 }
 
+/**
+ * Escape HTML entities to prevent XSS in email content.
+ * Converts potentially dangerous characters to their HTML entity equivalents.
+ */
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 /** Contact form body */
 interface ContactBody {
   name: string;
@@ -185,13 +198,17 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
   });
 
   try {
+    const safeName = escapeHtml(name.trim());
+    const safeEmail = escapeHtml(email.trim());
+    const safeMessage = escapeHtml(message.trim()).replace(/\n/g, '<br>');
+
     await transporter.sendMail({
       from: `"Portfolio Contact" <${from}>`,
       to: from,
       replyTo: email,
       subject: `Contact from ${name.trim()} (${email.trim()})`,
       text: message.trim(),
-      html: `<p><strong>From:</strong> ${name.trim()} &lt;${email.trim()}&gt;</p><p>${message.trim().replace(/\n/g, '<br>')}</p>`,
+      html: `<p><strong>From:</strong> ${safeName} &lt;${safeEmail}&gt;</p><p>${safeMessage}</p>`,
     });
     return {
       statusCode: 200,
