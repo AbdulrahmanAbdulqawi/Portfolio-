@@ -116,6 +116,7 @@ app.UseAuthorization();
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok" }));
 app.MapAuthEndpoints();
 app.MapContentEndpoints();
+app.MapBlogEndpoints();
 app.MapUploadEndpoints(uploadsPath);
 
 app.Run();

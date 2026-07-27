@@ -93,3 +93,43 @@ export interface AlsoBuiltItem {
   name: string;
   url: string;
 }
+
+export type BlogStatus = 'draft' | 'published';
+
+export interface BlogPostSummary {
+  id: string;
+  slug: string;
+  title: Record<'en' | 'ar', string>;
+  excerpt: Record<'en' | 'ar', string>;
+  coverImageUrl?: string;
+  publishedAt: string;
+}
+
+export interface BlogPostDetail extends BlogPostSummary {
+  bodyHtml: Record<'en' | 'ar', string>;
+}
+
+export interface AdminBlogPostSummary {
+  id: string;
+  slug: string;
+  title: Record<'en' | 'ar', string>;
+  status: BlogStatus;
+  publishedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminBlogPostDetail extends AdminBlogPostSummary {
+  excerpt: Record<'en' | 'ar', string>;
+  bodyHtml: Record<'en' | 'ar', string>;
+  coverImageUrl?: string;
+}
+
+export interface BlogPostWrite {
+  slug: string;
+  title: Record<'en' | 'ar', string>;
+  excerpt: Record<'en' | 'ar', string>;
+  bodyHtml: Record<'en' | 'ar', string>;
+  coverImageUrl?: string;
+  status: BlogStatus;
+}

@@ -17,18 +17,9 @@ export function Stack() {
         <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
         <span className="ms-auto font-mono text-xs text-[var(--ink-3)]">{tr.meta}</span>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] border-t border-[var(--ink)]">
-        {groups.map((group, i) => (
-          <div
-            key={group.title}
-            className="py-7"
-            style={{
-              borderInlineEnd: i % 2 === 0 ? '1px solid var(--rule)' : undefined,
-              borderBottom: i < 2 ? '1px solid var(--rule)' : undefined,
-              paddingInlineStart: i % 2 === 0 ? 0 : 'clamp(10px,2.5vw,32px)',
-              paddingInlineEnd: i % 2 === 0 ? 'clamp(10px,2.5vw,32px)' : 0,
-            }}
-          >
+      <div className="ldg-stack-grid">
+        {groups.map((group) => (
+          <div key={group.title} className="py-7">
             <p className="m-0 mb-[18px] font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent)]">
               {group.title}
             </p>

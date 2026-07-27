@@ -14,6 +14,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Certification> Certifications => Set<Certification>();
     public DbSet<WorkCase> WorkCases => Set<WorkCase>();
     public DbSet<AlsoBuiltItem> AlsoBuiltItems => Set<AlsoBuiltItem>();
+    public DbSet<BlogPost> BlogPosts => Set<BlogPost>();
     public DbSet<AdminUser> AdminUsers => Set<AdminUser>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +57,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         });
 
         modelBuilder.Entity<AlsoBuiltItem>(e => e.HasIndex(p => p.SortOrder));
+
+        modelBuilder.Entity<BlogPost>(e =>
+        {
+            e.HasIndex(p => p.Slug).IsUnique();
+            e.HasIndex(p => new { p.Status, p.PublishedAt });
+        });
 
         modelBuilder.Entity<AdminUser>(e =>
         {

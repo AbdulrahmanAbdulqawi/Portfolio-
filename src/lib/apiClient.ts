@@ -38,4 +38,5 @@ export const apiClient = {
     form.append('file', file);
     return request<T>(path, { method: 'POST', body: form }, token);
   },
+  delete: <T>(path: string, token?: string | null) => request<T>(path, { method: 'DELETE' }, token),
 };

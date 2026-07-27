@@ -6,6 +6,7 @@ const translations = {
       stack: '03 Stack',
       about: '04 About',
       contact: '05 Contact',
+      blog: '06 Blog',
     },
     hero: {
       ctaWork: 'See the work',
@@ -52,6 +53,14 @@ const translations = {
       successMsg: "Message sent! I'll get back to you soon.",
       errorMsg: 'Something went wrong. Please try again or email me directly.',
     },
+    blog: {
+      title: 'Blog',
+      empty: 'No posts yet — check back soon.',
+      readMore: 'Read the full post →',
+      notFound: "Couldn't find that post.",
+      backToBlog: '← Back to Blog',
+      loadError: 'Could not load posts. Please try again later.',
+    },
     aria: {
       langToAr: 'Switch to Arabic',
       langToEn: 'Switch to English',
@@ -60,6 +69,8 @@ const translations = {
       openConsole: 'Open console',
       closeConsole: 'Close console',
       resumePdf: 'Download résumé as PDF',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
     },
   },
   ar: {
@@ -69,6 +80,7 @@ const translations = {
       stack: '٠٣ التقنيات',
       about: '٠٤ عني',
       contact: '٠٥ تواصل',
+      blog: '٠٦ المدونة',
     },
     hero: {
       ctaWork: 'شاهد الأعمال',
@@ -115,6 +127,14 @@ const translations = {
       successMsg: 'تم إرسال الرسالة! سأتواصل معك قريباً.',
       errorMsg: 'حدث خطأ. يرجى المحاولة مرة أخرى أو مراسلتي مباشرة.',
     },
+    blog: {
+      title: 'المدونة',
+      empty: 'لا توجد منشورات بعد — تابعونا قريباً.',
+      readMore: '← قراءة المنشور كاملاً',
+      notFound: 'تعذر العثور على هذا المنشور.',
+      backToBlog: 'العودة إلى المدونة ←',
+      loadError: 'تعذر تحميل المنشورات. يرجى المحاولة لاحقاً.',
+    },
     aria: {
       langToAr: 'التبديل إلى العربية',
       langToEn: 'التبديل إلى الإنجليزية',
@@ -123,6 +143,8 @@ const translations = {
       openConsole: 'فتح الكونسول',
       closeConsole: 'إغلاق الكونسول',
       resumePdf: 'تحميل السيرة الذاتية بصيغة PDF',
+      openMenu: 'فتح القائمة',
+      closeMenu: 'إغلاق القائمة',
     },
   },
 } as const;
