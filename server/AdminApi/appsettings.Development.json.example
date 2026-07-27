@@ -1,0 +1,22 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "Default": "Host=localhost;Port=5432;Database=admin_api;Username=postgres;Password=CHANGE_ME"
+  },
+  "Jwt": {
+    "Key": "dev-only-signing-key-change-me-please-32-bytes-min",
+    "Issuer": "abdulqawi-portfolio-admin-api",
+    "Audience": "abdulqawi-portfolio-admin"
+  },
+  "Cors": {
+    "AllowedOrigins": ["http://localhost:5173"]
+  },
+  "Uploads": {
+    "Path": "wwwroot/uploads"
+  }
+}
