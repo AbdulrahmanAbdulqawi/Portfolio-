@@ -1,12 +1,12 @@
-export interface WritingLink {
-  label: string;
+export interface SocialLink {
+  platform: string;
   url: string;
+  icon: string;
 }
 
-export interface Testimonial {
-  quote: string;
-  author: string;
-  role?: string;
+export interface FactBarEntry {
+  label: string;
+  value: string;
 }
 
 export interface SiteConfig {
@@ -15,96 +15,55 @@ export interface SiteConfig {
   title: string;
   tagline: string;
   description: string;
-  /** Short intro shown on Home section (console view) */
-  homeIntro?: string;
   email: string;
   phone: string;
   location: string;
-  socialLinks: { platform: string; url: string; icon: string }[];
+  socialLinks: SocialLink[];
   navItems: string[];
   /** Public path or URL to résumé PDF (e.g. `/resume.pdf` in `public/`). */
   resumeUrl?: string;
-  /** One line: roles, stack, location / remote — shown in hero. */
-  availabilityLine?: string;
-  writingLinks?: WritingLink[];
-  testimonials?: Testimonial[];
-}
-
-export interface AboutLink {
-  text: string;
-  url: string;
-}
-
-export interface AboutParagraph {
-  text: string;
-  link?: AboutLink;
+  /** Availability line shown above the hero h1, e.g. "Open to backend / full-stack roles". */
+  availabilityLine: string;
+  /** Hero h1, authored as separate lines (rendered with <br /> between them). */
+  heroHeadlineLines: string[];
+  heroSubline: string;
+  factBar: FactBarEntry[];
+  contactIntro: string;
+  contactMeta: string;
+  footerCopyright: string;
 }
 
 export interface AboutContent {
   headline: string;
-  paragraphs: AboutParagraph[];
+  paragraphs: string[];
 }
 
 export interface Experience {
+  period: string;
   title: string;
   company: string;
-  period: string;
-  location: string;
-  responsibilities: string[];
+  paragraph: string;
+  chips?: string[];
   logo?: string;
 }
 
+export interface Recommendation {
+  short: string;
+  full: string;
+  author: string;
+  meta: string;
+}
+
+export type SkillLevel = 'Daily' | 'Solid' | 'Familiar';
+
 export interface Skill {
   name: string;
-  level: string;
+  level: SkillLevel;
 }
 
-export interface SkillCategory {
+export interface StackGroup {
   title: string;
-  icon: string;
   skills: Skill[];
-}
-
-export const PROJECT_ILLUSTRATION_KINDS = [
-  'neural',
-  'educationWeb',
-  'arcadeGame',
-  'cloudPipeline',
-  'multiLayerApp',
-  'prototypeIdeas',
-  'agent',
-  'aiTraining',
-  'realEstate',
-  'codeGraph',
-  'erp',
-  'community',
-  'refugee',
-  'ticket',
-  'reel',
-] as const;
-
-export type ProjectIllustrationKind = (typeof PROJECT_ILLUSTRATION_KINDS)[number];
-
-export interface ProjectCaseStudy {
-  context: string;
-  contribution: string;
-  outcome: string;
-}
-
-export interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  category: string;
-  /** Optional screenshot or cover (public path or URL). */
-  image?: string;
-  /** Decorative SVG when `image` is omitted. */
-  illustration: ProjectIllustrationKind;
-  github?: string;
-  link?: string;
-  /** Optional short line: where to look in the repo (README, folder, etc.). */
-  repoNote?: string;
-  caseStudy?: ProjectCaseStudy;
 }
 
 export interface EducationEntry {
@@ -112,4 +71,24 @@ export interface EducationEntry {
   degree: string;
   location: string;
   period: string;
+}
+
+export type WorkPanel =
+  | { kind: 'stats'; stats: { value: string; label: string }[] }
+  | { kind: 'image'; src: string; alt: string }
+  | { kind: 'terminal'; lines: { text: string; accent?: boolean }[] };
+
+export interface WorkCase {
+  number: string;
+  name: string;
+  stackLine: string;
+  headline: string;
+  description: string;
+  repoUrl: string;
+  panel: WorkPanel;
+}
+
+export interface AlsoBuiltItem {
+  name: string;
+  url: string;
 }

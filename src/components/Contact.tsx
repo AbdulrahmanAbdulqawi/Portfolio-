@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { FileText, Mail, MapPin, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle, AlertCircle } from 'lucide-react';
 import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
-import { Reveal } from './Reveal';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
@@ -12,9 +10,7 @@ export const Contact: React.FC = () => {
   const { lang } = useLang();
   const site = siteConfig[lang];
   const tr = t(lang).contact;
-  const trPortfolio = t(lang).portfolio;
   const aria = t(lang).aria;
-  const reduce = useReducedMotion();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<FormStatus>('idle');
 
@@ -45,198 +41,130 @@ export const Contact: React.FC = () => {
     if (status === 'error' || status === 'success') setStatus('idle');
   };
 
+  const rowClass =
+    'flex min-w-0 items-baseline justify-between gap-4 border-t border-[var(--rule-soft)] py-4 transition-colors hover:text-[var(--accent)]';
+
   return (
-    <section className="stitch-section bg-[var(--color-bg)]" aria-label={t(lang).aria.contact}>
-      <div className="flex flex-col gap-12">
-        <Reveal y={14}>
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <Mail className="w-9 h-9 shrink-0" style={{ color: 'var(--color-primary)' }} aria-hidden />
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}>
-                {tr.title}
-              </h2>
-            </div>
-            <p className="text-base md:text-lg max-w-full sm:max-w-2xl leading-relaxed" style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-sans)' }}>
-              {tr.intro}
-            </p>
-            {site.resumeUrl ? (
-              <a
-                href={site.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 hover:opacity-90 transition-opacity w-fit"
-                style={{ color: 'var(--color-primary)' }}
-                aria-label={aria.resumePdf}
-              >
-                <FileText className="w-4 h-4 shrink-0" aria-hidden />
-                {trPortfolio.downloadResume}
-              </a>
-            ) : null}
+    <section className="border border-[var(--rule)] px-5 py-8 pb-16 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+      <div className="flex items-baseline gap-4 pb-9">
+        <span className="font-mono text-[13px] text-[var(--accent)]">05</span>
+        <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
+        <span className="ms-auto font-mono text-xs text-[var(--ink-3)]">{site.contactMeta}</span>
+      </div>
+
+      <div className="flex flex-wrap gap-8 border-t border-[var(--ink)] pt-10 lg:gap-14">
+        <div className="min-w-0 flex-1 basis-[400px]">
+          <h3 className="m-0 mb-5 max-w-[520px] text-[clamp(30px,4.4vw,44px)] font-bold leading-[1.08] tracking-[-0.032em]">
+            {lang === 'ar' ? 'أخبرني بما تبنيه.' : "Tell me what you're building."}
+          </h3>
+          <p className="m-0 mb-9 max-w-[500px] font-serif text-xl leading-[1.6] text-[var(--ink-2)]">
+            {site.contactIntro}
+          </p>
+
+          <a href={`mailto:${site.email}`} className={`${rowClass} border-t-[var(--rule)]`}>
+            <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">{tr.emailLabel}</span>
+            <span className="min-w-0 break-all text-end text-lg font-semibold" dir="ltr">{site.email}</span>
+          </a>
+          <a href={`tel:${site.phone}`} className={rowClass}>
+            <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">{tr.phoneLabel}</span>
+            <span className="min-w-0 break-words text-end text-lg font-semibold" dir="ltr">{site.phone}</span>
+          </a>
+          <div className={`${rowClass} hover:text-inherit`}>
+            <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">{tr.locationLabel}</span>
+            <span className="min-w-0 break-words text-end text-lg font-semibold">{site.location}</span>
           </div>
-        </Reveal>
-
-        <div className="grid grid-cols-1 gap-8">
-          <div className="flex flex-wrap gap-4">
-            <motion.a
-              href={`mailto:${site.email}`}
-              className="stitch-contact-pill no-underline hover:opacity-95 transition-opacity"
-              whileHover={reduce ? undefined : { y: -2 }}
-              whileTap={reduce ? undefined : { scale: 0.98 }}
+          {site.resumeUrl && (
+            <a
+              href={site.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={aria.resumePdf}
+              className={`${rowClass} border-b border-[var(--rule)]`}
             >
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                style={{ backgroundColor: 'color-mix(in srgb, var(--color-primary) 14%, transparent)' }}
-              >
-                <Mail className="w-5 h-5" style={{ color: 'var(--color-primary)' }} aria-hidden />
-              </div>
-              <div className="text-start min-w-0">
-                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>
-                  {tr.emailLabel}
-                </p>
-                <p className="text-sm font-medium truncate" style={{ color: 'var(--color-text)' }}>
-                  {site.email}
-                </p>
-              </div>
-            </motion.a>
-            <motion.a
-              href={`tel:${site.phone}`}
-              className="stitch-contact-pill no-underline hover:opacity-95 transition-opacity"
-              whileHover={reduce ? undefined : { y: -2 }}
-              whileTap={reduce ? undefined : { scale: 0.98 }}
-            >
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                style={{ backgroundColor: 'color-mix(in srgb, var(--stitch-tertiary) 14%, transparent)' }}
-              >
-                <Phone className="w-5 h-5" style={{ color: 'var(--stitch-tertiary)' }} aria-hidden />
-              </div>
-              <div className="text-start">
-                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>
-                  {tr.phoneLabel}
-                </p>
-                <p className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
-                  {site.phone}
-                </p>
-              </div>
-            </motion.a>
-            <motion.div
-              className="stitch-contact-pill"
-              initial={reduce ? false : { opacity: 0, y: 8 }}
-              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '0px 0px -8% 0px' }}
-              transition={{ duration: 0.35, delay: 0.12 }}
-            >
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                style={{ backgroundColor: 'color-mix(in srgb, var(--stitch-tertiary) 14%, transparent)' }}
-              >
-                <MapPin className="w-5 h-5" style={{ color: 'var(--stitch-tertiary)' }} aria-hidden />
-              </div>
-              <div className="text-start">
-                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>
-                  {tr.locationLabel}
-                </p>
-                <p className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
-                  {site.location}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            onSubmit={handleSubmit}
-            className="stitch-contact-form space-y-5"
-            initial={reduce ? false : { opacity: 0, y: 12 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <input type="hidden" name="form-name" value="contact" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="space-y-2">
-                <label htmlFor="contact-name" className="text-sm font-medium px-1" style={{ color: 'var(--color-text-secondary)' }}>
-                  {tr.nameLabel}
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  disabled={status === 'sending'}
-                  className="input-field w-full"
-                  autoComplete="name"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="contact-email" className="text-sm font-medium px-1" style={{ color: 'var(--color-text-secondary)' }}>
-                  {tr.emailLabel}
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={status === 'sending'}
-                  className="input-field w-full"
-                  autoComplete="email"
-                />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="contact-message" className="text-sm font-medium px-1" style={{ color: 'var(--color-text-secondary)' }}>
-                {tr.messageLabel}
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={5}
-                required
-                value={formData.message}
-                onChange={handleChange}
-                disabled={status === 'sending'}
-                className="input-field resize-none w-full"
-              />
-            </div>
-
-            <motion.button
-              type="submit"
-              disabled={status === 'sending'}
-              className="btn-primary w-full flex items-center justify-center gap-3 py-4 disabled:opacity-60"
-              whileHover={reduce || status === 'sending' ? undefined : { scale: 1.02 }}
-              whileTap={reduce || status === 'sending' ? undefined : { scale: 0.98 }}
-            >
-              {status === 'sending' ? (
-                <>{tr.sending}</>
-              ) : (
-                <>
-                  <span>{tr.send}</span>
-                  <Send className="w-4 h-4 shrink-0" aria-hidden />
-                </>
-              )}
-            </motion.button>
-
-            {status === 'success' && (
-              <p className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-primary)' }}>
-                <CheckCircle className="w-4 h-4 shrink-0" />
-                {tr.successMsg}
-              </p>
-            )}
-            {status === 'error' && (
-              <p className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-hp)' }}>
-                <AlertCircle className="w-4 h-4 shrink-0" />
-                {tr.errorMsg}
-              </p>
-            )}
-          </motion.form>
+              <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">{tr.resumeLabel}</span>
+              <span className="min-w-0 break-words text-end text-lg font-semibold text-[var(--accent)]">{tr.downloadPdf}</span>
+            </a>
+          )}
         </div>
+
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          onSubmit={handleSubmit}
+          className="box-border flex min-w-0 flex-1 basis-[360px] max-w-[520px] flex-col gap-[22px] border border-[var(--rule)] bg-[var(--panel)] p-8"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="ldg-name" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">
+              {tr.nameLabel}
+            </label>
+            <input
+              id="ldg-name"
+              type="text"
+              name="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              disabled={status === 'sending'}
+              autoComplete="name"
+              className="w-full border border-[var(--rule)] bg-[var(--paper)] px-[14px] py-3 text-base text-[var(--ink)]"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="ldg-email" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">
+              {tr.emailLabel}
+            </label>
+            <input
+              id="ldg-email"
+              type="email"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              disabled={status === 'sending'}
+              autoComplete="email"
+              className="w-full border border-[var(--rule)] bg-[var(--paper)] px-[14px] py-3 text-base text-[var(--ink)]"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="ldg-msg" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">
+              {tr.messageLabel}
+            </label>
+            <textarea
+              id="ldg-msg"
+              name="message"
+              rows={6}
+              required
+              value={formData.message}
+              onChange={handleChange}
+              disabled={status === 'sending'}
+              className="w-full resize-y border border-[var(--rule)] bg-[var(--paper)] px-[14px] py-3 text-base text-[var(--ink)]"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === 'sending'}
+            className="w-full bg-[var(--ink)] py-4 text-[15px] font-semibold text-[var(--paper)] disabled:opacity-60"
+          >
+            {status === 'sending' ? tr.sending : tr.send}
+          </button>
+
+          {status === 'success' && (
+            <p className="flex items-center gap-2 text-sm text-[var(--accent)]">
+              <CheckCircle className="h-4 w-4 shrink-0" />
+              {tr.successMsg}
+            </p>
+          )}
+          {status === 'error' && (
+            <p className="flex items-center gap-2 text-sm" style={{ color: '#b91c1c' }}>
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              {tr.errorMsg}
+            </p>
+          )}
+        </form>
       </div>
     </section>
   );

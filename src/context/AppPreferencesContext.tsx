@@ -1,55 +1,39 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-export type Theme = 'dark' | 'light';
-export type ViewMode = 'retro' | 'professional';
+export type Theme = 'light' | 'night';
 
 interface AppPreferencesContextValue {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
-  viewMode: ViewMode;
-  setViewMode: (mode: ViewMode) => void;
-  toggleViewMode: () => void;
 }
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   const stored = localStorage.getItem('theme') as Theme | null;
-  if (stored === 'dark' || stored === 'light') return stored;
-  return 'dark';
-}
-
-function getInitialViewMode(): ViewMode {
-  if (typeof window === 'undefined') return 'professional';
-  const stored = localStorage.getItem('layout') as ViewMode | null;
-  if (stored === 'retro' || stored === 'professional') return stored;
-  return 'professional';
+  if (stored === 'light' || stored === 'night') return stored;
+  return 'light';
 }
 
 const AppPreferencesContext = createContext<AppPreferencesContextValue | null>(null);
 
 export function AppPreferencesProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
-  const [viewMode, setViewMode] = useState<ViewMode>(getInitialViewMode);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'night') {
+      document.documentElement.setAttribute('data-theme', 'night');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
     localStorage.setItem('theme', theme);
   }, [theme]);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-layout', viewMode);
-    localStorage.setItem('layout', viewMode);
-  }, [viewMode]);
 
   const value = useMemo<AppPreferencesContextValue>(() => ({
     theme,
     setTheme,
-    toggleTheme: () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark')),
-    viewMode,
-    setViewMode,
-    toggleViewMode: () => setViewMode((prev) => (prev === 'retro' ? 'professional' : 'retro')),
-  }), [theme, viewMode]);
+    toggleTheme: () => setTheme((prev) => (prev === 'light' ? 'night' : 'light')),
+  }), [theme]);
 
   return (
     <AppPreferencesContext.Provider value={value}>

@@ -4,11 +4,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Outfit', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-      },
-      screens: {
-        'xs': '480px',
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        serif: ['Newsreader', 'Georgia', 'serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        arabic: ['IBM Plex Sans Arabic', 'sans-serif'],
       },
     },
   },
