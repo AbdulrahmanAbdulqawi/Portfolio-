@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
-import { siteConfig } from '../data/site';
+import { useContent } from '../context/ContentContext';
 import { t } from '../data/translations';
 import { ThemeSwitch } from './ThemeSwitch';
 import { ConsoleOverlay } from './ConsoleOverlay';
@@ -12,7 +12,8 @@ const PERSON_LD_ID = 'portfolio-person-jsonld';
 
 export function SiteLayout() {
   const { lang, setLang } = useLang();
-  const site = siteConfig[lang];
+  const { content, loading } = useContent();
+  const site = content.site[lang];
   const tr = t(lang);
   const location = useLocation();
   const [consoleOpen, setConsoleOpen] = useState(false);
@@ -112,7 +113,13 @@ export function SiteLayout() {
       </header>
 
       <main className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-10">
-        <Outlet />
+        {loading ? (
+          <div className="flex min-h-[50vh] items-center justify-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--ink-3)]">
+            Loading…
+          </div>
+        ) : (
+          <Outlet />
+        )}
 
         <footer className="mb-16 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border border-t-0 border-[var(--rule)] px-5 py-8 sm:px-8 lg:px-12">
           <span className="font-mono text-xs text-[var(--ink-3)]">{site.footerCopyright}</span>

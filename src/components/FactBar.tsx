@@ -1,9 +1,10 @@
 import { useLang } from '../context/LanguageContext';
-import { siteConfig } from '../data/site';
+import { useContent } from '../context/ContentContext';
 
 export function FactBar() {
   const { lang } = useLang();
-  const { factBar } = siteConfig[lang];
+  const { content } = useContent();
+  const { factBar } = content.site[lang];
 
   return (
     <section className="grid grid-cols-[repeat(auto-fit,minmax(190px,1fr))] border border-t-0 border-[var(--rule)]">

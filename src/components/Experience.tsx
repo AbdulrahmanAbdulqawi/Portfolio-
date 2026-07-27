@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { experiences, recommendation } from '../data/experience';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
+import { useContent } from '../context/ContentContext';
 
 export function Experience() {
   const { lang } = useLang();
+  const { content } = useContent();
   const tr = t(lang).experience;
-  const rows = experiences[lang];
-  const rec = recommendation[lang];
+  const rows = content.experiences[lang];
+  const rec = content.recommendation[lang];
   const [quoteOpen, setQuoteOpen] = useState(false);
 
   const quoteText = quoteOpen ? rec.full : rec.short;

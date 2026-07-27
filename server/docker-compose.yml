@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: admin_api
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  api:
+    build: ./AdminApi
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=admin_api;Username=postgres;Password=postgres"
+      Jwt__Key: "dev-only-signing-key-change-me-please-32-bytes-min"
+      Jwt__Issuer: "abdulqawi-portfolio-admin-api"
+      Jwt__Audience: "abdulqawi-portfolio-admin"
+      Cors__AllowedOrigins__0: "http://localhost:5173"
+    ports:
+      - "5080:8080"
+    volumes:
+      - uploads-data:/data/uploads
+
+volumes:
+  db-data:
+  uploads-data:

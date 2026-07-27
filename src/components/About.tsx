@@ -1,14 +1,14 @@
-import { aboutContent } from '../data/about';
-import { educationEntries, certifications } from '../data/education';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
+import { useContent } from '../context/ContentContext';
 
 export function About() {
   const { lang } = useLang();
-  const about = aboutContent[lang];
+  const { content } = useContent();
+  const about = content.about[lang];
   const tr = t(lang).about;
-  const entries = educationEntries[lang];
-  const certs = certifications[lang];
+  const entries = content.educationEntries[lang];
+  const certs = content.certifications[lang];
 
   return (
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">

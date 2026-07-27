@@ -1,6 +1,6 @@
 import { useLang } from '../context/LanguageContext';
+import { useContent } from '../context/ContentContext';
 import { t } from '../data/translations';
-import { workCases, alsoBuilt } from '../data/work';
 import type { WorkCase } from '../types';
 
 function WorkPanel({ panel }: { panel: WorkCase['panel'] }) {
@@ -53,9 +53,10 @@ function WorkPanel({ panel }: { panel: WorkCase['panel'] }) {
 
 export function Work() {
   const { lang } = useLang();
+  const { content } = useContent();
   const tr = t(lang).work;
-  const cases = workCases[lang];
-  const chips = alsoBuilt[lang];
+  const cases = content.workCases[lang];
+  const chips = content.alsoBuilt[lang];
 
   return (
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { CheckCircle, AlertCircle } from 'lucide-react';
-import { siteConfig } from '../data/site';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
+import { useContent } from '../context/ContentContext';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export const Contact: React.FC = () => {
   const { lang } = useLang();
-  const site = siteConfig[lang];
+  const { content } = useContent();
+  const site = content.site[lang];
   const tr = t(lang).contact;
   const aria = t(lang).aria;
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });

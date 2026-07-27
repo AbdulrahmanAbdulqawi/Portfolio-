@@ -2,12 +2,13 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
-import { siteConfig } from '../data/site';
+import { useContent } from '../context/ContentContext';
 import { t } from '../data/translations';
 
 export function Hero() {
   const { lang } = useLang();
-  const site = siteConfig[lang];
+  const { content } = useContent();
+  const site = content.site[lang];
   const tr = t(lang).hero;
 
   return (
@@ -54,7 +55,7 @@ export function Hero() {
 
       <div className="relative min-h-[clamp(300px,40vw,560px)] flex-1 basis-[320px] bg-[var(--panel)]">
         <img
-          src="/profile.jpg"
+          src={site.heroImage || '/profile.jpg'}
           alt={site.name}
           className="absolute inset-0 h-full w-full object-cover [filter:grayscale(1)_contrast(1.12)_brightness(var(--img-bright))] [mix-blend-mode:var(--img-blend)]"
         />

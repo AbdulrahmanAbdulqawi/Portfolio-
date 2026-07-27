@@ -19,9 +19,10 @@ export interface SiteConfig {
   phone: string;
   location: string;
   socialLinks: SocialLink[];
-  navItems: string[];
   /** Public path or URL to résumé PDF (e.g. `/resume.pdf` in `public/`). */
   resumeUrl?: string;
+  /** Hero portrait. Undefined means "use the bundled default photo" (public/profile.jpg). */
+  heroImage?: string;
   /** Availability line shown above the hero h1, e.g. "Open to backend / full-stack roles". */
   availabilityLine: string;
   /** Hero h1, authored as separate lines (rendered with <br /> between them). */

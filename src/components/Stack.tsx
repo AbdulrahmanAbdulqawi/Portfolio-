@@ -1,11 +1,12 @@
 import { useLang } from '../context/LanguageContext';
+import { useContent } from '../context/ContentContext';
 import { t } from '../data/translations';
-import { stackGroups } from '../data/stack';
 
 export function Stack() {
   const { lang } = useLang();
+  const { content } = useContent();
   const tr = t(lang).stack;
-  const groups = stackGroups[lang];
+  const groups = content.stackGroups[lang];
 
   const levelLabel = { Daily: tr.daily, Solid: tr.solid, Familiar: tr.familiar } as const;
 

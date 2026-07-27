@@ -9,6 +9,18 @@ import { Contact } from './components/Contact';
 import { AppPreferencesProvider } from './context/AppPreferencesContext';
 import { useLanguage } from './hooks/useLanguage';
 import { LanguageProvider } from './context/LanguageContext';
+import { ContentProvider } from './context/ContentContext';
+import { AuthProvider } from './context/AuthContext';
+import { RequireAuth } from './components/admin/RequireAuth';
+import { AdminLogin } from './components/admin/AdminLogin';
+import { AdminLayout } from './components/admin/AdminLayout';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { SiteEditor } from './components/admin/editors/SiteEditor';
+import { AboutEditor } from './components/admin/editors/AboutEditor';
+import { ExperienceEditor } from './components/admin/editors/ExperienceEditor';
+import { StackEditor } from './components/admin/editors/StackEditor';
+import { EducationEditor } from './components/admin/editors/EducationEditor';
+import { WorkEditor } from './components/admin/editors/WorkEditor';
 
 function App() {
   const { lang, toggle: toggleLang, setLang } = useLanguage();
@@ -16,18 +28,35 @@ function App() {
   return (
     <LanguageProvider value={{ lang, toggle: toggleLang, setLang }}>
       <AppPreferencesProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<SiteLayout />}>
-              <Route index element={<Home />} />
-              <Route path="work" element={<Work />} />
-              <Route path="experience" element={<Experience />} />
-              <Route path="stack" element={<Stack />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <ContentProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route element={<SiteLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="work" element={<Work />} />
+                  <Route path="experience" element={<Experience />} />
+                  <Route path="stack" element={<Stack />} />
+                  <Route path="about" element={<About />} />
+                  <Route path="contact" element={<Contact />} />
+                </Route>
+
+                <Route path="admin/login" element={<AdminLogin />} />
+                <Route element={<RequireAuth />}>
+                  <Route path="admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="site" element={<SiteEditor />} />
+                    <Route path="about" element={<AboutEditor />} />
+                    <Route path="experience" element={<ExperienceEditor />} />
+                    <Route path="stack" element={<StackEditor />} />
+                    <Route path="education" element={<EducationEditor />} />
+                    <Route path="work" element={<WorkEditor />} />
+                  </Route>
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </AuthProvider>
+        </ContentProvider>
       </AppPreferencesProvider>
     </LanguageProvider>
   );
