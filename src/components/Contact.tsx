@@ -3,6 +3,7 @@ import { CheckCircle, AlertCircle } from 'lucide-react';
 import { t } from '../data/translations';
 import { useLang } from '../context/LanguageContext';
 import { useContent } from '../context/ContentContext';
+import { apiClient } from '../lib/apiClient';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
@@ -18,20 +19,12 @@ export const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
+    // Hidden honeypot: people never fill it, bots usually do. The API drops those silently.
+    const botField = (e.currentTarget.elements.namedItem('bot-field') as HTMLInputElement | null)?.value ?? '';
     try {
-      const form = e.currentTarget;
-      const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString(),
-      });
-      if (res.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setStatus('error');
-      }
+      await apiClient.post('/api/contact', { ...formData, botField });
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
     } catch {
       setStatus('error');
     }
@@ -90,12 +83,14 @@ export const Contact: React.FC = () => {
 
         <form
           name="contact"
-          method="POST"
-          data-netlify="true"
           onSubmit={handleSubmit}
           className="box-border flex min-w-0 flex-1 basis-[360px] max-w-[520px] flex-col gap-[22px] border border-[var(--rule)] bg-[var(--panel)] p-8"
         >
-          <input type="hidden" name="form-name" value="contact" />
+          <p className="hidden" aria-hidden="true">
+            <label>
+              Leave this empty <input name="bot-field" tabIndex={-1} autoComplete="off" />
+            </label>
+          </p>
 
           <div className="flex flex-col gap-2">
             <label htmlFor="ldg-name" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">

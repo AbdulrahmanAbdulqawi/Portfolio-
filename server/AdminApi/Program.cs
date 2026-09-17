@@ -1,9 +1,11 @@
 using System.Text;
+using System.Threading.RateLimiting;
 using AdminApi.Auth;
 using AdminApi.Data;
 using AdminApi.Endpoints;
 using AdminApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -45,6 +47,26 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddOpenApi();
+builder.Services.AddHttpClient();
+
+// Behind Coolify's reverse proxy every request arrives from the proxy; trust its
+// X-Forwarded-For so the rate limiter sees real visitors. The container publishes no
+// port, so only the proxy can reach it.
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy(ContactEndpoints.RateLimitPolicy, context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            _ => new FixedWindowRateLimiterOptions { PermitLimit = 5, Window = TimeSpan.FromMinutes(10) }));
+});
 
 var uploadsPath = Path.GetFullPath(builder.Configuration["Uploads:Path"] ?? "wwwroot/uploads");
 
@@ -92,6 +114,18 @@ using (var scope = app.Services.CreateScope())
     if (!await db.SiteConfigs.AnyAsync()) db.SiteConfigs.Add(new SiteConfig());
     if (!await db.AboutContents.AnyAsync()) db.AboutContents.Add(new AboutContent());
     if (!await db.Recommendations.AnyAsync()) db.Recommendations.Add(new Recommendation());
+
+    // Hosts without shell access (e.g. Coolify) can't run `seed-admin`: create the first
+    // admin from Admin:Email / Admin:Password instead. Only when no admin exists yet, so
+    // changing the password later is done with seed-admin, not by editing these values.
+    var adminEmail = app.Configuration["Admin:Email"];
+    var adminPassword = app.Configuration["Admin:Password"];
+    if (!string.IsNullOrWhiteSpace(adminEmail) && !string.IsNullOrWhiteSpace(adminPassword)
+        && !await db.AdminUsers.AnyAsync())
+    {
+        db.AdminUsers.Add(new AdminUser { Email = adminEmail, PasswordHash = BCrypt.Net.BCrypt.HashPassword(adminPassword) });
+    }
+
     await db.SaveChangesAsync();
 }
 
@@ -102,6 +136,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseForwardedHeaders();
 app.UseCors();
 
 app.UseStaticFiles(new StaticFileOptions
@@ -112,12 +147,14 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok" }));
 app.MapAuthEndpoints();
 app.MapContentEndpoints();
 app.MapBlogEndpoints();
 app.MapUploadEndpoints(uploadsPath);
+app.MapContactEndpoints();
 
 app.Run();
 return 0;
