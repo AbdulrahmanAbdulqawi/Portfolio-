@@ -57,7 +57,7 @@ export function Hero() {
         <img
           src={site.heroImage || '/profile.jpg'}
           alt={site.name}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover [filter:brightness(var(--img-bright))]"
         />
       </div>
     </section>

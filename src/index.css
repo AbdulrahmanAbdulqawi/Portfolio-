@@ -36,6 +36,10 @@
 
   /* media */
   --logo-filter: brightness(0) invert(1);
+  /* The hero photo is a normal colour photo, but its mean luminance is ~114/255 with
+   * a fifth of it above 200. Against this ground that reads as glowing, so dim it here
+   * only; the paper theme leaves it at 1. */
+  --img-bright: 0.85;
 }
 
 [data-theme='light'] {
@@ -63,6 +67,7 @@
   --invert-accent: #FF5A2B;
 
   --logo-filter: brightness(0);
+  --img-bright: 1;
 }
 
 @layer base {
