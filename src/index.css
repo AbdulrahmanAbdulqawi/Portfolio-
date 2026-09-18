@@ -36,9 +36,6 @@
 
   /* media */
   --logo-filter: brightness(0) invert(1);
-  --img-blend: luminosity;
-  --img-bright: 0.85;
-  --img-tint: rgba(255, 90, 43, 0.22);
 }
 
 [data-theme='light'] {
@@ -66,9 +63,6 @@
   --invert-accent: #FF5A2B;
 
   --logo-filter: brightness(0);
-  --img-blend: multiply;
-  --img-bright: 1.04;
-  --img-tint: rgba(216, 69, 31, 0.14);
 }
 
 @layer base {

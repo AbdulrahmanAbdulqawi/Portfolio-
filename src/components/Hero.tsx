@@ -57,9 +57,8 @@ export function Hero() {
         <img
           src={site.heroImage || '/profile.jpg'}
           alt={site.name}
-          className="absolute inset-0 h-full w-full object-cover [filter:grayscale(1)_contrast(1.12)_brightness(var(--img-bright))] [mix-blend-mode:var(--img-blend)]"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[var(--img-tint)] [mix-blend-mode:var(--img-blend)]" />
       </div>
     </section>
   );
