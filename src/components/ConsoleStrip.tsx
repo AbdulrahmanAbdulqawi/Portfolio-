@@ -3,9 +3,31 @@ import { t } from '../data/translations';
 import { consolePrompts, consoleStatic } from '../data/console';
 import { TypingLine } from './TypingLine';
 
-export function ConsoleStrip() {
+interface ConsoleStripProps {
+  /** One line instead of the full transcript. Used on the home page, where the work rows
+   * earn the vertical space and the full console is a keypress away anyway. */
+  compact?: boolean;
+}
+
+export function ConsoleStrip({ compact = false }: ConsoleStripProps) {
   const { lang } = useLang();
   const tr = t(lang).console;
+
+  if (compact) {
+    return (
+      <section className="border border-t-0 border-[var(--rule)] bg-[var(--panel)]">
+        <div
+          dir="ltr"
+          className="flex items-center gap-2 overflow-x-auto px-4 py-[11px] text-left font-mono text-[11.5px] text-[var(--ink-2)]"
+        >
+          <span className="text-[var(--accent-text)]">$</span>
+          <span className="whitespace-nowrap">whoami</span>
+          <span className="whitespace-nowrap text-[var(--ink-3)]">— {tr.hint}</span>
+          <span className="ldg-caret text-[var(--accent)]">▍</span>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="border border-t-0 border-[var(--rule)] bg-[var(--panel)]">

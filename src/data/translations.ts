@@ -12,6 +12,10 @@ const translations = {
       ctaWork: 'See the work',
       ctaContact: 'Get in touch',
     },
+    selectedWork: {
+      title: 'Selected work',
+      all: 'Full index →',
+    },
     console: {
       hint: 'press ~ anywhere to open the console',
     },
@@ -85,6 +89,10 @@ const translations = {
     hero: {
       ctaWork: 'شاهد الأعمال',
       ctaContact: 'تواصل معي',
+    },
+    selectedWork: {
+      title: 'أعمال مختارة',
+      all: 'الفهرس الكامل ←',
     },
     console: {
       hint: 'اضغط ~ في أي مكان لفتح الكونسول',
