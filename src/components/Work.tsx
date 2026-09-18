@@ -94,7 +94,9 @@ export function Work() {
               rel="noopener noreferrer"
               className="mt-[18px] inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent-text)]"
             >
-              {lang === 'ar' ? `← ${tr.repository}` : `${tr.repository} →`}
+              {lang === 'ar'
+                ? `← ${work.repoUrl.includes('github.com') ? tr.repository : tr.visitSite}`
+                : `${work.repoUrl.includes('github.com') ? tr.repository : tr.visitSite} →`}
             </a>
           </div>
           <WorkPanel panel={work.panel} />

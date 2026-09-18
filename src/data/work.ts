@@ -4,11 +4,29 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
   en: [
     {
       number: '01',
+      name: 'Nabdah',
+      stackLine: 'Nabdah · Angular · Meta Graph API · AaMa Development',
+      headline: 'Someone comments a keyword, and the link they asked for arrives as a DM.',
+      description:
+        "The product I run at AaMa Development. You pick a keyword, write the reply once, and everyone who comments that word gets it as a direct message, with an optional follow-gate and a log of who received what. It connects through Meta's official API, so no passwords are involved and you can disconnect it at any time. I built it because I was sending the same link by hand to everyone who asked for it in my comments. The numbers below are from running it on my own account, in public.",
+      repoUrl: 'https://nabddah.com',
+      panel: {
+        kind: 'stats',
+        stats: [
+          { value: 'LIVE', label: 'IN PRODUCTION' },
+          { value: '300K', label: 'ACCOUNTS REACHED' },
+          { value: '4.8K', label: 'COMMENTS' },
+          { value: 'AR · EN', label: 'BILINGUAL' },
+        ],
+      },
+    },
+    {
+      number: '02',
       name: 'iDaara',
       stackLine: 'iDaara · Angular 19 · .NET 10 · MediatR · PostgreSQL · Flutter',
-      headline: 'Seventeen ERP modules that share one auth, audit and import pipeline.',
+      headline: 'A multi-tenant ERP where 17 modules share one auth and audit pipeline.',
       description:
-        'A multi-tenant ERP covering sales through POS. I designed the architecture, implemented CQRS via MediatR across every module, added Stripe billing, a website builder and a Flutter client — then held the whole thing together with 488 xUnit tests and conventions an AI agent can follow.',
+        'An ERP covering everything from sales through to point of sale, built for multiple tenants. I designed the architecture and used CQRS through MediatR in every module. Stripe billing, a website builder and a Flutter client came later. What keeps it manageable is 488 xUnit tests and a set of conventions consistent enough that an AI agent can follow them.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/iDaara',
       panel: {
         kind: 'stats',
@@ -21,22 +39,22 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       },
     },
     {
-      number: '02',
+      number: '03',
       name: 'ReelHub',
       stackLine: 'ReelHub · .NET 8 Aspire · Hangfire · Angular 18 · Serilog',
-      headline: 'Scheduled posts that publish themselves, with retries and a live status feed.',
+      headline: 'Posts go out on schedule, retry when they fail, and report back.',
       description:
-        'An Aspire AppHost orchestrating Postgres, an API and a Hangfire worker. Two jobs do the real work — one posts, one reconciles status against the Get Late API — and the dashboard puts logs, metrics and traces for every service in one place.',
+        'An Aspire AppHost running Postgres, an API and a Hangfire worker together. Two jobs do the actual work: one publishes, the other checks status against the Get Late API and reconciles whatever it finds. The dashboard collects logs, metrics and traces from every service in one place.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/ReelHub',
       panel: { kind: 'image', src: '/projects/reelhub.svg', alt: 'ReelHub' },
     },
     {
-      number: '03',
+      number: '04',
       name: 'StackMap',
       stackLine: 'StackMap · Python · Roslyn · ts-morph · FastAPI · Mermaid',
-      headline: 'Answers "who calls this API?" in a monorepo, in seconds.',
+      headline: 'Tells you which frontend code calls which backend route.',
       description:
-        'A static analyser that drives ts-morph for the front end and Roslyn for .NET, correlates HttpClient calls with backend routes, flags orphaned components, and exports Markdown, Mermaid and Graphviz reports from a local web UI with live progress.',
+        'A static analyser that runs ts-morph over the frontend and Roslyn over the .NET side, then matches HttpClient calls to the routes that serve them. It flags components nothing references any more. Reports come out as Markdown, Mermaid or Graphviz from a local web UI that shows progress as it runs.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/StackMap',
       panel: {
         kind: 'terminal',
@@ -53,11 +71,29 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
   ar: [
     {
       number: '٠١',
+      name: 'Nabdah',
+      stackLine: 'Nabdah · Angular · Meta Graph API · AaMa Development',
+      headline: 'أحدهم يكتب كلمة في التعليقات، فيصله الرابط الذي طلبه في رسالة خاصة.',
+      description:
+        'المنتج الذي أديره في AaMa Development. تختار كلمة، وتكتب الرد مرة واحدة، فيصل كل من علّق بتلك الكلمة رسالة خاصة بالرد نفسه، مع إمكانية اشتراط المتابعة وسجل يبيّن من استلم ماذا. يتصل عبر واجهة Meta الرسمية، فلا كلمات مرور في الأمر ويمكنك فصله متى شئت. بنيته لأنني كنت أرسل الرابط نفسه يدوياً لكل من يطلبه في تعليقاتي. الأرقام أدناه من تشغيله على حسابي الشخصي علناً.',
+      repoUrl: 'https://nabddah.com',
+      panel: {
+        kind: 'stats',
+        stats: [
+          { value: 'مباشر', label: 'قيد التشغيل' },
+          { value: '٣٠٠ ألف', label: 'حساب تم الوصول إليه' },
+          { value: '٤٨٠٠', label: 'تعليق' },
+          { value: 'عربي · إنجليزي', label: 'ثنائي اللغة' },
+        ],
+      },
+    },
+    {
+      number: '٠٢',
       name: 'iDaara',
       stackLine: 'iDaara · Angular 19 · .NET 10 · MediatR · PostgreSQL · Flutter',
-      headline: 'سبع عشرة وحدة ERP تتشارك مصادقة وتدقيقاً وقناة استيراد واحدة.',
+      headline: 'نظام ERP متعدد المستأجرين تتشارك فيه ١٧ وحدة قناة مصادقة وتدقيق واحدة.',
       description:
-        'نظام ERP متعدد المستأجرين يغطي المبيعات حتى نقاط البيع. صممت المعمارية، ونفّذت CQRS عبر MediatR في كل وحدة، وأضفت فوترة Stripe ومنشئ مواقع وتطبيق Flutter — ثم ثبّتُّ كل ذلك بـ ٤٨٨ اختبار xUnit وأعراف يستطيع وكيل ذكاء اصطناعي اتباعها.',
+        'نظام ERP يغطي من المبيعات حتى نقاط البيع، مبني لعدة مستأجرين. صممت المعمارية واستخدمت CQRS عبر MediatR في كل وحدة. جاءت بعد ذلك فوترة Stripe ومنشئ المواقع وتطبيق Flutter. ما يبقي النظام قابلاً للإدارة هو ٤٨٨ اختبار xUnit وأعراف متسقة إلى حدّ أن وكيل ذكاء اصطناعي يستطيع اتباعها.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/iDaara',
       panel: {
         kind: 'stats',
@@ -70,22 +106,22 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       },
     },
     {
-      number: '٠٢',
+      number: '٠٣',
       name: 'ReelHub',
       stackLine: 'ReelHub · .NET 8 Aspire · Hangfire · Angular 18 · Serilog',
-      headline: 'منشورات مجدولة تنشر نفسها، مع إعادة محاولة وتحديث حالة لحظي.',
+      headline: 'المنشورات تخرج في موعدها، وتعيد المحاولة عند الفشل، وتبلّغ عن حالتها.',
       description:
-        'AppHost بـ Aspire ينسّق PostgreSQL وواجهة API وعامل Hangfire. مهمتان تقومان بالعمل الحقيقي — واحدة تنشر وأخرى تطابق الحالة مع Get Late API — واللوحة تجمع السجلات والمقاييس والتتبع لكل خدمة في مكان واحد.',
+        'AppHost بـ Aspire يشغّل PostgreSQL وواجهة API وعامل Hangfire معاً. مهمتان تقومان بالعمل الفعلي: واحدة تنشر، والأخرى تتحقق من الحالة عبر Get Late API وتطابق ما تجده. تجمع اللوحة السجلات والمقاييس والتتبع من كل خدمة في مكان واحد.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/ReelHub',
       panel: { kind: 'image', src: '/projects/reelhub.svg', alt: 'ReelHub' },
     },
     {
-      number: '٠٣',
+      number: '٠٤',
       name: 'StackMap',
       stackLine: 'StackMap · Python · Roslyn · ts-morph · FastAPI · Mermaid',
-      headline: 'يجيب عن سؤال «من يستدعي هذا الـ API؟» في ثوانٍ.',
+      headline: 'يخبرك أي كود في الواجهة يستدعي أي مسار في الخلفية.',
       description:
-        'محلّل ثابت يقود ts-morph للواجهة و Roslyn لـ .NET، يربط نداءات HttpClient بمسارات الخلفية، يكشف المكونات اليتيمة، ويصدّر تقارير Markdown و Mermaid و Graphviz من واجهة محلية بتقدّم لحظي.',
+        'محلّل ثابت يشغّل ts-morph على الواجهة و Roslyn على جانب .NET، ثم يطابق نداءات HttpClient بالمسارات التي تخدمها. يكشف المكوّنات التي لم يعد أحد يشير إليها. تخرج التقارير بصيغة Markdown أو Mermaid أو Graphviz من واجهة محلية تعرض التقدّم أثناء العمل.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/StackMap',
       panel: {
         kind: 'terminal',

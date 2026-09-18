@@ -85,6 +85,8 @@ export interface WorkCase {
   stackLine: string;
   headline: string;
   description: string;
+  /** GitHub repo for open work, or the live product URL for closed-source work.
+   * The link label is derived from the host, so both round-trip through the one DB column. */
   repoUrl: string;
   panel: WorkPanel;
 }

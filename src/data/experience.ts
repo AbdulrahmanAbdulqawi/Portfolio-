@@ -3,11 +3,19 @@ import type { Experience, Recommendation } from '../types';
 export const experiences: Record<'en' | 'ar', Experience[]> = {
   en: [
     {
+      period: '2026 — now',
+      title: 'Founder',
+      company: 'AaMa Development',
+      paragraph:
+        'I registered AaMa Development with the Dutch Chamber of Commerce and build products under it. The first one is Nabdah. I do the product decisions, the code and the support myself, and I share the build publicly as it happens.',
+      chips: ['ANGULAR', 'META GRAPH API', 'SAAS'],
+    },
+    {
       period: '2024 — now',
       title: 'Medior Software Developer',
       company: 'DevExperts',
       paragraph:
-        'Leads full-stack development of a Product Information Management platform across frontend architecture and backend services. Built a .NET Core PDF generation service that automated CRM document processing, and a synchronisation pipeline migrating JSON into PostgreSQL.',
+        'I lead full-stack work on a Product Information Management platform, across both the frontend architecture and the backend services. I built a .NET Core service that generates PDFs and took manual CRM document handling out of the loop, plus a synchronisation pipeline that moves JSON into PostgreSQL.',
       chips: ['.NET CORE', 'ANGULAR', 'MICROSERVICES', 'POSTGRESQL'],
       logo: '/devexperts.png',
     },
@@ -16,25 +24,33 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'Co-founder',
       company: 'Student-helper.org',
       paragraph:
-        'Founded student-helper.org to help students find opportunities abroad and get through the applications. Shipped the platform, ran the business, and learned project management and entrepreneurship the direct way.',
+        'I started student-helper.org to help students find opportunities abroad and get through the applications. I shipped the platform and ran the business side, which is where I actually learned project management.',
     },
     {
       period: '2020 — 2022',
       title: 'Associate Software Developer',
       company: 'SAP',
       paragraph:
-        "Designed and developed core Gigya-SAP components on SAP's global cloud platform. Built C# microservices on Microsoft Orleans using TPL and the virtual-actor model, shipped API endpoints with NUnit and xUnit coverage, and designed the MySQL schemas and migrations behind them.",
+        "I worked on core Gigya-SAP components on SAP's global cloud platform. I wrote C# microservices on Microsoft Orleans using TPL and the virtual-actor model, shipped API endpoints covered by NUnit and xUnit, and designed the MySQL schemas behind them.",
       chips: ['C#', 'MS ORLEANS', 'MYSQL', 'NUNIT / XUNIT'],
       logo: '/sap.png',
     },
   ],
   ar: [
     {
+      period: '٢٠٢٦ — الآن',
+      title: 'مؤسّس',
+      company: 'AaMa Development',
+      paragraph:
+        'سجّلت AaMa Development في غرفة التجارة الهولندية وأبني منتجات تحتها. أولها نبضة. أتولّى قرارات المنتج والكود والدعم بنفسي، وأشارك مراحل البناء علناً أولاً بأول.',
+      chips: ['ANGULAR', 'META GRAPH API', 'SAAS'],
+    },
+    {
       period: '٢٠٢٤ — الآن',
       title: 'مطوّر برمجيات متوسط',
       company: 'DevExperts',
       paragraph:
-        'يقود التطوير الشامل لمنصة إدارة معلومات المنتج على مستوى معمارية الواجهة والخدمات الخلفية. بنى خدمة توليد PDF بـ .NET Core أتمتت معالجة مستندات CRM، وخط مزامنة يرحّل JSON إلى PostgreSQL.',
+        'أقود العمل الشامل على منصة إدارة معلومات المنتج، في معمارية الواجهة والخدمات الخلفية معاً. بنيت خدمة بـ .NET Core تولّد ملفات PDF وأخرجت معالجة مستندات CRM اليدوية من المسار، إضافة إلى خط مزامنة ينقل JSON إلى PostgreSQL.',
       chips: ['.NET CORE', 'ANGULAR', 'MICROSERVICES', 'POSTGRESQL'],
       logo: '/devexperts.png',
     },
@@ -43,14 +59,14 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'شريك مؤسّس',
       company: 'Student-helper.org',
       paragraph:
-        'أسّست student-helper.org لمساعدة الطلاب على إيجاد فرص في الخارج وإكمال طلباتهم. أطلقت المنصة، وأدرت العمل، وتعلّمت إدارة المشاريع وريادة الأعمال بالطريقة المباشرة.',
+        'أسّست student-helper.org لمساعدة الطلاب على إيجاد فرص في الخارج وإكمال طلباتهم. أطلقت المنصة وأدرت الجانب التجاري، وهناك تعلّمت إدارة المشاريع فعلياً.',
     },
     {
       period: '٢٠٢٠ — ٢٠٢٢',
       title: 'مطوّر برمجيات مشارك',
       company: 'SAP',
       paragraph:
-        'صمّم وطوّر مكوّنات Gigya-SAP الأساسية على منصة SAP السحابية العالمية. بنى ميكروسيرفس بـ C# على Microsoft Orleans باستخدام TPL ونموذج الممثل الافتراضي، وأطلق واجهات API مغطّاة باختبارات NUnit و xUnit، وصمّم مخططات MySQL والترحيلات خلفها.',
+        'عملت على مكوّنات Gigya-SAP الأساسية في منصة SAP السحابية العالمية. كتبت ميكروسيرفس بـ C# على Microsoft Orleans باستخدام TPL ونموذج الممثل الافتراضي، وأطلقت واجهات API مغطّاة باختبارات NUnit و xUnit، وصمّمت مخططات MySQL خلفها.',
       chips: ['C#', 'MS ORLEANS', 'MYSQL', 'NUNIT / XUNIT'],
       logo: '/sap.png',
     },

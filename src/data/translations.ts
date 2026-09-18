@@ -21,9 +21,10 @@ const translations = {
     },
     work: {
       title: 'Work',
-      meta: '3 headline cases · 13 more in the index',
+      meta: '4 cases · 13 more in the index',
       alsoBuilt: 'Also built — 13 more',
       repository: 'Repository',
+      visitSite: 'Visit the site',
     },
     experience: {
       title: 'Experience',
@@ -99,9 +100,10 @@ const translations = {
     },
     work: {
       title: 'الأعمال',
-      meta: '٣ مشاريع رئيسية · و١٣ في الفهرس',
+      meta: '٤ مشاريع · و١٣ في الفهرس',
       alsoBuilt: 'مشاريع أخرى — ١٣',
       repository: 'Repository',
+      visitSite: 'زر الموقع',
     },
     experience: {
       title: 'الخبرة',
