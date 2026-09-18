@@ -61,7 +61,7 @@ export function Work() {
   return (
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
       <div className="flex items-baseline gap-4 pb-9">
-        <span className="font-mono text-[13px] text-[var(--accent)]">01</span>
+        <span className="font-mono text-[13px] text-[var(--accent-text)]">01</span>
         <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
         <span className="ms-auto font-mono text-xs text-[var(--ink-3)]">{tr.meta}</span>
       </div>
@@ -92,7 +92,7 @@ export function Work() {
               href={work.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-[18px] inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent)]"
+              className="mt-[18px] inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent-text)]"
             >
               {lang === 'ar' ? `← ${tr.repository}` : `${tr.repository} →`}
             </a>
@@ -114,7 +114,7 @@ export function Work() {
                 href={item.url}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noopener noreferrer' : undefined}
-                className="border border-[var(--rule)] px-[13px] py-[7px] font-mono text-xs text-[var(--ink-2)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="border border-[var(--rule)] px-[13px] py-[7px] font-mono text-xs text-[var(--ink-2)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
               >
                 {item.name}
               </a>

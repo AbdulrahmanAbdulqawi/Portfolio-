@@ -11,7 +11,7 @@ interface TypingLineProps {
   textColor?: string;
 }
 
-export function TypingLine({ prompts, dollarColor = 'var(--accent)', caretColor = 'var(--accent)', textColor }: TypingLineProps) {
+export function TypingLine({ prompts, dollarColor = 'var(--accent-text)', caretColor = 'var(--accent)', textColor }: TypingLineProps) {
   const reduce = useMediaQuery('(prefers-reduced-motion: reduce)');
   const [text, setText] = useState(reduce ? prompts[prompts.length - 1] : '');
 

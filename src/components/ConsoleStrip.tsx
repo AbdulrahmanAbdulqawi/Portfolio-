@@ -17,11 +17,11 @@ export function ConsoleStrip() {
       </div>
       <div dir="ltr" className="overflow-x-auto px-5 pb-6 pt-5 font-mono text-sm leading-[2] text-[var(--ink-2)] text-left">
         <div>
-          <span className="text-[var(--accent)]">$</span> whoami
+          <span className="text-[var(--accent-text)]">$</span> whoami
         </div>
         <div className="text-[var(--ink)]">{consoleStatic.whoamiOutput}</div>
         <div>
-          <span className="text-[var(--accent)]">$</span> ls ./work --sort=impact
+          <span className="text-[var(--accent-text)]">$</span> ls ./work --sort=impact
         </div>
         <div className="text-[var(--ink)]">{consoleStatic.lsOutput}</div>
         <div>

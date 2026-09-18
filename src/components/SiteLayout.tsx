@@ -78,7 +78,7 @@ export function SiteLayout() {
   }, [lang, site]);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `border-b py-1 transition-colors ${isActive ? 'border-[var(--accent)] text-[var(--accent)]' : 'border-transparent hover:border-[var(--accent)] hover:text-[var(--accent)]'}`;
+    `border-b py-1 transition-colors ${isActive ? 'border-[var(--accent)] text-[var(--accent-text)]' : 'border-transparent hover:border-[var(--accent)] hover:text-[var(--accent-text)]'}`;
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--paper)', color: 'var(--ink)' }}>
@@ -125,7 +125,7 @@ export function SiteLayout() {
               onClick={() => setConsoleOpen(true)}
               aria-label={tr.aria.openConsole}
               title={tr.aria.openConsole}
-              className="border border-[var(--accent)] bg-transparent px-[9px] py-1 font-mono text-xs text-[var(--accent)]"
+              className="border border-[var(--accent)] bg-transparent px-[9px] py-1 font-mono text-xs text-[var(--accent-text)]"
             >
               ~
             </button>
@@ -146,7 +146,7 @@ export function SiteLayout() {
         style={{ background: 'var(--paper)' }}
       >
         {NAV_ITEMS.map((item) => (
-          <NavLink key={item} to={`/${item}`} className={({ isActive }) => `border-b py-3 transition-colors ${isActive ? 'text-[var(--accent)]' : 'border-[var(--rule-soft)] hover:text-[var(--accent)]'}`}>
+          <NavLink key={item} to={`/${item}`} className={({ isActive }) => `border-b py-3 transition-colors ${isActive ? 'text-[var(--accent-text)]' : 'border-[var(--rule-soft)] hover:text-[var(--accent-text)]'}`}>
             {(tr.nav as Record<string, string>)[item]}
           </NavLink>
         ))}
@@ -168,7 +168,7 @@ export function SiteLayout() {
               href="https://github.com/AbdulrahmanAbdulqawi"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--ink-2)] transition-colors hover:text-[var(--accent)]"
+              className="text-[var(--ink-2)] transition-colors hover:text-[var(--accent-text)]"
             >
               GitHub
             </a>
@@ -176,11 +176,11 @@ export function SiteLayout() {
               href="https://linkedin.com/in/abdulrahman-abdulqawi"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--ink-2)] transition-colors hover:text-[var(--accent)]"
+              className="text-[var(--ink-2)] transition-colors hover:text-[var(--accent-text)]"
             >
               LinkedIn
             </a>
-            <a href={`mailto:${site.email}`} className="text-[var(--ink-2)] transition-colors hover:text-[var(--accent)]">
+            <a href={`mailto:${site.email}`} className="text-[var(--ink-2)] transition-colors hover:text-[var(--accent-text)]">
               Email
             </a>
           </div>

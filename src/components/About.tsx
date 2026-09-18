@@ -13,7 +13,7 @@ export function About() {
   return (
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
       <div className="flex items-baseline gap-4 pb-9">
-        <span className="font-mono text-[13px] text-[var(--accent)]">04</span>
+        <span className="font-mono text-[13px] text-[var(--accent-text)]">04</span>
         <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
       </div>
 
@@ -60,7 +60,7 @@ export function About() {
               <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">
                 {tr.certificatesLabel}
               </span>
-              <span className="font-mono text-[15px] text-[var(--accent)] transition-transform duration-200 group-open:rotate-45">
+              <span className="font-mono text-[15px] text-[var(--accent-text)] transition-transform duration-200 group-open:rotate-45">
                 +
               </span>
             </summary>

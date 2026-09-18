@@ -60,7 +60,7 @@ export function AdminLayout() {
               <NavLink
                 key={link.to}
                 to={link.to}
-                className={({ isActive }) => (isActive ? 'text-[var(--accent)]' : 'transition-colors hover:text-[var(--accent)]')}
+                className={({ isActive }) => (isActive ? 'text-[var(--accent-text)]' : 'transition-colors hover:text-[var(--accent-text)]')}
               >
                 {link.label}
               </NavLink>
@@ -101,7 +101,7 @@ export function AdminLayout() {
           <NavLink
             key={link.to}
             to={link.to}
-            className={({ isActive }) => `border-b py-3 transition-colors ${isActive ? 'text-[var(--accent)]' : 'border-[var(--rule-soft)] hover:text-[var(--accent)]'}`}
+            className={({ isActive }) => `border-b py-3 transition-colors ${isActive ? 'text-[var(--accent-text)]' : 'border-[var(--rule-soft)] hover:text-[var(--accent-text)]'}`}
           >
             {link.label}
           </NavLink>

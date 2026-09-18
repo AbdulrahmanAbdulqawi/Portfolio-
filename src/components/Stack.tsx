@@ -13,14 +13,14 @@ export function Stack() {
   return (
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
       <div className="flex items-baseline gap-4 pb-3">
-        <span className="font-mono text-[13px] text-[var(--accent)]">03</span>
+        <span className="font-mono text-[13px] text-[var(--accent-text)]">03</span>
         <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
         <span className="ms-auto font-mono text-xs text-[var(--ink-3)]">{tr.meta}</span>
       </div>
       <div className="ldg-stack-grid">
         {groups.map((group) => (
           <div key={group.title} className="py-7">
-            <p className="m-0 mb-[18px] font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent)]">
+            <p className="m-0 mb-[18px] font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
               {group.title}
             </p>
             {group.skills.map((skill, si) => (

@@ -2,39 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── LEDGER: warm-paper / ink-black editorial theme, one accent, light + night from one token set ── */
+/* ── LEDGER: ink-first editorial theme. The ink ground is the default identity (:root); the
+   warm-paper theme is opt-in via [data-theme='light']. Both come from one token set.
+   Text tokens are picked to clear WCAG AA (4.5:1) at the 10–12px sizes this design leans on:
+   --ink-3 and --accent-text were the three pairs that failed before. ── */
 :root {
-  --paper: #F3F0E9;
-  --paper-fade: rgba(243, 240, 233, 0.88);
-  --panel: #E8E4DA;
-  --ink: #14130F;
-  --ink-2: #46433B;
-  --ink-3: #7A756A;
-  --rule: #D5D0C3;
-  --rule-soft: #E2DED3;
-  --accent: #D8451F;
-  --dot: #C9C3B5;
-  --logo-filter: brightness(0);
-  --img-blend: multiply;
-  --img-bright: 1.04;
-  --img-tint: rgba(216, 69, 31, 0.14);
-}
+  /* surfaces, lightest-used last */
+  --paper: #12110E;
+  --paper-fade: rgba(18, 17, 14, 0.88);
+  --panel: #1A1915;
+  --panel-2: #24221C;
 
-[data-theme='night'] {
-  --paper: #0E0E0C;
-  --paper-fade: rgba(14, 14, 12, 0.88);
-  --panel: #141410;
-  --ink: #F3F0E9;
-  --ink-2: #B5B1A6;
-  --ink-3: #6E6A61;
-  --rule: #2B2A25;
-  --rule-soft: #211F1B;
+  /* text */
+  --ink: #F5F2E9;
+  --ink-2: #A8A294; /* 7.3:1 */
+  --ink-3: #8A8474; /* 5.2:1 — was #6E6A61 at 3.6:1 */
+
+  /* accent clears 6.2:1 as text on this ground, so one hue serves both roles */
   --accent: #FF5A2B;
+  --accent-text: #FF5A2B;
+
+  /* lines */
+  --rule: #2E2B24;
+  --rule-soft: #211F1B;
   --dot: #3A3934;
+
+  /* the one block that flips to the opposite ground (proof rail under the hero) */
+  --invert-bg: #F3F0E9;
+  --invert-ink: #14130F;
+  --invert-ink-3: #6B6659;
+  --invert-rule: #D5D0C3;
+  --invert-accent: #B8380F;
+
+  /* media */
   --logo-filter: brightness(0) invert(1);
   --img-blend: luminosity;
   --img-bright: 0.85;
   --img-tint: rgba(255, 90, 43, 0.22);
+}
+
+[data-theme='light'] {
+  --paper: #F3F0E9;
+  --paper-fade: rgba(243, 240, 233, 0.88);
+  --panel: #E8E4DA;
+  --panel-2: #DEDACE;
+
+  --ink: #14130F;
+  --ink-2: #46433B;
+  --ink-3: #6B6659; /* 5.0:1 — was #7A756A at 4.0:1 */
+
+  /* #D8451F stays for fills, dots and rules; as text on paper it is only 3.8:1 */
+  --accent: #D8451F;
+  --accent-text: #B8380F; /* 5.1:1 */
+
+  --rule: #D5D0C3;
+  --rule-soft: #E2DED3;
+  --dot: #C9C3B5;
+
+  --invert-bg: #14130F;
+  --invert-ink: #F3F0E9;
+  --invert-ink-3: #A8A294;
+  --invert-rule: #2E2B24;
+  --invert-accent: #FF5A2B;
+
+  --logo-filter: brightness(0);
+  --img-blend: multiply;
+  --img-bright: 1.04;
+  --img-tint: rgba(216, 69, 31, 0.14);
 }
 
 @layer base {
@@ -152,7 +186,7 @@
 }
 
 .ldg-prose a {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

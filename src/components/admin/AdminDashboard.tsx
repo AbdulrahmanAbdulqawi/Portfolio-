@@ -16,7 +16,7 @@ export function AdminDashboard() {
           <Link
             key={link.to}
             to={link.to}
-            className="border border-[var(--rule)] p-5 font-semibold transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="border border-[var(--rule)] p-5 font-semibold transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
           >
             {link.label}
           </Link>

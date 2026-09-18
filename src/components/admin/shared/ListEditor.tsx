@@ -58,7 +58,7 @@ export function ListEditor<T>({ items, onChange, renderItem, createItem, addLabe
       <button
         type="button"
         onClick={() => onChange([...items, createItem()])}
-        className="self-start border border-[var(--rule)] px-4 py-2 font-mono text-xs transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+        className="self-start border border-[var(--rule)] px-4 py-2 font-mono text-xs transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
       >
         {addLabel}
       </button>

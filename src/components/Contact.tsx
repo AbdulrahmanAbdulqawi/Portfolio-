@@ -36,12 +36,12 @@ export const Contact: React.FC = () => {
   };
 
   const rowClass =
-    'flex min-w-0 items-baseline justify-between gap-4 border-t border-[var(--rule-soft)] py-4 transition-colors hover:text-[var(--accent)]';
+    'flex min-w-0 items-baseline justify-between gap-4 border-t border-[var(--rule-soft)] py-4 transition-colors hover:text-[var(--accent-text)]';
 
   return (
     <section className="border border-[var(--rule)] px-5 py-8 pb-16 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
       <div className="flex items-baseline gap-4 pb-9">
-        <span className="font-mono text-[13px] text-[var(--accent)]">05</span>
+        <span className="font-mono text-[13px] text-[var(--accent-text)]">05</span>
         <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
         <span className="ms-auto font-mono text-xs text-[var(--ink-3)]">{site.contactMeta}</span>
       </div>
@@ -76,7 +76,7 @@ export const Contact: React.FC = () => {
               className={`${rowClass} border-b border-[var(--rule)]`}
             >
               <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-3)]">{tr.resumeLabel}</span>
-              <span className="min-w-0 break-words text-end text-lg font-semibold text-[var(--accent)]">{tr.downloadPdf}</span>
+              <span className="min-w-0 break-words text-end text-lg font-semibold text-[var(--accent-text)]">{tr.downloadPdf}</span>
             </a>
           )}
         </div>
@@ -149,7 +149,7 @@ export const Contact: React.FC = () => {
           </button>
 
           {status === 'success' && (
-            <p className="flex items-center gap-2 text-sm text-[var(--accent)]">
+            <p className="flex items-center gap-2 text-sm text-[var(--accent-text)]">
               <CheckCircle className="h-4 w-4 shrink-0" />
               {tr.successMsg}
             </p>

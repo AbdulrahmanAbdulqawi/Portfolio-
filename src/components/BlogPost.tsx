@@ -39,7 +39,7 @@ export function BlogPost() {
         <p className="font-mono text-sm text-[var(--ink-3)]">{tr.notFound}</p>
         <Link
           to="/blog"
-          className="mt-4 inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent)]"
+          className="mt-4 inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent-text)]"
         >
           {tr.backToBlog}
         </Link>
@@ -59,7 +59,7 @@ export function BlogPost() {
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
       <Link
         to="/blog"
-        className="mb-8 inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent)]"
+        className="mb-8 inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent-text)]"
       >
         {tr.backToBlog}
       </Link>

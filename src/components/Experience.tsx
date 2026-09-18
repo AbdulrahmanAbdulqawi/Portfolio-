@@ -17,7 +17,7 @@ export function Experience() {
   return (
     <section className="border border-[var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
       <div className="flex items-baseline gap-4 pb-9">
-        <span className="font-mono text-[13px] text-[var(--accent)]">02</span>
+        <span className="font-mono text-[13px] text-[var(--accent-text)]">02</span>
         <h2 className="m-0 text-[clamp(27px,3.6vw,38px)] font-bold tracking-[-0.03em]">{tr.title}</h2>
         <span className="ms-auto font-mono text-xs text-[var(--ink-3)]">{tr.meta}</span>
       </div>
@@ -51,7 +51,7 @@ export function Experience() {
             )}
           </div>
           <div className="flex flex-1 basis-[180px] flex-col items-end gap-[10px]">
-            <span className="text-base font-semibold text-[var(--accent)]">{row.company}</span>
+            <span className="text-base font-semibold text-[var(--accent-text)]">{row.company}</span>
             {row.logo && (
               <img
                 src={row.logo}
@@ -70,7 +70,7 @@ export function Experience() {
         <button
           type="button"
           onClick={() => setQuoteOpen((prev) => !prev)}
-          className="mt-[18px] border-b border-[var(--accent)] bg-transparent p-0 font-mono text-xs uppercase tracking-[0.1em] text-[var(--accent)]"
+          className="mt-[18px] border-b border-[var(--accent)] bg-transparent p-0 font-mono text-xs uppercase tracking-[0.1em] text-[var(--accent-text)]"
         >
           {quoteOpen ? tr.showLess : tr.showFull}
         </button>

@@ -19,7 +19,7 @@ export function SaveBar({ status, onSave }: SaveBarProps) {
       >
         {status === 'saving' ? 'Saving…' : 'Save'}
       </button>
-      {status === 'saved' && <span className="font-mono text-xs text-[var(--accent)]">Saved.</span>}
+      {status === 'saved' && <span className="font-mono text-xs text-[var(--accent-text)]">Saved.</span>}
       {status === 'error' && (
         <span className="font-mono text-xs" style={{ color: '#b91c1c' }}>
           Save failed.

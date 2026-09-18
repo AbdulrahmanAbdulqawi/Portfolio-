@@ -30,7 +30,7 @@ export function BlogListEditor() {
         <h1 className="text-2xl font-bold">Blog</h1>
         <Link
           to="/admin/blog/new"
-          className="border border-[var(--rule)] px-4 py-2 font-mono text-xs transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          className="border border-[var(--rule)] px-4 py-2 font-mono text-xs transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
         >
           + New post
         </Link>

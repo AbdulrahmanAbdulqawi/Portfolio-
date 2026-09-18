@@ -18,7 +18,7 @@ export function Hero() {
           <span className="relative inline-block h-[7px] w-[7px] rounded-full bg-[var(--accent)]">
             <span className="ldg-ping absolute inset-0 rounded-full bg-[var(--accent)]" />
           </span>
-          <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent)]">
+          <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent-text)]">
             {site.availabilityLine}
           </span>
         </div>
