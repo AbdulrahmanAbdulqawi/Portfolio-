@@ -2,3 +2,6 @@ bin/
 obj/
 appsettings.Development.json
 *.user
+
+# Runtime file uploads (directory is created at startup by Program.cs)
+AdminApi/wwwroot/uploads/
