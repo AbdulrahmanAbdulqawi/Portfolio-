@@ -26,7 +26,7 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       stackLine: 'iDaara · Angular 19 · .NET 10 · MediatR · PostgreSQL · Flutter',
       headline: 'A multi-tenant ERP where 17 modules share one auth and audit pipeline.',
       description:
-        'An ERP covering everything from sales through to point of sale, built for multiple tenants. I designed the architecture and used CQRS through MediatR in every module. Stripe billing, a website builder and a Flutter client came later. What keeps it manageable is 488 xUnit tests and a set of conventions consistent enough that an AI agent can follow them.',
+        'An ERP covering everything from sales through to point of sale, built for multiple tenants. I designed the architecture and used CQRS through MediatR in every module. Stripe billing, a website builder and a Flutter client came later. It stays manageable because of 488 xUnit tests and conventions consistent enough for an AI agent to follow.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/iDaara',
       panel: {
         kind: 'stats',
@@ -93,7 +93,7 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       stackLine: 'iDaara · Angular 19 · .NET 10 · MediatR · PostgreSQL · Flutter',
       headline: 'نظام ERP متعدد المستأجرين تتشارك فيه ١٧ وحدة قناة مصادقة وتدقيق واحدة.',
       description:
-        'نظام ERP يغطي من المبيعات حتى نقاط البيع، مبني لعدة مستأجرين. صممت المعمارية واستخدمت CQRS عبر MediatR في كل وحدة. جاءت بعد ذلك فوترة Stripe ومنشئ المواقع وتطبيق Flutter. ما يبقي النظام قابلاً للإدارة هو ٤٨٨ اختبار xUnit وأعراف متسقة إلى حدّ أن وكيل ذكاء اصطناعي يستطيع اتباعها.',
+        'نظام ERP يغطي من المبيعات حتى نقاط البيع، مبني لعدة مستأجرين. صممت المعمارية واستخدمت CQRS عبر MediatR في كل وحدة. جاءت بعد ذلك فوترة Stripe ومنشئ المواقع وتطبيق Flutter. ويبقى النظام قابلاً للإدارة بفضل ٤٨٨ اختبار xUnit وأعراف متسقة بما يكفي ليتّبعها وكيل ذكاء اصطناعي.',
       repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/iDaara',
       panel: {
         kind: 'stats',

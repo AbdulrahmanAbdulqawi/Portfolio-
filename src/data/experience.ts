@@ -7,7 +7,7 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'Founder',
       company: 'AaMa Development',
       paragraph:
-        'I registered AaMa Development with the Dutch Chamber of Commerce and build products under it. The first one is Nabdah. I do the product decisions, the code and the support myself, and I share the build publicly as it happens.',
+        'I registered AaMa Development with the Dutch Chamber of Commerce and build products under it. The first one is Nabdah. I make the product decisions, write the code and handle support myself, and I share the build publicly as it happens.',
       chips: ['ANGULAR', 'META GRAPH API', 'SAAS'],
     },
     {
@@ -15,7 +15,7 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'Medior Software Developer',
       company: 'DevExperts',
       paragraph:
-        'I lead full-stack work on a Product Information Management platform, across both the frontend architecture and the backend services. I built a .NET Core service that generates PDFs and took manual CRM document handling out of the loop, plus a synchronisation pipeline that moves JSON into PostgreSQL.',
+        'I lead full-stack work on a Product Information Management platform, from the frontend architecture to the backend services. I built a .NET Core service that generates PDFs, which replaced the manual document handling in the CRM. I also built a pipeline that syncs JSON data into PostgreSQL.',
       chips: ['.NET CORE', 'ANGULAR', 'MICROSERVICES', 'POSTGRESQL'],
       logo: '/devexperts.png',
     },
@@ -24,7 +24,7 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'Co-founder',
       company: 'Student-helper.org',
       paragraph:
-        'I started student-helper.org to help students find opportunities abroad and get through the applications. I shipped the platform and ran the business side, which is where I actually learned project management.',
+        'I co-founded student-helper.org to help students find opportunities abroad and get through the applications. I shipped the platform and ran the business side, which is where I actually learned project management.',
     },
     {
       period: '2020 — 2022',
@@ -50,7 +50,7 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'مطوّر برمجيات متوسط',
       company: 'DevExperts',
       paragraph:
-        'أقود العمل الشامل على منصة إدارة معلومات المنتج، في معمارية الواجهة والخدمات الخلفية معاً. بنيت خدمة بـ .NET Core تولّد ملفات PDF وأخرجت معالجة مستندات CRM اليدوية من المسار، إضافة إلى خط مزامنة ينقل JSON إلى PostgreSQL.',
+        'أقود تطوير منصة لإدارة معلومات المنتج، من معمارية الواجهة إلى الخدمات الخلفية. بنيت خدمة بـ .NET Core تولّد ملفات PDF وحلّت محلّ المعالجة اليدوية لمستندات CRM، وبنيت أيضاً خط مزامنة ينقل بيانات JSON إلى PostgreSQL.',
       chips: ['.NET CORE', 'ANGULAR', 'MICROSERVICES', 'POSTGRESQL'],
       logo: '/devexperts.png',
     },
@@ -59,7 +59,7 @@ export const experiences: Record<'en' | 'ar', Experience[]> = {
       title: 'شريك مؤسّس',
       company: 'Student-helper.org',
       paragraph:
-        'أسّست student-helper.org لمساعدة الطلاب على إيجاد فرص في الخارج وإكمال طلباتهم. أطلقت المنصة وأدرت الجانب التجاري، وهناك تعلّمت إدارة المشاريع فعلياً.',
+        'شاركت في تأسيس student-helper.org لمساعدة الطلاب على إيجاد فرص في الخارج وإكمال طلباتهم. أطلقت المنصة وأدرت الجانب التجاري، وهناك تعلّمت إدارة المشاريع فعلياً.',
     },
     {
       period: '٢٠٢٠ — ٢٠٢٢',

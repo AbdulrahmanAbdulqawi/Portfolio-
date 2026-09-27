@@ -60,7 +60,7 @@ const translations = {
     },
     blog: {
       title: 'Blog',
-      empty: 'No posts yet — check back soon.',
+      empty: 'No posts yet. Check back soon.',
       readMore: 'Read the full post →',
       notFound: "Couldn't find that post.",
       backToBlog: '← Back to Blog',
@@ -139,7 +139,7 @@ const translations = {
     },
     blog: {
       title: 'المدونة',
-      empty: 'لا توجد منشورات بعد — تابعونا قريباً.',
+      empty: 'لا توجد منشورات بعد. سأنشر قريباً.',
       readMore: '← قراءة المنشور كاملاً',
       notFound: 'تعذر العثور على هذا المنشور.',
       backToBlog: 'العودة إلى المدونة ←',
