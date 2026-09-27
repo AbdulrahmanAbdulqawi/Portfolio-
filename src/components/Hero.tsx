@@ -14,15 +14,6 @@ export function Hero() {
   return (
     <section className="flex flex-wrap border border-[var(--rule)]">
       <div className="ldg-rise flex-1 basis-[460px] min-w-0 border-e border-[var(--rule)] px-5 pb-12 pt-11 sm:px-8 sm:pb-12 sm:pt-16 lg:px-12 lg:pt-20">
-        <div className="mb-[30px] flex items-center gap-[11px]">
-          <span className="relative inline-block h-[7px] w-[7px] rounded-full bg-[var(--accent)]">
-            <span className="ldg-ping absolute inset-0 rounded-full bg-[var(--accent)]" />
-          </span>
-          <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent-text)]">
-            {site.availabilityLine}
-          </span>
-        </div>
-
         <h1 className="m-0 text-[clamp(38px,6.2vw,82px)] font-bold leading-[0.95] tracking-[-0.042em] text-[var(--ink)] rtl:text-[clamp(32px,5.4vw,70px)] rtl:leading-[1.2]">
           {site.heroHeadlineLines.map((line, i) => (
             <Fragment key={i}>
