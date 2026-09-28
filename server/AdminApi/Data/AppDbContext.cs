@@ -14,6 +14,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Certification> Certifications => Set<Certification>();
     public DbSet<WorkCase> WorkCases => Set<WorkCase>();
     public DbSet<AlsoBuiltItem> AlsoBuiltItems => Set<AlsoBuiltItem>();
+    public DbSet<Project> Projects => Set<Project>();
     public DbSet<BlogPost> BlogPosts => Set<BlogPost>();
     public DbSet<AdminUser> AdminUsers => Set<AdminUser>();
 
@@ -57,6 +58,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         });
 
         modelBuilder.Entity<AlsoBuiltItem>(e => e.HasIndex(p => p.SortOrder));
+
+        // Featured is part of the index because the Work page always reads the featured
+        // subset first and the full list only once the reader expands it.
+        modelBuilder.Entity<Project>(e => e.HasIndex(p => new { p.Featured, p.SortOrder }));
 
         modelBuilder.Entity<BlogPost>(e =>
         {

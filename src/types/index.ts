@@ -96,6 +96,22 @@ export interface AlsoBuiltItem {
   url: string;
 }
 
+/** `private` means closed source with nothing to link; the UI renders a label, never an anchor.
+ * That invariant is enforced server-side too, so a url can't sneak back onto a private row. */
+export type ProjectStatus = 'live' | 'private' | 'archived';
+
+export interface Project {
+  name: string;
+  description: string;
+  stackLine: string;
+  year: string;
+  /** Empty whenever there is nothing public to point at. */
+  url: string;
+  status: ProjectStatus;
+  /** Shown before the reader expands the full index. */
+  featured: boolean;
+}
+
 export type BlogStatus = 'draft' | 'published';
 
 export interface BlogPostSummary {

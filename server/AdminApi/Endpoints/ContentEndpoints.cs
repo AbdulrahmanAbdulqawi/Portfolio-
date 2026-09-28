@@ -22,6 +22,7 @@ public static class ContentEndpoints
         app.MapPut("/api/certifications", PutCertifications).RequireAuthorization();
         app.MapPut("/api/work-cases", PutWorkCases).RequireAuthorization();
         app.MapPut("/api/also-built", PutAlsoBuilt).RequireAuthorization();
+        app.MapPut("/api/projects", PutProjects).RequireAuthorization();
     }
 
     // ---- read ----
@@ -37,6 +38,7 @@ public static class ContentEndpoints
         var certifications = await db.Certifications.OrderBy(c => c.SortOrder).ToListAsync();
         var workCases = await db.WorkCases.OrderBy(w => w.SortOrder).ToListAsync();
         var alsoBuilt = await db.AlsoBuiltItems.OrderBy(a => a.SortOrder).ToListAsync();
+        var projects = await db.Projects.OrderBy(p => p.SortOrder).ToListAsync();
 
         return new ContentResponse(
             Site: new Bilingual<SiteConfigDto>(ToSiteDto(site, "en"), ToSiteDto(site, "ar")),
@@ -63,7 +65,10 @@ public static class ContentEndpoints
                 workCases.Select(w => ToWorkCaseDto(w, "ar")).ToList()),
             AlsoBuilt: new Bilingual<List<AlsoBuiltItemDto>>(
                 alsoBuilt.Select(a => ToAlsoBuiltDto(a, "en")).ToList(),
-                alsoBuilt.Select(a => ToAlsoBuiltDto(a, "ar")).ToList()));
+                alsoBuilt.Select(a => ToAlsoBuiltDto(a, "ar")).ToList()),
+            Projects: new Bilingual<List<ProjectDto>>(
+                projects.Select(p => ToProjectDto(p, "en")).ToList(),
+                projects.Select(p => ToProjectDto(p, "ar")).ToList()));
     }
 
     private static SiteConfigDto ToSiteDto(SiteConfig s, string lang) => lang == "en"
@@ -102,6 +107,15 @@ public static class ContentEndpoints
     private static AlsoBuiltItemDto ToAlsoBuiltDto(AlsoBuiltItem a, string lang) => lang == "en"
         ? new AlsoBuiltItemDto(a.NameEn, a.Url)
         : new AlsoBuiltItemDto(a.NameAr, a.Url);
+
+    private static ProjectDto ToProjectDto(Project p, string lang) => new(
+        lang == "en" ? p.NameEn : p.NameAr,
+        lang == "en" ? p.DescriptionEn : p.DescriptionAr,
+        p.StackLine,
+        p.Year,
+        p.Url,
+        p.Status.ToString().ToLowerInvariant(),
+        p.Featured);
 
     // ---- write ----
 
@@ -302,6 +316,42 @@ public static class ContentEndpoints
             NameEn = en.Name,
             NameAr = dto.Ar[i].Name,
             Url = en.Url,
+        }));
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+
+    private static async Task<IResult> PutProjects(BilingualListWriteDto<ProjectDto> dto, AppDbContext db)
+    {
+        if (dto.En.Count != dto.Ar.Count) return Results.BadRequest("en/ar arrays must be the same length.");
+
+        // Parse every status before touching the table, so one bad value can't leave a
+        // half-written index behind.
+        var statuses = new ProjectStatus[dto.En.Count];
+        for (var i = 0; i < dto.En.Count; i++)
+        {
+            if (!Enum.TryParse<ProjectStatus>(dto.En[i].Status, ignoreCase: true, out var parsed))
+            {
+                return Results.BadRequest($"Unknown status '{dto.En[i].Status}' at index {i}. Expected live, private or archived.");
+            }
+            statuses[i] = parsed;
+        }
+
+        db.Projects.RemoveRange(await db.Projects.ToListAsync());
+        db.Projects.AddRange(dto.En.Select((en, i) => new Project
+        {
+            SortOrder = i,
+            Featured = en.Featured,
+            NameEn = en.Name,
+            NameAr = dto.Ar[i].Name,
+            DescriptionEn = en.Description,
+            DescriptionAr = dto.Ar[i].Description,
+            StackLine = en.StackLine,
+            Year = en.Year,
+            // A private project has nothing to link to, so the url is dropped rather than
+            // trusted: this is the invariant that keeps dead links out of the index.
+            Url = statuses[i] == ProjectStatus.Private ? "" : en.Url,
+            Status = statuses[i],
         }));
         await db.SaveChangesAsync();
         return Results.NoContent();

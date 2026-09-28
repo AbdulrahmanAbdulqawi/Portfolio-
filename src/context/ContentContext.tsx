@@ -6,9 +6,11 @@ import { experiences, recommendation } from '../data/experience';
 import { stackGroups } from '../data/stack';
 import { educationEntries, certifications } from '../data/education';
 import { workCases, alsoBuilt } from '../data/work';
+import { projects } from '../data/projects';
 import type {
   AboutContent,
   AlsoBuiltItem,
+  Project,
   EducationEntry,
   Experience,
   Recommendation,
@@ -27,6 +29,7 @@ export interface ContentData {
   certifications: Record<'en' | 'ar', string[]>;
   workCases: Record<'en' | 'ar', WorkCase[]>;
   alsoBuilt: Record<'en' | 'ar', AlsoBuiltItem[]>;
+  projects: Record<'en' | 'ar', Project[]>;
 }
 
 /** Bundled at build time — used whenever the API is unreachable or unconfigured, so the site
@@ -41,6 +44,7 @@ const fallbackContent: ContentData = {
   certifications,
   workCases,
   alsoBuilt,
+  projects,
 };
 
 interface ContentContextValue {
@@ -60,8 +64,11 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await apiClient.get<ContentData>('/api/content');
-      setContent(data);
+      const data = await apiClient.get<Partial<ContentData>>('/api/content');
+      // The frontend and the API deploy separately, so a newly added section can be missing
+      // from a response served by an API that hasn't rolled out yet. Fall back per key
+      // rather than letting one absent field render as undefined.
+      setContent({ ...fallbackContent, ...data });
       setUsingFallback(false);
     } catch {
       setContent(fallbackContent);

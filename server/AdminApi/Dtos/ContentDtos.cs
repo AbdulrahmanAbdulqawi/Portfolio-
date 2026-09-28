@@ -29,6 +29,12 @@ public record WorkCaseDto(string Number, string Name, string StackLine, string H
 
 public record AlsoBuiltItemDto(string Name, string Url);
 
+/// <summary>Status travels as "live" | "private" | "archived" so the frontend can switch on it
+/// without knowing the enum's numeric values.</summary>
+public record ProjectDto(
+    string Name, string Description, string StackLine, string Year,
+    string Url, string Status, bool Featured);
+
 public record ContentResponse(
     Bilingual<SiteConfigDto> Site,
     Bilingual<AboutContentDto> About,
@@ -38,7 +44,8 @@ public record ContentResponse(
     Bilingual<List<EducationEntryDto>> EducationEntries,
     Bilingual<List<string>> Certifications,
     Bilingual<List<WorkCaseDto>> WorkCases,
-    Bilingual<List<AlsoBuiltItemDto>> AlsoBuilt);
+    Bilingual<List<AlsoBuiltItemDto>> AlsoBuilt,
+    Bilingual<List<ProjectDto>> Projects);
 
 // ---- write shapes: what the admin PUT endpoints accept. Singletons take one flattened en+ar
 // request (mirrors the single-row entity); lists take the two parallel en/ar arrays as-is,

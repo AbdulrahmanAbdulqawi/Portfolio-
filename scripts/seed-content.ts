@@ -11,6 +11,7 @@ import { experiences, recommendation } from '../src/data/experience';
 import { stackGroups } from '../src/data/stack';
 import { educationEntries, certifications } from '../src/data/education';
 import { workCases, alsoBuilt } from '../src/data/work';
+import { projects } from '../src/data/projects';
 
 const API_BASE_URL = process.env.SEED_API_BASE_URL;
 const EMAIL = process.env.SEED_ADMIN_EMAIL;
@@ -103,6 +104,7 @@ async function main() {
   await put('/api/certifications', { en: certifications.en, ar: certifications.ar });
   await put('/api/work-cases', { en: workCases.en, ar: workCases.ar });
   await put('/api/also-built', { en: alsoBuilt.en, ar: alsoBuilt.ar });
+  await put('/api/projects', { en: projects.en, ar: projects.ar });
 
   console.log('Done.');
 }
