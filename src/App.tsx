@@ -23,6 +23,7 @@ import { ExperienceEditor } from './components/admin/editors/ExperienceEditor';
 import { StackEditor } from './components/admin/editors/StackEditor';
 import { EducationEditor } from './components/admin/editors/EducationEditor';
 import { WorkEditor } from './components/admin/editors/WorkEditor';
+import { ProjectsEditor } from './components/admin/editors/ProjectsEditor';
 import { BlogListEditor } from './components/admin/editors/BlogListEditor';
 import { BlogPostEditor } from './components/admin/editors/BlogPostEditor';
 
@@ -57,6 +58,7 @@ function App() {
                     <Route path="stack" element={<StackEditor />} />
                     <Route path="education" element={<EducationEditor />} />
                     <Route path="work" element={<WorkEditor />} />
+                    <Route path="projects" element={<ProjectsEditor />} />
                     <Route path="blog" element={<BlogListEditor />} />
                     <Route path="blog/new" element={<BlogPostEditor />} />
                     <Route path="blog/:id" element={<BlogPostEditor />} />

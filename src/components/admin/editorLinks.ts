@@ -5,5 +5,6 @@ export const EDITOR_LINKS = [
   { to: '/admin/stack', label: 'Stack' },
   { to: '/admin/education', label: 'Education' },
   { to: '/admin/work', label: 'Work' },
+  { to: '/admin/projects', label: 'Projects' },
   { to: '/admin/blog', label: 'Blog' },
 ] as const;
