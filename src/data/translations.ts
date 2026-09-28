@@ -21,11 +21,14 @@ const translations = {
     },
     work: {
       title: 'Work',
-      meta: '4 cases · 13 more in the index',
-      alsoBuilt: 'Also built — 13 more',
+      meta: '{cases} cases · {index} in the index',
       repository: 'Repository',
       visitSite: 'Visit the site',
       privateRepo: 'Closed source',
+      projects: 'Projects',
+      showAll: 'Show all {n}',
+      showFewer: 'Show fewer',
+      archived: 'Archived',
     },
     experience: {
       title: 'Experience',
@@ -101,11 +104,14 @@ const translations = {
     },
     work: {
       title: 'الأعمال',
-      meta: '٤ مشاريع · و١٣ في الفهرس',
-      alsoBuilt: 'مشاريع أخرى — ١٣',
+      meta: '{cases} مشاريع · {index} في الفهرس',
       repository: 'Repository',
       visitSite: 'زر الموقع',
       privateRepo: 'مغلق المصدر',
+      projects: 'المشاريع',
+      showAll: 'اعرض الكل ({n})',
+      showFewer: 'اعرض أقل',
+      archived: 'مؤرشف',
     },
     experience: {
       title: 'الخبرة',
