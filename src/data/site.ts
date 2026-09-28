@@ -18,8 +18,8 @@ export const siteConfig: Record<'en' | 'ar', SiteConfig> = {
     ],
     resumeUrl: '/resume.pdf',
     availabilityLine: 'Open to backend and full-stack roles',
-    heroHeadlineLines: ['I build', '.NET backends.'],
-    heroSubline: 'Six years on C# and .NET, currently at DevExperts in Amersfoort. I also founded AaMa Development, where I build Nabdah: an Instagram automation tool for creators who got tired of sending the same link by hand.',
+    heroHeadlineLines: ['I build backends,', 'and the products', 'that run on them.'],
+    heroSubline: 'Six years in C# and .NET, now at DevExperts. I build systems that connect people who cannot easily reach each other, and I founded AaMa Development to ship my own. The first is Nabdah. Outside work I write about culture, identity and displacement.',
     factBar: [
       { label: 'Based', value: 'Amersfoort, NL' },
       { label: 'Stack', value: '.NET · Angular · SQL' },
@@ -48,8 +48,8 @@ export const siteConfig: Record<'en' | 'ar', SiteConfig> = {
     ],
     resumeUrl: '/resume.pdf',
     availabilityLine: 'متاح لأدوار باكند وفول ستاك',
-    heroHeadlineLines: ['أبني أنظمة خلفية بـ ‎.NET‎.'],
-    heroSubline: 'ست سنوات مع C# و .NET، وأعمل حالياً في DevExperts في أمرسفورت. أسّست أيضاً AaMa Development، وفيها أبني نبضة: أداة لأتمتة إنستغرام لصنّاع المحتوى الذين سئموا إرسال الرابط نفسه يدوياً.',
+    heroHeadlineLines: ['أبني أنظمة خلفية،', 'والمنتجات التي', 'تقوم عليها.'],
+    heroSubline: 'ست سنوات مع C# و .NET، وأعمل حالياً في DevExperts. أبني أنظمة تصل بين أناس لا يصلون إلى بعضهم بسهولة، وأسّست AaMa Development لأبني منتجاتي الخاصة. أولها نبضة. وخارج العمل أكتب عن الثقافة والهوية والنزوح.',
     factBar: [
       { label: 'المقر', value: 'أمرسفورت، هولندا' },
       { label: 'التقنيات', value: '.NET · Angular · SQL' },
