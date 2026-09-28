@@ -25,6 +25,7 @@ const translations = {
       alsoBuilt: 'Also built — 13 more',
       repository: 'Repository',
       visitSite: 'Visit the site',
+      privateRepo: 'Closed source',
     },
     experience: {
       title: 'Experience',
@@ -104,6 +105,7 @@ const translations = {
       alsoBuilt: 'مشاريع أخرى — ١٣',
       repository: 'Repository',
       visitSite: 'زر الموقع',
+      privateRepo: 'مغلق المصدر',
     },
     experience: {
       title: 'الخبرة',

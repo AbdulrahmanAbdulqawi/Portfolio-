@@ -88,16 +88,24 @@ export function Work() {
             <p className="mt-4 max-w-[580px] font-serif text-[19px] leading-[1.6] text-[var(--ink-2)]">
               {work.description}
             </p>
-            <a
-              href={work.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-[18px] inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent-text)]"
-            >
-              {lang === 'ar'
-                ? `← ${work.repoUrl.includes('github.com') ? tr.repository : tr.visitSite}`
-                : `${work.repoUrl.includes('github.com') ? tr.repository : tr.visitSite} →`}
-            </a>
+            {/* Closed-source work has no URL to send anyone to, so it gets a label rather
+             * than a link into a 404. */}
+            {work.repoUrl ? (
+              <a
+                href={work.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-[18px] inline-block border-b border-[var(--accent)] font-mono text-xs uppercase tracking-[0.08em] text-[var(--accent-text)]"
+              >
+                {lang === 'ar'
+                  ? `← ${work.repoUrl.includes('github.com') ? tr.repository : tr.visitSite}`
+                  : `${work.repoUrl.includes('github.com') ? tr.repository : tr.visitSite} →`}
+              </a>
+            ) : (
+              <span className="mt-[18px] inline-block font-mono text-xs uppercase tracking-[0.08em] text-[var(--ink-3)]">
+                {tr.privateRepo}
+              </span>
+            )}
           </div>
           <WorkPanel panel={work.panel} />
         </article>
@@ -109,6 +117,18 @@ export function Work() {
         </p>
         <div className="flex flex-wrap gap-[10px]">
           {chips.map((item) => {
+            // No URL means the source is closed or there is nothing public to point at.
+            // Render the name plainly instead of a chip that goes nowhere.
+            if (!item.url) {
+              return (
+                <span
+                  key={item.name}
+                  className="border border-dashed border-[var(--rule)] px-[13px] py-[7px] font-mono text-xs text-[var(--ink-3)]"
+                >
+                  {item.name}
+                </span>
+              );
+            }
             const external = item.url.startsWith('http');
             return (
               <a

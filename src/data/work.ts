@@ -27,7 +27,7 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       headline: 'A multi-tenant ERP where 17 modules share one auth and audit pipeline.',
       description:
         'An ERP covering everything from sales through to point of sale, built for multiple tenants. I designed the architecture and used CQRS through MediatR in every module. Stripe billing, a website builder and a Flutter client came later. It stays manageable because of 488 xUnit tests and conventions consistent enough for an AI agent to follow.',
-      repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/iDaara',
+      repoUrl: '', // closed source
       panel: {
         kind: 'stats',
         stats: [
@@ -45,7 +45,7 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       headline: 'Posts go out on schedule, retry when they fail, and report back.',
       description:
         'An Aspire AppHost running Postgres, an API and a Hangfire worker together. Two jobs do the actual work: one publishes, the other checks status against the Get Late API and reconciles whatever it finds. The dashboard collects logs, metrics and traces from every service in one place.',
-      repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/ReelHub',
+      repoUrl: '', // closed source
       panel: { kind: 'image', src: '/projects/reelhub.svg', alt: 'ReelHub' },
     },
     {
@@ -94,7 +94,7 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       headline: 'نظام ERP متعدد المستأجرين تتشارك فيه ١٧ وحدة قناة مصادقة وتدقيق واحدة.',
       description:
         'نظام ERP يغطي من المبيعات حتى نقاط البيع، مبني لعدة مستأجرين. صممت المعمارية واستخدمت CQRS عبر MediatR في كل وحدة. جاءت بعد ذلك فوترة Stripe ومنشئ المواقع وتطبيق Flutter. ويبقى النظام قابلاً للإدارة بفضل ٤٨٨ اختبار xUnit وأعراف متسقة بما يكفي ليتّبعها وكيل ذكاء اصطناعي.',
-      repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/iDaara',
+      repoUrl: '', // closed source
       panel: {
         kind: 'stats',
         stats: [
@@ -112,7 +112,7 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
       headline: 'المنشورات تخرج في موعدها، وتعيد المحاولة عند الفشل، وتبلّغ عن حالتها.',
       description:
         'AppHost بـ Aspire يشغّل PostgreSQL وواجهة API وعامل Hangfire معاً. مهمتان تقومان بالعمل الفعلي: واحدة تنشر، والأخرى تتحقق من الحالة عبر Get Late API وتطابق ما تجده. تجمع اللوحة السجلات والمقاييس والتتبع من كل خدمة في مكان واحد.',
-      repoUrl: 'https://github.com/AbdulrahmanAbdulqawi/ReelHub',
+      repoUrl: '', // closed source
       panel: { kind: 'image', src: '/projects/reelhub.svg', alt: 'ReelHub' },
     },
     {
@@ -139,35 +139,38 @@ export const workCases: Record<'en' | 'ar', WorkCase[]> = {
 
 const gh = 'https://github.com/AbdulrahmanAbdulqawi/';
 
+/** An empty url means there is nothing public to link: the repo is closed source, or the
+ * project predates GitHub. The Work page renders those as plain names rather than links,
+ * so no chip sends a visitor to a 404. */
 export const alsoBuilt: Record<'en' | 'ar', AlsoBuiltItem[]> = {
   en: [
     { name: 'Agent', url: gh + 'Agent' },
-    { name: 'TicketHub', url: gh + 'TicketHub' },
-    { name: 'YemeniCommunity', url: gh + 'YemeniCommunity' },
-    { name: 'RefugeeHub', url: gh + 'RefugeeHub' },
-    { name: 'AIModel', url: gh + 'AIModel' },
-    { name: 'Daar', url: gh + 'Daar' },
-    { name: 'Employee Registration', url: '/work' },
-    { name: 'Neural Network Models', url: '/work' },
-    { name: 'Tobacco Shop', url: '/work' },
-    { name: 'Pacman (WPF)', url: '/work' },
-    { name: 'Student Helper', url: '/work' },
-    { name: 'Yemeni Driver', url: '/work' },
-    { name: 'Connect SAPiers', url: '/work' },
+    { name: 'Yemeni Driver', url: gh + 'Yemeni-Driver' },
+    { name: 'Connect SAPiers', url: gh + 'C2S' },
+    { name: 'Tobacco Shop', url: gh + 'Appliactions' },
+    { name: 'Pacman (WPF)', url: gh + 'Games' },
+    { name: 'TicketHub', url: '' },
+    { name: 'YemeniCommunity', url: '' },
+    { name: 'RefugeeHub', url: '' },
+    { name: 'AIModel', url: '' },
+    { name: 'Daar', url: '' },
+    { name: 'Employee Registration', url: '' },
+    { name: 'Neural Network Models', url: '' },
+    { name: 'Student Helper', url: '' },
   ],
   ar: [
     { name: 'Agent', url: gh + 'Agent' },
-    { name: 'TicketHub', url: gh + 'TicketHub' },
-    { name: 'YemeniCommunity', url: gh + 'YemeniCommunity' },
-    { name: 'RefugeeHub', url: gh + 'RefugeeHub' },
-    { name: 'AIModel', url: gh + 'AIModel' },
-    { name: 'دار', url: gh + 'Daar' },
-    { name: 'تطبيق تسجيل الموظفين', url: '/work' },
-    { name: 'نماذج شبكات عصبية', url: '/work' },
-    { name: 'تطبيق متجر التبغ', url: '/work' },
-    { name: 'لعبة باكمان', url: '/work' },
-    { name: 'موقع مساعد الطالب', url: '/work' },
-    { name: 'Yemeni Driver', url: '/work' },
-    { name: 'Connect SAPiers', url: '/work' },
+    { name: 'Yemeni Driver', url: gh + 'Yemeni-Driver' },
+    { name: 'Connect SAPiers', url: gh + 'C2S' },
+    { name: 'تطبيق متجر التبغ', url: gh + 'Appliactions' },
+    { name: 'لعبة باكمان', url: gh + 'Games' },
+    { name: 'TicketHub', url: '' },
+    { name: 'YemeniCommunity', url: '' },
+    { name: 'RefugeeHub', url: '' },
+    { name: 'AIModel', url: '' },
+    { name: 'دار', url: '' },
+    { name: 'تطبيق تسجيل الموظفين', url: '' },
+    { name: 'نماذج شبكات عصبية', url: '' },
+    { name: 'موقع مساعد الطالب', url: '' },
   ],
 };
