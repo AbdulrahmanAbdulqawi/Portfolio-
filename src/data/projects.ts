@@ -72,7 +72,7 @@ export const projects: Record<'en' | 'ar', Project[]> = {
       year: '2026',
       url: gh + 'roadmap',
       status: 'live',
-      featured: true,
+      featured: false,
     },
     {
       name: 'proex.bh',
@@ -134,7 +134,16 @@ export const projects: Record<'en' | 'ar', Project[]> = {
       status: 'archived',
       featured: false,
     },
-    { name: 'RefugeeHub', description: '', stackLine: '', year: '', url: '', status: 'private', featured: false },
+    {
+      name: 'RefugeeHub',
+      description:
+        'Connects refugees in the Netherlands with volunteers, NGOs and the services they need. Profiles for all three sides, then groups, events, job listings, a resource directory for legal and healthcare, mentorship matching and real-time chat.',
+      stackLine: 'Angular 18 · .NET 8 · PostgreSQL · SignalR · NgRx',
+      year: '2026',
+      url: '',
+      status: 'private',
+      featured: true,
+    },
     { name: 'Daar', description: '', stackLine: '', year: '', url: '', status: 'private', featured: false },
     { name: 'AIModel', description: '', stackLine: '', year: '', url: '', status: 'private', featured: false },
     { name: 'Employee Registration', description: '', stackLine: '', year: '', url: '', status: 'archived', featured: false },
@@ -199,7 +208,7 @@ export const projects: Record<'en' | 'ar', Project[]> = {
       year: '٢٠٢٦',
       url: gh + 'roadmap',
       status: 'live',
-      featured: true,
+      featured: false,
     },
     {
       name: 'proex.bh',
@@ -261,7 +270,16 @@ export const projects: Record<'en' | 'ar', Project[]> = {
       status: 'archived',
       featured: false,
     },
-    { name: 'RefugeeHub', description: '', stackLine: '', year: '', url: '', status: 'private', featured: false },
+    {
+      name: 'RefugeeHub',
+      description:
+        'يصل اللاجئين في هولندا بالمتطوعين والمنظمات والخدمات التي يحتاجونها. ملفات تعريف للأطراف الثلاثة، ثم مجموعات وفعاليات وإعلانات وظائف ودليل موارد قانونية وصحية، ومطابقة للإرشاد ومحادثة فورية.',
+      stackLine: 'Angular 18 · .NET 8 · PostgreSQL · SignalR · NgRx',
+      year: '٢٠٢٦',
+      url: '',
+      status: 'private',
+      featured: true,
+    },
     { name: 'دار', description: '', stackLine: '', year: '', url: '', status: 'private', featured: false },
     { name: 'AIModel', description: '', stackLine: '', year: '', url: '', status: 'private', featured: false },
     { name: 'تطبيق تسجيل الموظفين', description: '', stackLine: '', year: '', url: '', status: 'archived', featured: false },
