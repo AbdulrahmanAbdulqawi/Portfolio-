@@ -3,7 +3,8 @@ using System.Net.Http.Headers;
 
 namespace AdminApi.Endpoints;
 
-public record ContactRequest(string? Name, string? Email, string? Message, string? BotField);
+/// <summary>Topic is set only for consultation requests: the offer the visitor picked on the Contact page.</summary>
+public record ContactRequest(string? Name, string? Email, string? Message, string? BotField, string? Topic = null);
 
 /// <summary>
 /// Public contact form → email via Resend (https://resend.com/docs/api-reference/emails/send-email).
@@ -30,9 +31,10 @@ public static class ContactEndpoints
             var name = request.Name?.Trim() ?? "";
             var email = request.Email?.Trim() ?? "";
             var message = request.Message?.Trim() ?? "";
+            var topic = request.Topic?.Trim() ?? "";
 
             if (name.Length is 0 or > 100 || email.Length > 200 || !EmailCheck.IsValid(email)
-                || message.Length is 0 or > 5000)
+                || message.Length is 0 or > 5000 || topic.Length > 100)
             {
                 return Results.BadRequest(new { error = "Please fill in a name, a valid email and a message." });
             }
@@ -55,8 +57,10 @@ public static class ContactEndpoints
                     to = new[] { to },
                     reply_to = email,
                     // Plain text only: nothing the visitor typed is ever rendered as HTML.
-                    subject = $"Portfolio contact: {name}",
-                    text = $"Name: {name}\nEmail: {email}\n\n{message}",
+                    subject = topic.Length > 0 ? $"Consultation request: {topic} ({name})" : $"Portfolio contact: {name}",
+                    text = topic.Length > 0
+                        ? $"Consultation request\nTopic: {topic}\nName: {name}\nEmail: {email}\n\n{message}"
+                        : $"Name: {name}\nEmail: {email}\n\n{message}",
                 }),
             };
             send.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);

@@ -34,6 +34,19 @@ export interface SiteConfig {
   footerCopyright: string;
 }
 
+export interface ConsultationOffer {
+  title: string;
+  description: string;
+}
+
+export interface ConsultationContent {
+  title: string;
+  intro: string;
+  /** Short line under the intro, e.g. how the call happens and in which languages. */
+  format: string;
+  offers: ConsultationOffer[];
+}
+
 export interface AboutContent {
   headline: string;
   paragraphs: string[];
